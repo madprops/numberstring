@@ -17,3 +17,9 @@ assert numberwords(2345) == "two thousand three hundred and forty-five"
 assert numberwords(4455667788) == "four billion four hundred and fifty-five million six hundred and sixty-seven thousand seven hundred and eighty-eight"
 assert numberwords(245.11) == "two hundred and forty-five dot one"
 assert numberwords(9.1818) == "nine dot two"
+
+assert countword("") == 0
+assert countword("a") == 1
+assert countword("abc") == 6
+assert countword("abc $$ !@#") == 6
+assert countword("Red Trains") == 108

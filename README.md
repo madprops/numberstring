@@ -31,3 +31,11 @@ This avoids cases like 1.19999 and just returns 1.2
 Right now it just rounds to 1 decimal place
 
 >proc numstring*(num: SomeNumber): string
+
+## countword
+
+Purpose: Get the sum of letter index values
+
+a = 1, z = 26. abc = 6
+
+>proc countword*(s: string): int

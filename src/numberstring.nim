@@ -1,5 +1,12 @@
-import math
-import strutils
+import std/math
+import std/strutils
+import std/tables
+import std/enumerate
+import std/sequtils
+
+var lettermap = initTable[char, int]()
+for i, c in enumerate('a'..'z'):
+  lettermap[c] = i + 1
 
 # Purpose: Return rounded float strings
 # This avoids cases like 1.19999 and just returns 1.2
@@ -96,3 +103,16 @@ proc numberwords*(num: SomeNumber): string =
         return first & " " & powers[idx][0] & " " & second
 
     idx = idx - 1
+
+# Purpose: Get the sum of letter index values
+# a = 1, z = 26. abc = 6
+proc countword*(s: string): int =
+  var sum = 0
+  let s_low = s.strip().tolower()
+
+  for c in toSeq(s_low):
+    if c != ' ': 
+      if lettermap.hasKey(c):
+        sum += lettermap[c]
+
+  return sum
