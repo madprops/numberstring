@@ -53,13 +53,7 @@ proc numberwords*(num: SomeNumber): string =
     else:
       return tens
 
-  if n < 1000:
-    if n mod 100 == 0:
-      return numberwords(int(n / 100)) & " hundred"
-    else:
-      return numberwords(int(n / 100)) & " hundred and " & numberwords(n mod 100)
-
-  let powers = [("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
+  let powers = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
 
   let ns = $n
   var idx = powers.len - 1
