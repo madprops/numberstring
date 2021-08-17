@@ -7,8 +7,7 @@ import std/sequtils
 # Hold letters and their 1 based position
 # a = 1, z = 26
 var lettermap = initTable[char, int]()
-for i, c in enumerate('a'..'z'):
-  lettermap[c] = i + 1
+for i, c in enumerate('a'..'z'): lettermap[c] = i + 1
 
 # Purpose: Return rounded float strings
 # This avoids cases like 1.19999 and just returns 1.2
@@ -16,11 +15,8 @@ for i, c in enumerate('a'..'z'):
 proc numstring*(num: SomeNumber): string =
   let split = split_decimal(float(num))
   let n = int(round(split.floatpart * 10))
-  
-  if n == 0:
-    return $(int(split.intpart))
-  else:
-    return $(int(split.intpart)) & "." & $n
+  if n == 0: $(int(split.intpart))
+  else: $(int(split.intpart)) & "." & $n
 
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
@@ -64,14 +60,14 @@ proc numberwords*(num: SomeNumber): string =
       return numberwords(int(n / 100)) & " hundred and " & numberwords(n mod 100)
 
   let powers = [("thousand", 3), ("million", 6),
-        ("billion", 9), ("trillion", 12), ("quadrillion", 15),
-        ("quintillion", 18), ("sextillion", 21), ("septillion", 24),
-        ("octillion", 27), ("nonillion", 30), ("decillion", 33),
-        ("undecillion", 36), ("duodecillion", 39), ("tredecillion", 42),
-        ("quattuordecillion", 45), ("quindecillion", 48),
-        ("sexdecillion", 51), ("eptendecillion", 54),
-        ("octadecillion", 57), ("novemdecillion", 61),
-        ("vigintillion", 64)]
+            ("billion", 9), ("trillion", 12), ("quadrillion", 15),
+            ("quintillion", 18), ("sextillion", 21), ("septillion", 24),
+            ("octillion", 27), ("nonillion", 30), ("decillion", 33),
+            ("undecillion", 36), ("duodecillion", 39), ("tredecillion", 42),
+            ("quattuordecillion", 45), ("quindecillion", 48),
+            ("sexdecillion", 51), ("eptendecillion", 54),
+            ("octadecillion", 57), ("novemdecillion", 61),
+            ("vigintillion", 64)]
 
   let ns = $n
   var idx = powers.len - 1
