@@ -1,4 +1,4 @@
-import numberstring
+import pkg/numberstring
 
 assert multistring(0, @["day", "days"]) == "days"
 assert multistring(1, ["day", "days"], @["is", "are"]) == "day is"
