@@ -38,7 +38,7 @@ afterwords: openArray[string] = []): string =
 # Purpose: Turn numbers into english words
 # Example: 122 == "one hundred and twenty-two"
 # Submit the number that is transformed into words
-proc numberword*(num: SomeNumber): string =
+proc numberwords*(num: SomeNumber): string =
   if "." in $num:
     let split = numstring(num).split(".")
     return numberword(parseInt(split[0])) & " dot " & numberword(parseInt(split[1]))

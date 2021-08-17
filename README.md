@@ -22,7 +22,7 @@ Receive the appropiate words (without the number)
 
 >proc multistring*(num: SomeNumber, words: openArray[string], afterwords: openArray[string] = []): string
 
-## numberword
+## numberwords
 
 Purpose: Turn numbers into english words
 
