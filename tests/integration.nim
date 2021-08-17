@@ -1,9 +1,12 @@
 import pkg/numberstring
 
-assert multistring(0, @["day", "days"]) == "days"
-assert multistring(1, ["day", "days"], @["is", "are"]) == "day is"
-assert multistring(2, @["day", "days"], ["was", "were"]) == "days were"
-assert multistring(3, ["cat", "cats"], ["nap", "nip"]) == "cats nip"
+assert multistring(0, "day", "days") == "days"
+assert multistring(1, "day", "days") == "day"
+assert multistring(2, "day", "days") == "days"
+assert multistring(3, "cat", "cats") == "cats"
+assert multistring(4, "is", "are") == "are"
+assert multistring(1, "was", "were") == "was"
+assert multistring(2, "it", "them") == "them"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"

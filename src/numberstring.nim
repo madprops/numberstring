@@ -4,6 +4,8 @@ import std/tables
 import std/enumerate
 import std/sequtils
 
+# Hold letters and their 1 based position
+# a = 1, z = 26
 var lettermap = initTable[char, int]()
 for i, c in enumerate('a'..'z'):
   lettermap[c] = i + 1
@@ -14,6 +16,7 @@ for i, c in enumerate('a'..'z'):
 proc numstring*(num: SomeNumber): string =
   let split = split_decimal(float(num))
   let n = int(round(split.floatpart * 10))
+  
   if n == 0:
     return $(int(split.intpart))
   else:
@@ -21,26 +24,10 @@ proc numstring*(num: SomeNumber): string =
 
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
-# Send an array with the singular word and the plural word
-# Send an optional array of other words to consider
-# Receive the appropiate words (without the number)
-proc multistring*(num: SomeNumber, words: openArray[string],
-afterwords: openArray[string] = []): string =
-  if words.len != 2:
-    return ""
-
-  var msg = ""
-  let is_singular = float(num) == 1.0
-
-  if is_singular: msg.add(words[0])
-  else: msg.add(words[1])
-
-  if afterwords.len == 2:
-    msg.add(" ")
-    if is_singular: msg.add(afterwords[0])
-    else: msg.add(afterwords[1])
-
-  return msg
+# Send the singular word and the plural word
+proc multistring*(num: SomeNumber, w1: string, w2: string): string =
+  if float(num) == 1.0: return w1
+  else: return w2
 
 # Purpose: Turn numbers into english words
 # Example: 122 == "one hundred and twenty-two"
