@@ -79,9 +79,8 @@ proc numberwords*(num: SomeNumber): string =
 # a = 1, z = 26. abc = 6
 proc countword*(s: string): int =
   var sum = 0
-  let s_low = s.strip().tolower()
 
-  for c in toSeq(s_low):
+  for c in toSeq(s.strip().tolower()):
     if c != ' ': 
       if c in '0'..'9':
         sum += parseInt($c)
