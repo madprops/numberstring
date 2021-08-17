@@ -26,8 +26,7 @@ proc numstring*(num: SomeNumber): string =
 # Send the number of the amount of things. 1 == singular
 # Send the singular word and the plural word
 proc multistring*(num: SomeNumber, sw, pw: string): string =
-  if float(num) == 1.0: return sw
-  else: return pw
+  if float(num) == 1.0: return sw else: return pw
 
 # Purpose: Turn numbers into english words
 # Example: 122 == "one hundred and twenty-two"
