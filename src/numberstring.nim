@@ -30,7 +30,7 @@ proc multistring*(num: SomeNumber, s_word, p_word: string): string =
 proc numberwords*(num: SomeNumber): string =
   if "." in $num:
     let split = numstring(num).split(".")
-    return numberwords(parseInt(split[0])) & " dot " & numberwords(parseInt(split[1]))
+    return numberwords(parseInt(split[0])) & " point " & numberwords(parseInt(split[1]))
 
   let n = int(num)
 
