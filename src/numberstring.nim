@@ -21,8 +21,8 @@ proc numstring*(num: SomeNumber): string =
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
 # Send the singular word and the plural word
-proc multistring*(num: SomeNumber, s_word, p_word: string): string =
-  if float(num) == 1.0: s_word else: p_word
+proc multistring*(num: int, s_word, p_word: string): string =
+  if num == 1: s_word else: p_word
 
 # Purpose: Turn numbers into english words
 # Example: 122 == "one hundred and twenty-two"
