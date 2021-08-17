@@ -1,3 +1,11 @@
+## numstring
+
+Purpose: Return rounded float strings
+
+This avoids cases like 1.19999 and just returns 1.2
+
+Right now it just rounds to 1 decimal place
+
 >proc numstring*(num: SomeNumber): string
 
 ## multistring
