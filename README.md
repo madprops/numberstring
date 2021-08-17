@@ -18,6 +18,8 @@ Send an array with the singular word and the plural word
 
 Send an optional array of other words to consider
 
+Receive the appropiate words (without the number)
+
 >proc multistring*(num: SomeNumber, words: openArray[string], afterwords: openArray[string] = []): string
 
 ## numberword
