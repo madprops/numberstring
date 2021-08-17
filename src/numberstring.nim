@@ -16,14 +16,13 @@ proc numstring*(num: SomeNumber): string =
 # Send the number of the amount of things. 1 == singular
 # Send an array with the singular word and the plural word
 # Send an optional array of other words to consider
+# Receive the appropiate words (without the number)
 proc multistring*(num: SomeNumber, words: openArray[string],
 afterwords: openArray[string] = []): string =
-  let ns = numstring(num)
-
   if words.len != 2:
     return ""
 
-  var msg = ns & " "
+  var msg = ""
   let is_singular = float(num) == 1.0
 
   if is_singular: msg.add(words[0])
@@ -90,7 +89,7 @@ proc numberword*(num: SomeNumber): string =
     if ns.len > d:
       let first = numberword(parseInt(ns[0..^(d + 1)]))
       let second = numberword(parseInt(ns[^d..^1]))
-      
+
       if second == "zero":
         return first & " " & powers[idx][0]
       else:

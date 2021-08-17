@@ -1,10 +1,10 @@
 import numberstring
 
-assert multistring(1, ["day", "days"], @["is", "are"]) == "1 day is"
-assert multistring(2, @["day", "days"], ["was", "were"]) == "2 days were"
-assert multistring(3, ["day", "days"], @["is", "are"]) == "3 days are"
-assert multistring(4, @["day", "days"]) == "4 days"
-assert multistring(9.1818, ["day", "days"]) == "9.2 days"
+assert multistring(1, ["day", "days"], @["is", "are"]) == "day is"
+assert multistring(2, @["day", "days"], ["was", "were"]) == "days were"
+assert multistring(3, ["day", "days"], @["is", "are"]) == "days are"
+assert multistring(4, @["day", "days"]) == "days"
+assert multistring(0, ["day", "days"], ["aba", "bab"]) == "days bab"
 
 assert numberword(-89) == "minus eighty-nine"
 assert numberword(0) == "zero"
