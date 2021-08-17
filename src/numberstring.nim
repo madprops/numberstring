@@ -94,7 +94,9 @@ proc countword*(s: string): int =
 
   for c in toSeq(s_low):
     if c != ' ': 
-      if lettermap.hasKey(c):
+      if c in '0'..'9':
+        sum += parseInt($c)
+      elif lettermap.hasKey(c):
         sum += lettermap[c]
 
   return sum

@@ -29,5 +29,6 @@ assert countword("a") == 1
 assert countword("abc") == 6
 assert countword("abc $$ !@#") == 6
 assert countword("Red Trains") == 108
+assert countword("2  a  b  c  2") == 10
 
 echo "Test completed succesfully."
