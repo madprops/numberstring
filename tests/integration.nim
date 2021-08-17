@@ -8,6 +8,9 @@ assert multistring(4, "is", "are") == "are"
 assert multistring(1, "was", "were") == "was"
 assert multistring(2, "it", "them") == "them"
 
+let n = 10000
+assert multistring(n, "thing", "things") & " " & multistring(n, "was", "were") == "things were"
+
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
 assert numberwords(1) == "one"
