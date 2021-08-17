@@ -3,6 +3,7 @@ import std/strutils
 import std/tables
 import std/enumerate
 import std/sequtils
+import std/strformat
 
 # Hold letters and their 1 based position
 # a = 1, z = 26
@@ -16,7 +17,7 @@ proc numstring*(num: SomeNumber): string =
   let split = split_decimal(float(num))
   let n = int(round(split.floatpart * 10))
   if n == 0: $(int(split.intpart))
-  else: $(int(split.intpart)) & "." & $n
+  else: &"{(int(split.intpart))}.{n}"
 
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
@@ -30,11 +31,13 @@ proc multistring*(num: int, s_word, p_word: string): string =
 proc numberwords*(num: SomeNumber): string =
   if "." in $num:
     let split = numstring(num).split(".")
-    return numberwords(parseInt(split[0])) & " point " & numberwords(parseInt(split[1]))
+    let part_1 = numberwords(parseInt(split[0]))
+    let part_2 = numberwords(parseInt(split[1]))
+    return &"{part_1} point {part_2}"
 
   let n = int(num)
 
-  if n < 0: return "minus " & numberwords(-n)
+  if n < 0: return &"minus {numberwords(-n)}"
 
   if n < 10:
     return ["zero", "one", "two", "three", "four", "five",
@@ -49,7 +52,7 @@ proc numberwords*(num: SomeNumber): string =
             "seventy", "eighty", "ninety"][(int(n / 10) - 2) mod 10]
 
     if n mod 10 != 0:
-      return tens & "-" & numberwords(n mod 10)
+      return &"{tens}-{numberwords(n mod 10)}"
     else:
       return tens
 
@@ -66,9 +69,9 @@ proc numberwords*(num: SomeNumber): string =
       let second = numberwords(parseInt(ns[^d..^1]))
 
       if second == "zero":
-        return first & " " & powers[idx][0]
+        return &"{first} {powers[idx][0]}"
       else:
-        return first & " " & powers[idx][0] & " " & second
+        return &"{first} {powers[idx][0]} {second}"
 
     idx = idx - 1
 
