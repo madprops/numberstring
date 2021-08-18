@@ -154,7 +154,7 @@ proc wordtag*(n: int, vf: bool = true): string =
   var
     s = ""
     m = true
-  
+
   for i in 1..n:
     if m:
       if vf:
@@ -167,5 +167,5 @@ proc wordtag*(n: int, vf: bool = true): string =
       else:
         s &= sample(ns_vowels)
     m = not m
-  
+
   return s

@@ -62,18 +62,38 @@ Receives a boolean to set if vowels go first
 ## Variables
 
 > Hold letters and their 1 based position
+
 > a = 1, z = 26
-let ns_lettermap*
+
+### let ns_lettermap*
+
+---
 
 > List of vowel letters
-let ns_vowels*
+
+### let ns_vowels*
+
+---
 
 > List of consonant letters
-let ns_consonants*
+
+### let ns_consonants*
+
+---
 
 > Constants to calculate time
-let ns_minute*
-let ns_hour*
-let ns_day*
-let ns_month*
-let ns_year*
+
+### let ns_minute*
+
+### let ns_hour*
+
+### let ns_day*
+
+### let ns_month*
+
+### let ns_year*
+
+
+
+
+
