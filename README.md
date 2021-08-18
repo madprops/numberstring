@@ -6,7 +6,7 @@ Send the number of the amount of things. 1 == singular
 
 Send the singular word and the plural word
 
->proc multistring*(num: SomeNumber, words: openArray[string], afterwords: openArray[string] = []): string
+>proc multistring*(num: int64, s_word, p_word: string): string
 
 ## numberwords
 
@@ -35,3 +35,14 @@ Purpose: Get the sum of letter index values
 a = 1, z = 26. abc = 6
 
 >proc countword*(s: string): int
+
+## timeago
+
+
+Purpose: Get the timeago message between two dates
+
+The dates are 2 unix seconds
+
+First is the highest, second is the lowest
+
+>proc timeago*(date_high, date_low: int64): string
