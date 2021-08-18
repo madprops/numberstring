@@ -1,3 +1,5 @@
+import std/times
+import std/random
 import std/math
 import std/strutils
 import std/tables
@@ -10,6 +12,15 @@ import std/strformat
 var lettermap = initTable[char, int]()
 for i, c in enumerate('a'..'z'): lettermap[c] = i + 1
 
+# List of vowel letters
+var a_vowels = @['a', 'e', 'i', 'o', 'u']
+
+# List of consonant letters
+var a_consonants: seq[char]
+for c in 'a'..'z':
+  if c notin a_vowels:
+    a_consonants.add(c)
+
 # Constants to calculate time
 let t_minute = 60.0
 let t_hour = 3600.0
@@ -17,12 +28,17 @@ let t_day = 86400.0
 let t_month = 2592000.0
 let t_year = 31536000.0
 
+# Init the rng
+randomize()
+
 # Purpose: Return rounded float strings
 # This avoids cases like 1.19999 and just returns 1.2
 # Right now it just rounds to 1 decimal place
 proc numstring*(num: SomeNumber): string =
-  let split = split_decimal(float(num))
-  let n = int(round(split.floatpart * 10))
+  let
+    split = split_decimal(float(num))
+    n = int(round(split.floatpart * 10))
+
   if n == 0: $(int(split.intpart))
   else: &"{(int(split.intpart))}.{n}"
 
@@ -101,8 +117,9 @@ proc countword*(s: string): int =
 proc timeago*(date_high, date_low: int64): string =
   let diff = float(max(date_high, date_low) - min(date_high, date_low))
 
-  var n: int64
-  var w: string
+  var
+    n: int64
+    w: string
 
   if diff < t_minute:
     n = int64(diff)
@@ -124,3 +141,28 @@ proc timeago*(date_high, date_low: int64): string =
     w = multistring(n, "year", "years")
 
   return &"{n} {w}"
+
+# Purpose: Generate random string tags
+# It alternates between vowels and consonants
+# Receives a number to set the length
+proc wordtag*(n: int): string =
+  var
+    s = ""
+    m = true
+  
+  let t = sample([1, 2])
+  
+  for i in 1..n:
+    if m:
+      if t == 1:
+        s &= sample(a_consonants)
+      else:
+        s &= sample(a_vowels)
+    else:
+      if t == 1:
+        s &= sample(a_vowels)
+      else:
+        s &= sample(a_consonants)
+    m = not m
+  
+  return s

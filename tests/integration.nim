@@ -40,4 +40,7 @@ assert timeago(1629246966, 1513102966) == "3 years"
 assert timeago(2, 2000) == "33 minutes"
 assert timeago(80, 50) == "30 seconds"
 
+assert wordtag(6).len == 6
+assert wordtag(12).len == 12
+
 echo "Test completed successfully."
