@@ -50,4 +50,7 @@ assert wt2.len == 6
 assert wt2[0] in ns_consonants
 assert wt2[1] in ns_vowels
 
+assert leetspeak("maple strikter") == "m4pl3 s7r1k73r"
+assert leetspeak("a e i o t") == "4 3 1 0 7"
+
 echo "Test completed successfully."

@@ -59,6 +59,14 @@ Receives a boolean to set if vowels go first
 
 >proc wordtag*(n: int, vf: bool = true): string
 
+## leetspeak
+
+Purpose: Turn a string into 'leet speak'
+
+For instance "maple strikter" -> "m4pl3 s7r1k73r"
+
+>proc leetspeak*(s: string): string
+
 ## Constants
 
 > Hold letters and their 1 based position

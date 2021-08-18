@@ -165,3 +165,14 @@ proc wordtag*(n: int, vf: bool = true): string =
     m = not m
 
   return s
+
+# Purpose: Turn a string into 'leet speak'
+# For instance "maple strikter" -> "m4pl3 s7r1k73r"
+proc leetspeak*(s: string): string =
+  var s2 = s.tolower()
+  s2 = s2.replace("a", "4")
+  s2 = s2.replace("e", "3")
+  s2 = s2.replace("i", "1")
+  s2 = s2.replace("o", "0")
+  s2 = s2.replace("t", "7")
+  return s2
