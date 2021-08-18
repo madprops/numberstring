@@ -15,15 +15,11 @@ let ns_lettermap* = block:
   temp
 
 # List of vowel letters
-let ns_vowels* = @['a', 'e', 'i', 'o', 'u']
+let ns_vowels* = ['a', 'e', 'i', 'o', 'u']
 
 # List of consonant letters
-let ns_consonants* = block:
-  var temp: seq[char]
-  for c in 'a'..'z':
-    if c notin ns_vowels:
-      temp.add(c)
-  temp
+let ns_consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
+                  'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
 # Constants to calculate time
 let ns_minute* = 60.0
