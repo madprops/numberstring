@@ -1,3 +1,4 @@
+import std/strformat
 import pkg/numberstring
 
 assert multistring(0, "day", "days") == "days"
@@ -52,5 +53,7 @@ assert wt2[1] in ns_vowels
 
 assert leetspeak("Maple Strikter") == "m4pl3 s7r1k73r"
 assert leetspeak("a e i o t") == "4 3 1 0 7"
+
+assert numerate(["a b c", "dfg", "h i j"]) == "1) a b c\n2) dfg\n3) h i j"
 
 echo "Test completed successfully."

@@ -176,3 +176,12 @@ proc leetspeak*(s: string): string =
   s2 = s2.replace("o", "0")
   s2 = s2.replace("t", "7")
   return s2
+
+# Purpose: Add numbers to lines
+# 1) This is a line
+# 2) This is another line
+proc numerate*(lines: openArray[string]): string =
+  var new_array: seq[string]
+  for i, s in lines:
+    new_array.add(&"{i + 1}) {s}")
+  return new_array.join("\n")

@@ -67,6 +67,16 @@ For instance "maple strikter" -> "m4pl3 s7r1k73r"
 
 >proc leetspeak*(s: string): string
 
+## numerate
+
+Purpose: Add numbers to lines
+
+1) This is a line
+
+2) This is another line
+
+>proc numerate*(lines: openArray[string]): string
+
 ## Constants
 
 > Hold letters and their 1 based position
