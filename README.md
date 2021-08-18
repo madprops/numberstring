@@ -46,3 +46,34 @@ The dates are 2 unix seconds
 First is the highest, second is the lowest
 
 >proc timeago*(date_high, date_low: int64): string
+
+## wordtag
+
+Purpose: Generate random string tags
+
+It alternates between vowels and consonants
+
+Receives a number to set the length
+
+Receives a boolean to set if vowels go first
+
+>proc wordtag*(n: int, vf: bool = true): string
+
+## Variables
+
+> Hold letters and their 1 based position
+> a = 1, z = 26
+let ns_lettermap*
+
+> List of vowel letters
+let ns_vowels*
+
+> List of consonant letters
+let ns_consonants*
+
+> Constants to calculate time
+let ns_minute*
+let ns_hour*
+let ns_day*
+let ns_month*
+let ns_year*

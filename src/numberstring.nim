@@ -9,17 +9,21 @@ import std/strformat
 
 # Hold letters and their 1 based position
 # a = 1, z = 26
-var ns_lettermap* = initTable[char, int]()
-for i, c in enumerate('a'..'z'): ns_lettermap[c] = i + 1
+let ns_lettermap* = block:
+  var temp = initTable[char, int]()
+  for i, c in enumerate('a'..'z'): temp[c] = i + 1
+  temp
 
 # List of vowel letters
-var ns_vowels* = @['a', 'e', 'i', 'o', 'u']
+let ns_vowels* = @['a', 'e', 'i', 'o', 'u']
 
 # List of consonant letters
-var ns_consonants*: seq[char]
-for c in 'a'..'z':
-  if c notin ns_vowels:
-    ns_consonants.add(c)
+let ns_consonants* = block:
+  var temp: seq[char]
+  for c in 'a'..'z':
+    if c notin ns_vowels:
+      temp.add(c)
+  temp
 
 # Constants to calculate time
 let ns_minute* = 60.0
