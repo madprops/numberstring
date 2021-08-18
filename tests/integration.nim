@@ -33,6 +33,7 @@ assert countword("2  a  b  c  2") == 10
 
 assert timeago(1629246966, 1629246960) == "just now"
 assert timeago(1629246966, 1629243966) == "50 minutes ago"
+assert timeago(1629243966, 1629246966) == "50 minutes ago"
 assert timeago(1629246966, 1629233966) == "3 hours ago"
 assert timeago(1629246966, 1629102966) == "1 day ago"
 assert timeago(1629246966, 1623102966) == "2 months ago"
