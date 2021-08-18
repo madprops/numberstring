@@ -101,29 +101,27 @@ proc countword*(s: string): int =
 # First is the highest, second is the lowest
 proc timeago*(date_high, date_low: int64): string =
   let diff = float(date_high - date_low)
-  var msg = ""
 
   if diff < t_minute:
-    msg = "just now"
-  elif diff < t_hour:
-    let n = int64(diff / float(60))
-    let w = multistring(n, "minute", "minutes")
-    msg = &"{n} {w} ago"
-  elif diff >= t_hour and diff < t_day:
-    let n = int64(diff / float(60) / float(60))
-    let w = multistring(n, "hour", "hours")
-    msg = &"{n} {w} ago"
-  elif diff >= t_day and diff < t_month:
-    let n = int64(diff / float(24) / float(60) / float(60))
-    let w = multistring(n, "day", "days")
-    msg = &"{n} {w} ago"
-  elif diff >= t_month and diff < t_year:
-    let n = int64(diff / float(30) / float(24) / float(60) / float(60))
-    let w = multistring(n, "month", "months")
-    msg = &"{n} {w} ago"
-  elif diff >= t_year:
-    let n = int64(diff / float(365) / float(24) / float(60) / float(60))
-    let w = multistring(n, "year", "years")
-    msg = &"{n} {w} ago"
+    return "just now"
+  else:
+    var n: int64
+    var w: string
 
-  return msg
+    if diff < t_hour:
+      n = int64(diff / float(60))
+      w = multistring(n, "minute", "minutes")
+    elif diff >= t_hour and diff < t_day:
+      n = int64(diff / float(60) / float(60))
+      w = multistring(n, "hour", "hours")
+    elif diff >= t_day and diff < t_month:
+      n = int64(diff / float(24) / float(60) / float(60))
+      w = multistring(n, "day", "days")
+    elif diff >= t_month and diff < t_year:
+      n = int64(diff / float(30) / float(24) / float(60) / float(60))
+      w = multistring(n, "month", "months")
+    elif diff >= t_year:
+      n = int64(diff / float(365) / float(24) / float(60) / float(60))
+      w = multistring(n, "year", "years")
+
+    return &"{n} {w} ago"
