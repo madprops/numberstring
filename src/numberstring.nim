@@ -10,6 +10,13 @@ import std/strformat
 var lettermap = initTable[char, int]()
 for i, c in enumerate('a'..'z'): lettermap[c] = i + 1
 
+# Constants to calculate time
+let t_minute = 60.0
+let t_hour = 3600.0
+let t_day = 86400.0
+let t_month = 2592000.0
+let t_year = 31536000.0
+
 # Purpose: Return rounded float strings
 # This avoids cases like 1.19999 and just returns 1.2
 # Right now it just rounds to 1 decimal place
@@ -22,7 +29,7 @@ proc numstring*(num: SomeNumber): string =
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
 # Send the singular word and the plural word
-proc multistring*(num: int, s_word, p_word: string): string =
+proc multistring*(num: int64, s_word, p_word: string): string =
   if num == 1: s_word else: p_word
 
 # Purpose: Turn numbers into english words
@@ -81,10 +88,42 @@ proc countword*(s: string): int =
   var sum = 0
 
   for c in toSeq(s.strip().tolower()):
-    if c != ' ': 
+    if c != ' ':
       if c in '0'..'9':
         sum += parseInt($c)
       elif lettermap.hasKey(c):
         sum += lettermap[c]
 
   return sum
+
+# Purpose: Get the timeago message between two dates
+# The dates are 2 unix seconds
+# First is the highest, second is the lowest
+proc timeago*(time_high, time_low: int64): string =
+  let diff = float(time_high - time_low)
+  var msg = ""
+
+  if diff < t_minute:
+    msg = "just now"
+  elif diff < t_hour:
+    let n = int64(diff / float(60))
+    let w = multistring(n, "minute", "minutes")
+    msg = &"{n} {w} ago"
+  elif diff >= t_hour and diff < t_day:
+    let n = int64(diff / float(60) / float(60))
+    let w = multistring(n, "hour", "hours")
+    msg = &"{n} {w} ago"
+  elif diff >= t_day and diff < t_month:
+    let n = int64(diff / float(24) / float(60) / float(60))
+    let w = multistring(n, "day", "days")
+    msg = &"{n} {w} ago"
+  elif diff >= t_month and diff < t_year:
+    let n = int64(diff / float(30) / float(24) / float(60) / float(60))
+    let w = multistring(n, "month", "months")
+    msg = &"{n} {w} ago"
+  elif diff >= t_year:
+    let n = int64(diff / float(365) / float(24) / float(60) / float(60))
+    let w = multistring(n, "year", "years")
+    msg = &"{n} {w} ago"
+
+  return msg
