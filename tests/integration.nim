@@ -40,7 +40,14 @@ assert timeago(1629246966, 1513102966) == "3 years"
 assert timeago(2, 2000) == "33 minutes"
 assert timeago(80, 50) == "30 seconds"
 
-assert wordtag(6).len == 6
-assert wordtag(12).len == 12
+let wt1 = wordtag(4, true)
+assert wt1.len == 4
+assert wt1[0] in ns_vowels
+assert wt1[1] in ns_consonants
+
+let wt2 = wordtag(6, false)
+assert wt2.len == 6
+assert wt2[0] in ns_consonants
+assert wt2[1] in ns_vowels
 
 echo "Test completed successfully."

@@ -9,24 +9,24 @@ import std/strformat
 
 # Hold letters and their 1 based position
 # a = 1, z = 26
-var lettermap = initTable[char, int]()
-for i, c in enumerate('a'..'z'): lettermap[c] = i + 1
+var ns_lettermap* = initTable[char, int]()
+for i, c in enumerate('a'..'z'): ns_lettermap[c] = i + 1
 
 # List of vowel letters
-var a_vowels = @['a', 'e', 'i', 'o', 'u']
+var ns_vowels* = @['a', 'e', 'i', 'o', 'u']
 
 # List of consonant letters
-var a_consonants: seq[char]
+var ns_consonants*: seq[char]
 for c in 'a'..'z':
-  if c notin a_vowels:
-    a_consonants.add(c)
+  if c notin ns_vowels:
+    ns_consonants.add(c)
 
 # Constants to calculate time
-let t_minute = 60.0
-let t_hour = 3600.0
-let t_day = 86400.0
-let t_month = 2592000.0
-let t_year = 31536000.0
+let ns_minute* = 60.0
+let ns_hour* = 3600.0
+let ns_day* = 86400.0
+let ns_month* = 2592000.0
+let ns_year* = 31536000.0
 
 # Init the rng
 randomize()
@@ -107,8 +107,8 @@ proc countword*(s: string): int =
     if c != ' ':
       if c in '0'..'9':
         sum += parseInt($c)
-      elif lettermap.hasKey(c):
-        sum += lettermap[c]
+      elif ns_lettermap.hasKey(c):
+        sum += ns_lettermap[c]
 
   return sum
 
@@ -121,19 +121,19 @@ proc timeago*(date_high, date_low: int64): string =
     n: int64
     w: string
 
-  if diff < t_minute:
+  if diff < ns_minute:
     n = int64(diff)
     w = multistring(n, "second", "seconds")
-  elif diff < t_hour:
+  elif diff < ns_hour:
     n = int64(diff / float(60))
     w = multistring(n, "minute", "minutes")
-  elif diff < t_day:
+  elif diff < ns_day:
     n = int64(diff / float(60) / float(60))
     w = multistring(n, "hour", "hours")
-  elif diff < t_month:
+  elif diff < ns_month:
     n = int64(diff / float(24) / float(60) / float(60))
     w = multistring(n, "day", "days")
-  elif diff < t_year:
+  elif diff < ns_year:
     n = int64(diff / float(30) / float(24) / float(60) / float(60))
     w = multistring(n, "month", "months")
   else:
@@ -145,24 +145,23 @@ proc timeago*(date_high, date_low: int64): string =
 # Purpose: Generate random string tags
 # It alternates between vowels and consonants
 # Receives a number to set the length
-proc wordtag*(n: int): string =
+# Receives a boolean to set if vowels go first
+proc wordtag*(n: int, vf: bool = true): string =
   var
     s = ""
     m = true
   
-  let t = sample([1, 2])
-  
   for i in 1..n:
     if m:
-      if t == 1:
-        s &= sample(a_consonants)
+      if vf:
+        s &= sample(ns_vowels)
       else:
-        s &= sample(a_vowels)
+        s &= sample(ns_consonants)
     else:
-      if t == 1:
-        s &= sample(a_vowels)
+      if vf:
+        s &= sample(ns_consonants)
       else:
-        s &= sample(a_consonants)
+        s &= sample(ns_vowels)
     m = not m
   
   return s
