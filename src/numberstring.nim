@@ -99,8 +99,8 @@ proc countword*(s: string): int =
 # Purpose: Get the timeago message between two dates
 # The dates are 2 unix seconds
 # First is the highest, second is the lowest
-proc timeago*(time_high, time_low: int64): string =
-  let diff = float(time_high - time_low)
+proc timeago*(date_high, date_low: int64): string =
+  let diff = float(date_high - date_low)
   var msg = ""
 
   if diff < t_minute:
