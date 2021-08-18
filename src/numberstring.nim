@@ -24,7 +24,7 @@ proc numstring*(num: SomeNumber): string =
   let split = split_decimal(float(num))
   let n = int(round(split.floatpart * 10))
   if n == 0: $(int(split.intpart))
-  else: fmt"{(int(split.intpart))}.{n}"
+  else: &"{(int(split.intpart))}.{n}"
 
 # Purpose: Avoid strings like "1 days" when it should be "1 day"
 # Send the number of the amount of things. 1 == singular
