@@ -59,7 +59,7 @@ Receives a boolean to set if vowels go first
 
 >proc wordtag*(n: int, vf: bool = true): string
 
-## Variables
+## Constants
 
 > Hold letters and their 1 based position
 
@@ -92,8 +92,3 @@ Receives a boolean to set if vowels go first
 ### let ns_month*
 
 ### let ns_year*
-
-
-
-
-
