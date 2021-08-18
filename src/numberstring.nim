@@ -111,16 +111,16 @@ proc timeago*(date_high, date_low: int64): string =
     if diff < t_hour:
       n = int64(diff / float(60))
       w = multistring(n, "minute", "minutes")
-    elif diff >= t_hour and diff < t_day:
+    elif diff < t_day:
       n = int64(diff / float(60) / float(60))
       w = multistring(n, "hour", "hours")
-    elif diff >= t_day and diff < t_month:
+    elif diff < t_month:
       n = int64(diff / float(24) / float(60) / float(60))
       w = multistring(n, "day", "days")
-    elif diff >= t_month and diff < t_year:
+    elif diff < t_year:
       n = int64(diff / float(30) / float(24) / float(60) / float(60))
       w = multistring(n, "month", "months")
-    elif diff >= t_year:
+    else:
       n = int64(diff / float(365) / float(24) / float(60) / float(60))
       w = multistring(n, "year", "years")
 
