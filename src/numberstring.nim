@@ -98,30 +98,29 @@ proc countword*(s: string): int =
 
 # Purpose: Get the timeago message between two dates
 # The dates are 2 unix timestamps in seconds
-# The order of the dates is not important
-proc timeago*(date_1, date_2: int64): string =
-  let diff = float(max(date_1, date_2) - min(date_1, date_2))
+proc timeago*(date_high, date_low: int64): string =
+  let diff = float(max(date_high, date_low) - min(date_high, date_low))
+
+  var n: int64
+  var w: string
 
   if diff < t_minute:
-    return "just now"
+    n = int64(diff)
+    w = multistring(n, "second", "seconds")
+  elif diff < t_hour:
+    n = int64(diff / float(60))
+    w = multistring(n, "minute", "minutes")
+  elif diff < t_day:
+    n = int64(diff / float(60) / float(60))
+    w = multistring(n, "hour", "hours")
+  elif diff < t_month:
+    n = int64(diff / float(24) / float(60) / float(60))
+    w = multistring(n, "day", "days")
+  elif diff < t_year:
+    n = int64(diff / float(30) / float(24) / float(60) / float(60))
+    w = multistring(n, "month", "months")
   else:
-    var n: int64
-    var w: string
+    n = int64(diff / float(365) / float(24) / float(60) / float(60))
+    w = multistring(n, "year", "years")
 
-    if diff < t_hour:
-      n = int64(diff / float(60))
-      w = multistring(n, "minute", "minutes")
-    elif diff < t_day:
-      n = int64(diff / float(60) / float(60))
-      w = multistring(n, "hour", "hours")
-    elif diff < t_month:
-      n = int64(diff / float(24) / float(60) / float(60))
-      w = multistring(n, "day", "days")
-    elif diff < t_year:
-      n = int64(diff / float(30) / float(24) / float(60) / float(60))
-      w = multistring(n, "month", "months")
-    else:
-      n = int64(diff / float(365) / float(24) / float(60) / float(60))
-      w = multistring(n, "year", "years")
-
-    return &"{n} {w} ago"
+  return &"{n} {w}"

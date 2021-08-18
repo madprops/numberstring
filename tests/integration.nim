@@ -31,12 +31,13 @@ assert countword("abc $$ !@#") == 6
 assert countword("Red Trains") == 108
 assert countword("2  a  b  c  2") == 10
 
-assert timeago(1629246966, 1629246960) == "just now"
-assert timeago(1629246966, 1629243966) == "50 minutes ago"
-assert timeago(1629243966, 1629246966) == "50 minutes ago"
-assert timeago(1629246966, 1629233966) == "3 hours ago"
-assert timeago(1629246966, 1629102966) == "1 day ago"
-assert timeago(1629246966, 1623102966) == "2 months ago"
-assert timeago(1629246966, 1513102966) == "3 years ago"
+assert timeago(1629246966, 1629243966) == "50 minutes"
+assert timeago(1629243966, 1629246966) == "50 minutes"
+assert timeago(1629246966, 1629233966) == "3 hours"
+assert timeago(1629246966, 1629102966) == "1 day"
+assert timeago(1629246966, 1623102966) == "2 months"
+assert timeago(1629246966, 1513102966) == "3 years"
+assert timeago(2, 2000) == "33 minutes"
+assert timeago(80, 50) == "30 seconds"
 
 echo "Test completed successfully."
