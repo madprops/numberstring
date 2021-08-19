@@ -1,3 +1,7 @@
+Check [the integration test](tests/integration.nim) to see how functions are used.
+
+---
+
 ## multistring
 
 Purpose: Avoid strings like "1 days" when it should be "1 day"
