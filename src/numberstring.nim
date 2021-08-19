@@ -76,13 +76,13 @@ proc numberwords*(num: SomeNumber): string =
 
     dec(idx)
 
-proc countword*(s: string): int =
+proc countword*(text: string): int =
   ## Purpose: Get the sum of letter index values
   ## 
   ## a = 1, z = 26. abc = 6
   result = 0
 
-  for c in toSeq(s.strip().tolower()):
+  for c in toSeq(text.strip().tolower()):
     if c != ' ':
       if c in '0'..'9':
         result += parseInt($c)
@@ -117,7 +117,7 @@ proc timeago*(date_high, date_low: int64): string =
 
   return &"{n} {w}"
 
-proc wordtag*(n: int, vf: bool = true): string =
+proc wordtag*(num: int, vowels_first: bool = true): string =
   ## Purpose: Generate random string tags
   ## 
   ## It alternates between vowels and consonants
@@ -127,16 +127,17 @@ proc wordtag*(n: int, vf: bool = true): string =
   ## Receives a boolean to set if vowels go first
   result = ""; var m = true
 
-  for i in 1..n:
-    result.add(if (m and vf) or (not m and not vf): sample(ns_vowels)
+  for i in 1..num:
+    result.add(if (m and vowels_first) or 
+    (not m and not vowels_first): sample(ns_vowels)
     else: sample(ns_consonants))
     m = not m
 
-proc leetspeak*(s: string): string =
+proc leetspeak*(text: string): string =
   ## Purpose: Turn a string into 'leet speak'
   ## 
   ## For instance "maple strikter" -> "m4pl3 s7r1k73r"
-  return s.tolower().replace("a", "4")
+  return text.tolower().replace("a", "4")
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
@@ -154,15 +155,15 @@ proc numerate*(lines: openArray[string], left, right: string): string =
     for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
 
-proc insertnum*(s, token: string): string =
+proc insertnum*(text, token: string): string =
   ## Purpose: Replace token with an incrementing number
   ## 
   ## This is __ and this is __
   ## 
   ## This is 1 and this is 2
-  result = ""; var ss = s
+  result = ""; var ss = text
 
-  for n in 1..s.count(token):
+  for n in 1..text.count(token):
     let i = ss.find(token)
     result.add(&"{ss[0..(i - 1)]}{n}")
     ss = ss[i + token.len..^1]

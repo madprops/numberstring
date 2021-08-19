@@ -101,7 +101,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">countword
       <li><a class="reference" href="#countword%2Cstring"
-    title="countword(s: string): int">countword,<wbr>string</a></li>
+    title="countword(text: string): int">countword,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">numberwords
@@ -111,7 +111,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">wordtag
       <li><a class="reference" href="#wordtag%2Cint%2Cbool"
-    title="wordtag(n: int; vf: bool = true): string">wordtag,<wbr>int,<wbr>bool</a></li>
+    title="wordtag(num: int; vowels_first: bool = true): string">wordtag,<wbr>int,<wbr>bool</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">timeago
@@ -121,7 +121,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">leetspeak
       <li><a class="reference" href="#leetspeak%2Cstring"
-    title="leetspeak(s: string): string">leetspeak,<wbr>string</a></li>
+    title="leetspeak(text: string): string">leetspeak,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">multistring
@@ -131,7 +131,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">insertnum
       <li><a class="reference" href="#insertnum%2Cstring%2Cstring"
-    title="insertnum(s, token: string): string">insertnum,<wbr>string,<wbr>string</a></li>
+    title="insertnum(text, token: string): string">insertnum,<wbr>string,<wbr>string</a></li>
 
   </ul>
 
@@ -170,7 +170,7 @@ function main() {
 
 </dd>
 <a id="countword,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#countword%2Cstring"><span class="Identifier">countword</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#countword%2Cstring"><span class="Identifier">countword</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Get the sum of letter index values</p>
@@ -189,7 +189,7 @@ function main() {
 
 </dd>
 <a id="wordtag,int,bool"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#wordtag%2Cint%2Cbool"><span class="Identifier">wordtag</span></a><span class="Other">(</span><span class="Identifier">n</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">vf</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#wordtag%2Cint%2Cbool"><span class="Identifier">wordtag</span></a><span class="Other">(</span><span class="Identifier">num</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">vowels_first</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Generate random string tags</p>
@@ -200,7 +200,7 @@ function main() {
 
 </dd>
 <a id="leetspeak,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#leetspeak%2Cstring"><span class="Identifier">leetspeak</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#leetspeak%2Cstring"><span class="Identifier">leetspeak</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Turn a string into 'leet speak'</p>
@@ -222,7 +222,7 @@ function main() {
 
 </dd>
 <a id="insertnum,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Replace token with an incrementing number</p>
@@ -241,7 +241,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-19 23:38:56 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-19 23:44:13 UTC</small>
       </div>
     </div>
   </div>
