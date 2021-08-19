@@ -8,6 +8,8 @@ Send the singular word and the plural word
 
 >proc multistring*(num: int64, s_word, p_word: string): string
 
+---
+
 ## numberwords
 
 Purpose: Turn numbers into english words
@@ -17,6 +19,8 @@ Example: 122 == "one hundred and twenty-two"
 Submit the number that is transformed into words
 
 >proc numberword*(num: SomeNumber): string
+
+---
 
 ## numstring
 
@@ -28,6 +32,8 @@ Right now it just rounds to 1 decimal place
 
 >proc numstring*(num: SomeNumber): string
 
+---
+
 ## countword
 
 Purpose: Get the sum of letter index values
@@ -35,6 +41,8 @@ Purpose: Get the sum of letter index values
 a = 1, z = 26. abc = 6
 
 >proc countword*(s: string): int
+
+---
 
 ## timeago
 
@@ -46,6 +54,8 @@ The dates are 2 unix seconds
 First is the highest, second is the lowest
 
 >proc timeago*(date_high, date_low: int64): string
+
+---
 
 ## wordtag
 
@@ -59,6 +69,8 @@ Receives a boolean to set if vowels go first
 
 >proc wordtag*(n: int, vf: bool = true): string
 
+---
+
 ## leetspeak
 
 Purpose: Turn a string into 'leet speak'
@@ -66,6 +78,8 @@ Purpose: Turn a string into 'leet speak'
 For instance "maple strikter" -> "m4pl3 s7r1k73r"
 
 >proc leetspeak*(s: string): string
+
+---
 
 ## numerate
 
@@ -80,6 +94,8 @@ Send an array of lines
 And the left and right parts around the number
 
 proc numerate*(lines: openArray[string], left: string, right: string): string
+
+---
 
 ## Constants
 
