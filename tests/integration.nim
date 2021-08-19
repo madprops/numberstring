@@ -54,6 +54,7 @@ assert wt2[1] in ns_vowels
 assert leetspeak("Maple Strikter") == "m4pl3 s7r1k73r"
 assert leetspeak("a e i o t") == "4 3 1 0 7"
 
-assert numerate(["a b c", "dfg", "h i j"]) == "1) a b c\n2) dfg\n3) h i j"
+assert numerate(["a b c", "dfg", "h i j"], "(", ")") == "(1) a b c\n(2) dfg\n(3) h i j"
+assert numerate(["cat", "dog", "cow"], "#", ":") == "#1: cat\n#2: dog\n#3: cow"
 
 echo "Test completed successfully."

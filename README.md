@@ -75,7 +75,11 @@ Purpose: Add numbers to lines
 
 2) This is another line
 
->proc numerate*(lines: openArray[string]): string
+Send an array of lines
+
+And the left and right parts around the number
+
+proc numerate*(lines: openArray[string], left: string, right: string): string
 
 ## Constants
 

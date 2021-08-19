@@ -180,8 +180,10 @@ proc leetspeak*(s: string): string =
 # Purpose: Add numbers to lines
 # 1) This is a line
 # 2) This is another line
-proc numerate*(lines: openArray[string]): string =
+# Send an array of lines
+# And the left and right parts around the number
+proc numerate*(lines: openArray[string], left: string, right: string): string =
   var new_array: seq[string]
   for i, s in lines:
-    new_array.add(&"{i + 1}) {s}")
+    new_array.add(&"{left}{i + 1}{right} {s}")
   return new_array.join("\n")
