@@ -72,10 +72,9 @@ proc numberwords*(num: SomeNumber): string =
         second = numberwords(parseInt(ns[^d..^1]))
         dz = ns_powers[idx][0]
 
-      if second == "zero":
-        return &"{first} {dz}"
-      else:
-        return &"{first} {dz} {second}"
+      var s = &"{first} {dz}"
+      if second != "zero": s.add(&" {second}")
+      return s
 
     dec(idx)
 
