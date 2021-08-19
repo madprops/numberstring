@@ -58,7 +58,7 @@ proc numberwords*(num: SomeNumber): string =
       split = numstring(num).split(".")
       part_1 = numberwords(parseInt(split[0]))
       part_2 = numberwords(parseInt(split[1]))
-      
+
     return &"{part_1} point {part_2}"
 
   let n = int(num)
@@ -200,7 +200,6 @@ proc insertnum*(s: string, token: string): string =
 
   for n in 1..s.count(token):
     let i = ss.find(token)
-    if i == -1: break
     ns &= &"{ss[0..(i - 1)]}{n}"
     ss = ss[i + token.len..^1]
 
