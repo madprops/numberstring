@@ -6,6 +6,7 @@ import std/tables
 import std/enumerate
 import std/sequtils
 import std/strformat
+import std/sugar
 
 # Hold letters and their 1 based position
 # a = 1, z = 26
@@ -183,7 +184,6 @@ proc leetspeak*(s: string): string =
 # Send an array of lines
 # And the left and right parts around the number
 proc numerate*(lines: openArray[string], left: string, right: string): string =
-  var new_array: seq[string]
-  for i, s in lines:
-    new_array.add(&"{left}{i + 1}{right} {s}")
+  var new_array = collect(newSeq):
+    for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
