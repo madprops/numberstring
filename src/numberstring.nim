@@ -54,11 +54,9 @@ proc numberwords*(num: SomeNumber): string =
   if n < 20: return ns_teens[n - 10]
 
   if n < 100:
-    let tens = ns_tens[(int(n / 10) - 2) mod 10]
-    if n mod 10 != 0:
-      return &"{tens}-{numberwords(n mod 10)}"
-    else:
-      return tens
+    result = ns_tens[(int(n / 10) - 2) mod 10]
+    if n mod 10 != 0: result.add(&"-{numberwords(n mod 10)}")
+    return
 
   let ns = $n
   var idx = ns_powers.len - 1
@@ -130,7 +128,7 @@ proc wordtag*(n: int, vf: bool = true): string =
   result = ""; var m = true
 
   for i in 1..n:
-    result &= (if (m and vf) or (not m and not vf): sample(ns_vowels)
+    result.add(if (m and vf) or (not m and not vf): sample(ns_vowels)
     else: sample(ns_consonants))
     m = not m
 
@@ -166,5 +164,5 @@ proc insertnum*(s: string, token: string): string =
 
   for n in 1..s.count(token):
     let i = ss.find(token)
-    result &= &"{ss[0..(i - 1)]}{n}"
+    result.add(&"{ss[0..(i - 1)]}{n}")
     ss = ss[i + token.len..^1]
