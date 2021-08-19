@@ -2,68 +2,50 @@ import std/times
 import std/random
 import std/math
 import std/strutils
-import std/tables
-import std/enumerate
 import std/sequtils
 import std/strformat
 import std/sugar
 
-# Hold letters and their 1 based position
-# a = 1, z = 26
-let ns_lettermap* = block:
-  var temp = initTable[char, int]()
-  for i, c in enumerate('a'..'z'): temp[c] = i + 1
-  temp
+let
+  # Letter constants
+  ns_vowels = ['a', 'e', 'i', 'o', 'u']
+  ns_consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
-# Letter constants
-let ns_vowels* = ['a', 'e', 'i', 'o', 'u']
-let ns_consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+let
+  # Constants to calculate time
+  ns_minute = 60.0
+  ns_hour = 3_600.0
+  ns_day = 86_400.0
+  ns_month = 2_592_000.0
+  ns_year = 31_536_000.0
 
-# Constants to calculate time
-let ns_minute* = 60.0
-let ns_hour* = 3_600.0
-let ns_day* = 86_400.0
-let ns_month* = 2_592_000.0
-let ns_year* = 31_536_000.0
-
-# Constants to calculate number words
-let ns_powers* = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
-let ns_tens* = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-let ns_teens* = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-let ns_digits* = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+let
+  # Constants to calculate number words
+  ns_powers = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
+  ns_tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+  ns_teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+  ns_digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 # Init the rng
 randomize()
 
-# Purpose: Return rounded float strings
-# This avoids cases like 1.19999 and just returns 1.2
-# Right now it just rounds to 1 decimal place
-proc numstring*(num: SomeNumber): string =
-  let
-    split = split_decimal(float(num))
-    n = int(round(split.floatpart * 10))
+# a = 1, z = 26
+proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 
-  if n == 0: $(int(split.intpart))
-  else: &"{(int(split.intpart))}.{n}"
-
-# Purpose: Avoid strings like "1 days" when it should be "1 day"
-# Send the number of the amount of things. 1 == singular
-# Send the singular word and the plural word
 proc multistring*(num: int64, s_word, p_word: string): string =
+  ## Purpose: Avoid strings like "1 days" when it should be "1 day"
+  ## 
+  ## Send the number of the amount of things. 1 == singular
+  ## 
+  ## Send the singular word and the plural word
   if num == 1: s_word else: p_word
 
-# Purpose: Turn numbers into english words
-# Example: 122 == "one hundred twenty-two"
-# Submit the number that is transformed into words
 proc numberwords*(num: SomeNumber): string =
-  if "." in $num:
-    let
-      split = numstring(num).split(".")
-      part_1 = numberwords(parseInt(split[0]))
-      part_2 = numberwords(parseInt(split[1]))
-
-    return &"{part_1} point {part_2}"
-
+  ## Purpose: Turn numbers into english words
+  ## 
+  ## Example: 122 == "one hundred twenty-two"
+  ## 
+  ## Submit the number that is transformed into words
   let n = int(num)
   if n < 0: return &"minus {numberwords(-n)}"
   if n < 10: return ns_digits[n]
@@ -86,31 +68,34 @@ proc numberwords*(num: SomeNumber): string =
       let 
         first = numberwords(parseInt(ns[0..^(d + 1)]))
         second = numberwords(parseInt(ns[^d..^1]))
-
+        dz = ns_powers[idx][0]
+        
       if second == "zero":
-        return &"{first} {ns_powers[idx][0]}"
+        return &"{first} {dz}"
       else:
-        return &"{first} {ns_powers[idx][0]} {second}"
+        return &"{first} {dz} {second}"
 
     dec(idx)
 
-# Purpose: Get the sum of letter index values
-# a = 1, z = 26. abc = 6
 proc countword*(s: string): int =
+  ## Purpose: Get the sum of letter index values
+  ## 
+  ## a = 1, z = 26. abc = 6
   var sum = 0
 
   for c in toSeq(s.strip().tolower()):
     if c != ' ':
       if c in '0'..'9':
         sum += parseInt($c)
-      elif ns_lettermap.hasKey(c):
-        sum += ns_lettermap[c]
+      elif c in 'a'..'z':
+        sum += alphabetpos(c)
 
   return sum
 
-# Purpose: Get the timeago message between two dates
-# The dates are 2 unix timestamps in seconds
 proc timeago*(date_high, date_low: int64): string =
+  ## Purpose: Get the timeago message between two dates
+  ## 
+  ## The dates are 2 unix timestamps in seconds
   let diff = float(max(date_high, date_low) - min(date_high, date_low))
   var n: int64; var w: string
 
@@ -135,11 +120,14 @@ proc timeago*(date_high, date_low: int64): string =
 
   return &"{n} {w}"
 
-# Purpose: Generate random string tags
-# It alternates between vowels and consonants
-# Receives a number to set the length
-# Receives a boolean to set if vowels go first
 proc wordtag*(n: int, vf: bool = true): string =
+  ## Purpose: Generate random string tags
+  ## 
+  ## It alternates between vowels and consonants
+  ## 
+  ## Receives a number to set the length
+  ## 
+  ## Receives a boolean to set if vowels go first
   var s = ""; var m = true
 
   for i in 1..n:
@@ -149,27 +137,34 @@ proc wordtag*(n: int, vf: bool = true): string =
 
   return s
 
-# Purpose: Turn a string into 'leet speak'
-# For instance "maple strikter" -> "m4pl3 s7r1k73r"
 proc leetspeak*(s: string): string =
+  ## Purpose: Turn a string into 'leet speak'
+  ## 
+  ## For instance "maple strikter" -> "m4pl3 s7r1k73r"
   return s.tolower().replace("a", "4")
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
-# Purpose: Add numbers to lines
-# 1) This is a line
-# 2) This is another line
-# Send an array of lines
-# And the left and right parts around the number
 proc numerate*(lines: openArray[string], left: string, right: string): string =
+  ## Purpose: Add numbers to lines
+  ## 
+  ## 1) This is a line
+  ## 
+  ## 2) This is another line
+  ## 
+  ## Send an array of lines
+  ## 
+  ## And the left and right parts around the number
   let new_array = collect(newSeq):
     for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
 
-# Purpose: Replace token with an incrementing number
-# This is __ and this is __
-# This is 1 and this is 2
 proc insertnum*(s: string, token: string): string =
+  ## Purpose: Replace token with an incrementing number
+  ## 
+  ## This is __ and this is __
+  ## 
+  ## This is 1 and this is 2
   var ss = s; var ns = ""
 
   for n in 1..s.count(token):
