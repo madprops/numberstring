@@ -1,4 +1,3 @@
-import std/strformat
 import pkg/numberstring
 
 assert multistring(0, "day", "days") == "days"
