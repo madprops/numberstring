@@ -72,9 +72,9 @@ proc numberwords*(num: SomeNumber): string =
         second = numberwords(parseInt(ns[^d..^1]))
         dz = ns_powers[idx][0]
 
-      var s = &"{first} {dz}"
-      if second != "zero": s.add(&" {second}")
-      return s
+      result = &"{first} {dz}"
+      if second != "zero": result.add(&" {second}")
+      return
 
     dec(idx)
 
@@ -82,16 +82,14 @@ proc countword*(s: string): int =
   ## Purpose: Get the sum of letter index values
   ## 
   ## a = 1, z = 26. abc = 6
-  var sum = 0
+  result = 0
 
   for c in toSeq(s.strip().tolower()):
     if c != ' ':
       if c in '0'..'9':
-        sum += parseInt($c)
+        result += parseInt($c)
       elif c in 'a'..'z':
-        sum += alphabetpos(c)
-
-  return sum
+        result += alphabetpos(c)
 
 proc timeago*(date_high, date_low: int64): string =
   ## Purpose: Get the timeago message between two dates
@@ -129,14 +127,12 @@ proc wordtag*(n: int, vf: bool = true): string =
   ## Receives a number to set the length
   ## 
   ## Receives a boolean to set if vowels go first
-  var s = ""; var m = true
+  result = ""; var m = true
 
   for i in 1..n:
-    s &= (if (m and vf) or (not m and not vf): sample(ns_vowels)
+    result &= (if (m and vf) or (not m and not vf): sample(ns_vowels)
     else: sample(ns_consonants))
     m = not m
-
-  return s
 
 proc leetspeak*(s: string): string =
   ## Purpose: Turn a string into 'leet speak'
@@ -166,11 +162,9 @@ proc insertnum*(s: string, token: string): string =
   ## This is __ and this is __
   ## 
   ## This is 1 and this is 2
-  var ss = s; var ns = ""
+  result = ""; var ss = s
 
   for n in 1..s.count(token):
     let i = ss.find(token)
-    ns &= &"{ss[0..(i - 1)]}{n}"
+    result &= &"{ss[0..(i - 1)]}{n}"
     ss = ss[i + token.len..^1]
-
-  return ns
