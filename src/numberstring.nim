@@ -174,7 +174,7 @@ proc leetspeak*(s: string): string =
 # Send an array of lines
 # And the left and right parts around the number
 proc numerate*(lines: openArray[string], left: string, right: string): string =
-  var new_array = collect(newSeq):
+  let new_array = collect(newSeq):
     for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
 
