@@ -54,9 +54,11 @@ proc multistring*(num: int64, s_word, p_word: string): string =
 # Submit the number that is transformed into words
 proc numberwords*(num: SomeNumber): string =
   if "." in $num:
-    let split = numstring(num).split(".")
-    let part_1 = numberwords(parseInt(split[0]))
-    let part_2 = numberwords(parseInt(split[1]))
+    let
+      split = numstring(num).split(".")
+      part_1 = numberwords(parseInt(split[0]))
+      part_2 = numberwords(parseInt(split[1]))
+      
     return &"{part_1} point {part_2}"
 
   let n = int(num)
