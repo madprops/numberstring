@@ -11,6 +11,10 @@ assert multistring(2, "it", "them") == "them"
 let n = 10000
 assert multistring(n, "thing", "things") & " " & multistring(n, "was", "were") == "things were"
 
+assert numstring(2.19999) == "2.2"
+assert numstring(0.088) == "0.1"
+assert numstring(12.445) == "12.4"
+
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
 assert numberwords(1) == "one"
