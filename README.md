@@ -143,6 +143,8 @@ This is 1 and this is 2
 
 ### let ns_year*
 
+---
+
 > Constants to calculate number words
 
 ### let ns_powers*
