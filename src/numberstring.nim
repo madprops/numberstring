@@ -140,7 +140,7 @@ proc leetspeak*(s: string): string =
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
-proc numerate*(lines: openArray[string], left: string, right: string): string =
+proc numerate*(lines: openArray[string], left, right: string): string =
   ## Purpose: Add numbers to lines
   ## 
   ## 1) This is a line
@@ -154,7 +154,7 @@ proc numerate*(lines: openArray[string], left: string, right: string): string =
     for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
 
-proc insertnum*(s: string, token: string): string =
+proc insertnum*(s, token: string): string =
   ## Purpose: Replace token with an incrementing number
   ## 
   ## This is __ and this is __

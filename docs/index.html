@@ -96,7 +96,7 @@ function main() {
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">numerate
       <li><a class="reference" href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring"
-    title="numerate(lines: openArray[string]; left: string; right: string): string">numerate,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
+    title="numerate(lines: openArray[string]; left, right: string): string">numerate,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">countword
@@ -131,7 +131,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">insertnum
       <li><a class="reference" href="#insertnum%2Cstring%2Cstring"
-    title="insertnum(s: string; token: string): string">insertnum,<wbr>string,<wbr>string</a></li>
+    title="insertnum(s, token: string): string">insertnum,<wbr>string,<wbr>string</a></li>
 
   </ul>
 
@@ -209,7 +209,7 @@ function main() {
 
 </dd>
 <a id="numerate,openArray[string],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">numerate</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">right</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+<dt><pre><span class="Keyword">proc</span> <a href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">numerate</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">,</span> <span class="Identifier">right</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -222,8 +222,7 @@ function main() {
 
 </dd>
 <a id="insertnum,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Replace token with an incrementing number</p>
@@ -242,7 +241,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-19 22:32:04 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-19 23:38:56 UTC</small>
       </div>
     </div>
   </div>
