@@ -142,3 +142,13 @@ This is 1 and this is 2
 ### let ns_month*
 
 ### let ns_year*
+
+> Constants to calculate number words
+
+### let ns_powers*
+
+### let ns_tens*
+
+### let ns_teens*
+
+### let ns_digits*
