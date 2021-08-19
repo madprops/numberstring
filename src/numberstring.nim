@@ -91,8 +91,9 @@ proc numberwords*(num: SomeNumber): string =
     let d = powers[idx][1]
 
     if ns.len > d:
-      let first = numberwords(parseInt(ns[0..^(d + 1)]))
-      let second = numberwords(parseInt(ns[^d..^1]))
+      let 
+        first = numberwords(parseInt(ns[0..^(d + 1)]))
+        second = numberwords(parseInt(ns[^d..^1]))
 
       if second == "zero":
         return &"{first} {powers[idx][0]}"
@@ -119,10 +120,7 @@ proc countword*(s: string): int =
 # The dates are 2 unix timestamps in seconds
 proc timeago*(date_high, date_low: int64): string =
   let diff = float(max(date_high, date_low) - min(date_high, date_low))
-
-  var
-    n: int64
-    w: string
+  var n: int64; var w: string
 
   if diff < ns_minute:
     n = int64(diff)
@@ -150,9 +148,7 @@ proc timeago*(date_high, date_low: int64): string =
 # Receives a number to set the length
 # Receives a boolean to set if vowels go first
 proc wordtag*(n: int, vf: bool = true): string =
-  var
-    s = ""
-    m = true
+  var s = ""; var m = true
 
   for i in 1..n:
     s &= (if (m and vf) or (not m and not vf): sample(ns_vowels)
@@ -182,9 +178,7 @@ proc numerate*(lines: openArray[string], left: string, right: string): string =
 # This is __ and this is __
 # This is 1 and this is 2
 proc insertnum*(s: string, token: string): string =
-  var
-    ss = s
-    ns = ""
+  var ss = s; var ns = ""
 
   for n in 1..s.count(token):
     let i = ss.find(token)
