@@ -15,12 +15,9 @@ let ns_lettermap* = block:
   for i, c in enumerate('a'..'z'): temp[c] = i + 1
   temp
 
-# List of vowel letters
+# Letter constants
 let ns_vowels* = ['a', 'e', 'i', 'o', 'u']
-
-# List of consonant letters
-let ns_consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
-                  'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+let ns_consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
 # Constants to calculate time
 let ns_minute* = 60.0
