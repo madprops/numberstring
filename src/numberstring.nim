@@ -24,10 +24,10 @@ let ns_consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
 
 # Constants to calculate time
 let ns_minute* = 60.0
-let ns_hour* = 3600.0
-let ns_day* = 86400.0
-let ns_month* = 2592000.0
-let ns_year* = 31536000.0
+let ns_hour* = 3_600.0
+let ns_day* = 86_400.0
+let ns_month* = 2_592_000.0
+let ns_year* = 31_536_000.0
 
 # Init the rng
 randomize()
