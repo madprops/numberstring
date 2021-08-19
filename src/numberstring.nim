@@ -50,7 +50,7 @@ proc multistring*(num: int64, s_word, p_word: string): string =
   if num == 1: s_word else: p_word
 
 # Purpose: Turn numbers into english words
-# Example: 122 == "one hundred and twenty-two"
+# Example: 122 == "one hundred twenty-two"
 # Submit the number that is transformed into words
 proc numberwords*(num: SomeNumber): string =
   if "." in $num:
