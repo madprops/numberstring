@@ -37,15 +37,19 @@ assert timeago(1629246966, 1513102966) == "3 years"
 assert timeago(2, 2000) == "33 minutes"
 assert timeago(80, 50) == "30 seconds"
 
-# let wt1 = wordtag(4, true)
-# assert wt1.len == 4
-# assert wt1[0] in get_vowels()
-# assert wt1[1] in get_consonants()
+let vowels = ['a', 'e', 'i', 'o', 'u']
 
-# let wt2 = wordtag(6, false)
-# assert wt2.len == 6
-# assert wt2[0] in get_consonants()
-# assert wt2[1] in get_vowels()
+let wt1 = wordtag(4, true)
+assert wt1.len == 4
+assert wt1[0] in vowels
+assert wt1[1] in 'a'..'z'
+assert wt1[1] notin vowels
+
+let wt2 = wordtag(6, false)
+assert wt2.len == 6
+assert wt1[0] in 'a'..'z'
+assert wt2[0] notin vowels
+assert wt2[1] in vowels
 
 assert leetspeak("Maple Strikter") == "m4pl3 s7r1k73r"
 assert leetspeak("a e i o t") == "4 3 1 0 7"
