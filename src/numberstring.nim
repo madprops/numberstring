@@ -155,16 +155,8 @@ proc wordtag*(n: int, vf: bool = true): string =
     m = true
 
   for i in 1..n:
-    if m:
-      if vf:
-        s &= sample(ns_vowels)
-      else:
-        s &= sample(ns_consonants)
-    else:
-      if vf:
-        s &= sample(ns_consonants)
-      else:
-        s &= sample(ns_vowels)
+    s &= (if (m and vf) or (not m and not vf): sample(ns_vowels)
+    else: sample(ns_consonants))
     m = not m
 
   return s
@@ -172,13 +164,9 @@ proc wordtag*(n: int, vf: bool = true): string =
 # Purpose: Turn a string into 'leet speak'
 # For instance "maple strikter" -> "m4pl3 s7r1k73r"
 proc leetspeak*(s: string): string =
-  var s2 = s.tolower()
-  s2 = s2.replace("a", "4")
-  s2 = s2.replace("e", "3")
-  s2 = s2.replace("i", "1")
-  s2 = s2.replace("o", "0")
-  s2 = s2.replace("t", "7")
-  return s2
+  return s.tolower().replace("a", "4")
+  .replace("e", "3").replace("i", "1")
+  .replace("o", "0").replace("t", "7")
 
 # Purpose: Add numbers to lines
 # 1) This is a line
