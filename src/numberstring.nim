@@ -29,6 +29,12 @@ let ns_day* = 86_400.0
 let ns_month* = 2_592_000.0
 let ns_year* = 31_536_000.0
 
+# Constants to calculate number words
+let ns_powers* = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
+let ns_tens* = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+let ns_teens* = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+let ns_digits* = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+
 # Init the rng
 randomize()
 
@@ -62,33 +68,22 @@ proc numberwords*(num: SomeNumber): string =
     return &"{part_1} point {part_2}"
 
   let n = int(num)
-
   if n < 0: return &"minus {numberwords(-n)}"
-
-  if n < 10:
-    return ["zero", "one", "two", "three", "four", "five",
-            "six", "seven", "eight", "nine"][n]
-
-  if n < 20:
-    return ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-            "sixteen", "seventeen", "eighteen", "nineteen"][n - 10]
+  if n < 10: return ns_digits[n]
+  if n < 20: return ns_teens[n - 10]
 
   if n < 100:
-    let tens = ["twenty", "thirty", "forty", "fifty", "sixty",
-            "seventy", "eighty", "ninety"][(int(n / 10) - 2) mod 10]
-
+    let tens = ns_tens[(int(n / 10) - 2) mod 10]
     if n mod 10 != 0:
       return &"{tens}-{numberwords(n mod 10)}"
     else:
       return tens
 
-  let powers = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
-
   let ns = $n
-  var idx = powers.len - 1
+  var idx = ns_powers.len - 1
 
   while true:
-    let d = powers[idx][1]
+    let d = ns_powers[idx][1]
 
     if ns.len > d:
       let 
@@ -96,11 +91,11 @@ proc numberwords*(num: SomeNumber): string =
         second = numberwords(parseInt(ns[^d..^1]))
 
       if second == "zero":
-        return &"{first} {powers[idx][0]}"
+        return &"{first} {ns_powers[idx][0]}"
       else:
-        return &"{first} {powers[idx][0]} {second}"
+        return &"{first} {ns_powers[idx][0]} {second}"
 
-    idx = idx - 1
+    dec(idx)
 
 # Purpose: Get the sum of letter index values
 # a = 1, z = 26. abc = 6
