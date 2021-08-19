@@ -1,3 +1,5 @@
+
+
 import std/times
 import std/random
 import std/math
@@ -69,7 +71,7 @@ proc numberwords*(num: SomeNumber): string =
         first = numberwords(parseInt(ns[0..^(d + 1)]))
         second = numberwords(parseInt(ns[^d..^1]))
         dz = ns_powers[idx][0]
-        
+
       if second == "zero":
         return &"{first} {dz}"
       else:
