@@ -193,15 +193,13 @@ proc numerate*(lines: openArray[string], left: string, right: string): string =
 # This is 1 and this is 2
 proc insertnum*(s: string, token: string): string =
   var
-    n = 1
     ss = s
     ns = ""
 
-  while true:
+  for n in 1..s.count(token):
     let i = ss.find(token)
     if i == -1: break
     ns &= &"{ss[0..(i - 1)]}{n}"
     ss = ss[i + token.len..^1]
-    n += 1
 
   return ns
