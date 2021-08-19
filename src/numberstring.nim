@@ -187,3 +187,20 @@ proc numerate*(lines: openArray[string], left: string, right: string): string =
   var new_array = collect(newSeq):
     for i, s in lines: &"{left}{i + 1}{right} {s}"
   return new_array.join("\n")
+
+# Purpose: Replace token with an incrementing number
+# This is __ and this is __
+# This is 1 and this is 2
+proc insertnum*(s: string, token: string): string =
+  var n = 1
+  var ss = s
+  var ns = ""
+
+  while true:
+    let i = ss.find(token)
+    if i == -1: break
+    ns &= &"{ss[0..(i - 1)]}{n}"
+    ss = ss[i + token.len..^1]
+    n += 1
+
+  return ns

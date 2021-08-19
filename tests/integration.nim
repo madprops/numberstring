@@ -57,4 +57,7 @@ assert leetspeak("a e i o t") == "4 3 1 0 7"
 assert numerate(["a b c", "dfg", "h i j"], "(", ")") == "(1) a b c\n(2) dfg\n(3) h i j"
 assert numerate(["cat", "dog", "cow"], "#", ":") == "#1: cat\n#2: dog\n#3: cow"
 
+assert insertnum("this is number __ and this is number __", "__") == "this is number 1 and this is number 2"
+assert insertnum("slot$ vs trak$ in the room-$", "$") == "slot1 vs trak2 in the room-3"
+
 echo "Test completed successfully."

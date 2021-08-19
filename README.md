@@ -97,6 +97,18 @@ proc numerate*(lines: openArray[string], left: string, right: string): string
 
 ---
 
+## insertnum
+
+Purpose: Replace token with an incrementing number
+
+This is __ and this is __
+
+This is 1 and this is 2
+
+>proc insertnum*(s: string, token: string): string
+
+---
+
 ## Constants
 
 > Hold letters and their 1 based position
