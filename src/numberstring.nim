@@ -35,7 +35,7 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, include_num: bool = t
   runnableExamples:
     assert multistring(1, "day", "days") == "1 day"
     assert multistring(3, "cat", "cats") == "3 cats"
-    assert multistring(3, "cat", "cats", false) == "cats"
+    assert multistring(3, "dog", "dogs", false) == "dogs"
   
   if include_num:
     if num == 1: &"{num} {s_word}" else: &"{num} {p_word}"
