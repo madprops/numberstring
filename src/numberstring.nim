@@ -11,6 +11,12 @@ import std/[times, random, math, strutils, sequtils, strformat, sugar]
 ## WORD: Use the number word like TWO
 ## 
 ## None: Don't show anything
+## 
+## Similarly there are string_mode arguments
+## 
+## That change the case of strings
+## 
+## Using the same Word notation
 
 const
   # Letter constants
@@ -68,13 +74,12 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "n
     assert multistring(3, "cat", "cats") == "3 cats"
     assert multistring(4, "dog", "dogs", "none") == "dogs"
     assert multistring(4, "dog", "dogs", "word") == "four dogs"
-    assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
-    assert multistring(1, "dog", "dogs", "WORD") == "ONE DOG"
+    assert multistring(4, "DOG", "DoGs", "Word") == "Four DoGs"
+    assert multistring(1, "dog", "dogs", "WORD") == "ONE dog"
   
   result = if num == 1: s_word else: p_word
 
   if num_mode != "none":
-    result = capitalizer(result, num_mode)
     let ns = apply_num_mode(num, num_mode)
     result = &"{ns} {result}"
 
@@ -133,7 +138,7 @@ proc countword*(text: string): int =
       elif c in 'a'..'z':
         result += alphabetpos(c)
 
-proc timeago*(date_1, date_2: int64, num_mode: string = "num"): string =
+proc timeago*(date_1, date_2: int64, num_mode: string = "num", string_mode: string = "word"): string =
   ## Purpose: Get the timeago message between two dates
   ## 
   ## Used for simple messages like "posted 1 hour ago"
@@ -142,22 +147,29 @@ proc timeago*(date_1, date_2: int64, num_mode: string = "num"): string =
   ## 
   ## Accepts a num_mode string
   ## 
-  ## The num_mode also affects the strings
+  ## Accepts a string_mode string
   runnableExamples:
     assert timeago(0, 10) == "10 seconds"
     assert timeago(0, 140) == "2 minutes"
     assert timeago(0, Hour * 3, "word") == "three hours"
-    assert timeago(0, Month, "Word") == "One Month"
-    assert timeago(0, Year * 10, "WORD") == "TEN YEARS"
+    assert timeago(0, Month, "Word") == "One month"
+    assert timeago(0, Year * 10, "WORD", "Word") == "TEN Years"
     
+  proc cs(s: string): string = capitalizer(s, string_mode)
   let d = float(max(date_1, date_2) - min(date_1, date_2))
   
-  if d < Minute: multistring(int64(d), "second", "seconds", num_mode)
-  elif d < Hour: multistring(int64(d / 60), "minute", "minutes", num_mode)
-  elif d < Day: multistring(int64(d / 60 / 60), "hour", "hours", num_mode)
-  elif d < Month: multistring(int64(d / 24 / 60 / 60), "day", "days", num_mode)
-  elif d < Year: multistring(int64(d / 30 / 24 / 60 / 60), "month", "months", num_mode)
-  else: multistring(int64(d / 365 / 24 / 60 / 60), "year", "years", num_mode)
+  if d < Minute: 
+    multistring(int64(d), cs("second"), cs("seconds"), num_mode)
+  elif d < Hour: 
+    multistring(int64(d / 60), cs("minute"), cs("minutes"), num_mode)
+  elif d < Day: 
+    multistring(int64(d / 60 / 60), cs("hour"), cs("hours"), num_mode)
+  elif d < Month: 
+    multistring(int64(d / 24 / 60 / 60), cs("day"), cs("days"), num_mode)
+  elif d < Year: 
+    multistring(int64(d / 30 / 24 / 60 / 60), cs("month"), cs("months"), num_mode)
+  else: 
+    multistring(int64(d / 365 / 24 / 60 / 60), cs("year"), cs("years"), num_mode)
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags

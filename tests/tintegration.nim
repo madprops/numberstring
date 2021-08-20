@@ -5,8 +5,8 @@ assert multistring(1, "day", "days") == "1 day"
 assert multistring(2, "day", "days") == "2 days"
 assert multistring(4, "dog", "dogs", "none") == "dogs"
 assert multistring(4, "dog", "dogs", "word") == "four dogs"
-assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
-assert multistring(1, "dog", "dogs", "WORD") == "ONE DOG"
+assert multistring(4, "DOG", "DoGs", "Word") == "Four DoGs"
+assert multistring(1, "dog", "dogs", "WORD") == "ONE dog"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
@@ -34,8 +34,8 @@ assert timeago(1629246966, 1513102966) == "3 years"
 assert timeago(2, 2000) == "33 minutes"
 assert timeago(80, 50) == "30 seconds"
 assert timeago(0, Hour * 3, "word") == "three hours"
-assert timeago(0, Month, "Word") == "One Month"
-assert timeago(0, Year * 10, "WORD") == "TEN YEARS"
+assert timeago(0, Month, "Word") == "One month"
+assert timeago(0, Year * 10, "WORD", "Word") == "TEN Years"
 
 let wt1 = wordtag(4, true)
 assert wt1.len == 4
