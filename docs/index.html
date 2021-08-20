@@ -249,18 +249,22 @@ function main() {
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Purpose: Add numbers to lines
-<p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="StringLit">&quot;Cat snow&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Bull frog&quot;</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="StringLit">&quot;(&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;)&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;(1) Cat snow</span><span class="EscapeSequence">\n</span><span class="StringLit">(2) Bull frog&quot;</span></pre>
+<p>Purpose: Add numbers to lines</p>
+<p>1) This is a line</p>
+<p>2) This is another line</p>
+<p>Send an array of lines</p>
+<p>And the left and right parts around the number</p>
+
 
 </dd>
 <a id="insertnum,string,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Purpose: Replace token with an incrementing number
-<p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="StringLit">&quot;This is $ and this is $&quot;</span><span class="Operator">.</span><span class="Identifier">insertNum</span><span class="Punctuation">(</span><span class="StringLit">&quot;$&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;This is 1 and this is 2&quot;</span></pre>
+<p>Purpose: Replace token with an incrementing number</p>
+<p>This is __ and this is __</p>
+<p>This is 1 and this is 2</p>
+
 
 </dd>
 
@@ -273,7 +277,7 @@ Purpose: Replace token with an incrementing number
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 01:34:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 01:38:02 UTC</small>
       </div>
     </div>
   </div>
