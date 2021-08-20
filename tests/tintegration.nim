@@ -3,10 +3,6 @@ import pkg/numberstring
 assert multistring(0, "day", "days") == "0 days"
 assert multistring(1, "day", "days") == "1 day"
 assert multistring(2, "day", "days") == "2 days"
-assert multistring(3, "cat", "cats") == "3 cats"
-assert multistring(4, "is", "are") == "4 are"
-assert multistring(1, "was", "were") == "1 was"
-assert multistring(2, "it", "them") == "2 them"
 assert multistring(10, "thing", "things") & " " & multistring(10, "was", "were", false) == "10 things were"
 
 assert numberwords(-89) == "minus eighty-nine"
@@ -14,7 +10,6 @@ assert numberwords(0) == "zero"
 assert numberwords(1) == "one"
 assert numberwords(18) == "eighteen"
 assert numberwords(100) == "one hundred"
-assert numberwords(101) == "one hundred one"
 assert numberwords(122) == "one hundred twenty-two"
 assert numberwords(999) == "nine hundred ninety-nine"
 assert numberwords(2345) == "two thousand three hundred forty-five"
@@ -28,7 +23,6 @@ assert countword("abc $$ !@#") == 6
 assert countword("Red Trains") == 108
 assert countword("2  a  b  c  2") == 10
 
-assert timeago(1629246966, 1629243966) == "50 minutes"
 assert timeago(1629243966, 1629246966) == "50 minutes"
 assert timeago(1629246966, 1629233966) == "3 hours"
 assert timeago(1629246966, 1629102966) == "1 day"
