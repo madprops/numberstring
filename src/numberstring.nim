@@ -105,23 +105,23 @@ proc timeago*(date_1, date_2: int64): string =
   let diff = float(max(date_1, date_2) - min(date_1, date_2))
   var n: int64; var w: string
 
-  if diff < float(Minute):
+  if diff < Minute:
     n = int64(diff)
     w = multistring(n, "second", "seconds")
-  elif diff < float(Hour):
-    n = int64(diff / float(60))
+  elif diff < Hour:
+    n = int64(diff / 60)
     w = multistring(n, "minute", "minutes")
-  elif diff < float(Day):
-    n = int64(diff / float(60) / float(60))
+  elif diff < Day:
+    n = int64(diff / 60 / 60)
     w = multistring(n, "hour", "hours")
-  elif diff < float(Month):
-    n = int64(diff / float(24) / float(60) / float(60))
+  elif diff < Month:
+    n = int64(diff / 24 / 60 / 60)
     w = multistring(n, "day", "days")
-  elif diff < float(Year):
-    n = int64(diff / float(30) / float(24) / float(60) / float(60))
+  elif diff < Year:
+    n = int64(diff / 30 / 24 / 60 / 60)
     w = multistring(n, "month", "months")
   else:
-    n = int64(diff / float(365) / float(24) / float(60) / float(60))
+    n = int64(diff / 365 / 24 / 60 / 60)
     w = multistring(n, "year", "years")
 
   return &"{n} {w}"
