@@ -24,17 +24,22 @@ var randgen = initRand(int(epochTime()))
 # a = 1, z = 26
 proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 
-proc multistring*(num: SomeNumber, s_word, p_word: string): string =
+proc multistring*(num: SomeNumber, s_word, p_word: string, include_num: bool = true): string =
   ## Purpose: Avoid strings like "1 days" when it should be "1 day"
   ## 
   ## Send the number of the amount of things. 1 == singular
   ## 
   ## Send the singular word and the plural word
+  ## 
+  ## Optional boolean to set if the number is shown
   runnableExamples:
-    assert multistring(1, "day", "days") == "day"
-    assert multistring(3, "cat", "cats") == "cats"
-    
-  if num == 1: s_word else: p_word
+    assert multistring(1, "day", "days") == "1 day"
+    assert multistring(3, "cat", "cats") == "3 cats"
+  
+  if include_num:
+    if num == 1: &"{num} {s_word}" else: &"{num} {p_word}"
+  else:
+    if num == 1: s_word else: p_word
 
 proc numberwords*(num: SomeNumber): string =
   ## Purpose: Turn numbers into english words
@@ -103,28 +108,19 @@ proc timeago*(date_1, date_2: int64): string =
     assert timeago(0, Year * 10) == "10 years"
     
   let diff = float(max(date_1, date_2) - min(date_1, date_2))
-  var n: int64; var w: string
 
   if diff < Minute:
-    n = int64(diff)
-    w = multistring(n, "second", "seconds")
+    multistring(int64(diff), "second", "seconds")
   elif diff < Hour:
-    n = int64(diff / 60)
-    w = multistring(n, "minute", "minutes")
+    multistring(int64(diff / 60), "minute", "minutes")
   elif diff < Day:
-    n = int64(diff / 60 / 60)
-    w = multistring(n, "hour", "hours")
+    multistring(int64(diff / 60 / 60), "hour", "hours")
   elif diff < Month:
-    n = int64(diff / 24 / 60 / 60)
-    w = multistring(n, "day", "days")
+    multistring(int64(diff / 24 / 60 / 60), "day", "days")
   elif diff < Year:
-    n = int64(diff / 30 / 24 / 60 / 60)
-    w = multistring(n, "month", "months")
+    multistring(int64(diff / 30 / 24 / 60 / 60), "month", "months")
   else:
-    n = int64(diff / 365 / 24 / 60 / 60)
-    w = multistring(n, "year", "years")
-
-  return &"{n} {w}"
+    multistring(int64(diff / 365 / 24 / 60 / 60), "year", "years")
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags

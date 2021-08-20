@@ -1,13 +1,13 @@
 import pkg/numberstring
 
-assert multistring(0, "day", "days") == "days"
-assert multistring(1, "day", "days") == "day"
-assert multistring(2, "day", "days") == "days"
-assert multistring(3, "cat", "cats") == "cats"
-assert multistring(4, "is", "are") == "are"
-assert multistring(1, "was", "were") == "was"
-assert multistring(2, "it", "them") == "them"
-assert multistring(10, "thing", "things") & " " & multistring(10, "was", "were") == "things were"
+assert multistring(0, "day", "days") == "0 days"
+assert multistring(1, "day", "days") == "1 day"
+assert multistring(2, "day", "days") == "2 days"
+assert multistring(3, "cat", "cats") == "3 cats"
+assert multistring(4, "is", "are") == "4 are"
+assert multistring(1, "was", "were") == "1 was"
+assert multistring(2, "it", "them") == "2 them"
+assert multistring(10, "thing", "things") & " " & multistring(10, "was", "were", false) == "10 things were"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
