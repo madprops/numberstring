@@ -24,7 +24,7 @@ var randgen = initRand(int(epochTime()))
 # a = 1, z = 26
 proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 
-proc multistring*(num: int64, s_word, p_word: string): string =
+proc multistring*(num: SomeNumber, s_word, p_word: string): string =
   ## Purpose: Avoid strings like "1 days" when it should be "1 day"
   ## 
   ## Send the number of the amount of things. 1 == singular
