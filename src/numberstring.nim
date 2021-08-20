@@ -1,35 +1,25 @@
+import std/[times, random, math, strutils, sequtils, strformat, sugar]
 
-
-import std/times
-import std/random
-import std/math
-import std/strutils
-import std/sequtils
-import std/strformat
-import std/sugar
-
-let
+const
   # Letter constants
-  ns_vowels = ['a', 'e', 'i', 'o', 'u']
-  ns_consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
-
-let
+  Vowels* = ['a', 'e', 'i', 'o', 'u']
+  Consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+  
   # Constants to calculate time
-  ns_minute = 60.0
-  ns_hour = 3_600.0
-  ns_day = 86_400.0
-  ns_month = 2_592_000.0
-  ns_year = 31_536_000.0
-
-let
+  Minute = 60.0
+  Hour = 3_600.0
+  Day = 86_400.0
+  Month = 2_592_000.0
+  Year = 31_536_000.0
+  
   # Constants to calculate number words
-  ns_powers = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
-  ns_tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-  ns_teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-  ns_digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+  Powers = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
+  Tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+  Teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+  Digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-# Init the rng
-randomize()
+# Init the random number generator
+var randgen = initRand(int(epochTime()))
 
 # a = 1, z = 26
 proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
@@ -50,25 +40,25 @@ proc numberwords*(num: SomeNumber): string =
   ## Submit the number that is transformed into words
   let n = int(num)
   if n < 0: return &"minus {numberwords(-n)}"
-  if n < 10: return ns_digits[n]
-  if n < 20: return ns_teens[n - 10]
+  if n < 10: return Digits[n]
+  if n < 20: return Teens[n - 10]
 
   if n < 100:
-    result = ns_tens[(int(n / 10) - 2) mod 10]
+    result = Tens[(int(n / 10) - 2) mod 10]
     if n mod 10 != 0: result.add(&"-{numberwords(n mod 10)}")
     return
 
   let ns = $n
-  var idx = ns_powers.len - 1
+  var idx = Powers.len - 1
 
   while true:
-    let d = ns_powers[idx][1]
+    let d = Powers[idx][1]
 
     if ns.len > d:
       let 
         first = numberwords(parseInt(ns[0..^(d + 1)]))
         second = numberwords(parseInt(ns[^d..^1]))
-        dz = ns_powers[idx][0]
+        dz = Powers[idx][0]
 
       result = &"{first} {dz}"
       if second != "zero": result.add(&" {second}")
@@ -91,24 +81,30 @@ proc countword*(text: string): int =
 
 proc timeago*(date_high, date_low: int64): string =
   ## Purpose: Get the timeago message between two dates
+  ##
+  ## For instance "33 minutes" (which is the diff of the dates)
+  ## 
+  ## This is for cases where you need to show a simple message
+  ## 
+  ## Like "posted 1 hour ago"
   ## 
   ## The dates are 2 unix timestamps in seconds
   let diff = float(max(date_high, date_low) - min(date_high, date_low))
   var n: int64; var w: string
 
-  if diff < ns_minute:
+  if diff < Minute:
     n = int64(diff)
     w = multistring(n, "second", "seconds")
-  elif diff < ns_hour:
+  elif diff < Hour:
     n = int64(diff / float(60))
     w = multistring(n, "minute", "minutes")
-  elif diff < ns_day:
+  elif diff < Day:
     n = int64(diff / float(60) / float(60))
     w = multistring(n, "hour", "hours")
-  elif diff < ns_month:
+  elif diff < Month:
     n = int64(diff / float(24) / float(60) / float(60))
     w = multistring(n, "day", "days")
-  elif diff < ns_year:
+  elif diff < Year:
     n = int64(diff / float(30) / float(24) / float(60) / float(60))
     w = multistring(n, "month", "months")
   else:
@@ -117,7 +113,7 @@ proc timeago*(date_high, date_low: int64): string =
 
   return &"{n} {w}"
 
-proc wordtag*(num: int, vowels_first: bool = true): string =
+proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags
   ## 
   ## It alternates between vowels and consonants
@@ -125,12 +121,14 @@ proc wordtag*(num: int, vowels_first: bool = true): string =
   ## Receives a number to set the length
   ## 
   ## Receives a boolean to set if vowels go first
+  ## 
+  ## A rand seed can be provided as an extra argument
   result = ""; var m = true
 
   for i in 1..num:
     result.add(if (m and vowels_first) or 
-    (not m and not vowels_first): sample(ns_vowels)
-    else: sample(ns_consonants))
+    (not m and not vowels_first): rng.sample(Vowels)
+    else: rng.sample(Consonants))
     m = not m
 
 proc leetspeak*(text: string): string =
