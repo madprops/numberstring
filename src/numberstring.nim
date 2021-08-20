@@ -24,6 +24,9 @@ var randgen = initRand(int(epochTime()))
 # a = 1, z = 26
 proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 
+# '1' = 1
+proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
+
 proc multistring*(num: SomeNumber, s_word, p_word: string, include_num: bool = true): string =
   ## Purpose: Avoid strings like "1 days" when it should be "1 day"
   ## 
@@ -91,7 +94,7 @@ proc countword*(text: string): int =
   for c in toSeq(text.strip().tolower()):
     if c != ' ':
       if c in '0'..'9':
-        result += parseInt($c)
+        result += numericval(c)
       elif c in 'a'..'z':
         result += alphabetpos(c)
 
