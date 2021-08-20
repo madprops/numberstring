@@ -128,8 +128,8 @@ function main() {
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">numerate
-      <li><a class="reference" href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring"
-    title="numerate(lines: openArray[string]; left, right: string): string">numerate,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
+      <li><a class="reference" href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring%2Cstring"
+    title="numerate(lines: openArray[string]; left, right: string; num_mode: string = &quot;num&quot;): string">numerate,<wbr>openArray[string],<wbr>string,<wbr>string,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">countword
@@ -148,8 +148,8 @@ function main() {
 
   </ul>
   <ul class="simple nested-toc-section">timeago
-      <li><a class="reference" href="#timeago%2Cint64%2Cint64"
-    title="timeago(date_1, date_2: int64): string">timeago,<wbr>int64,<wbr>int64</a></li>
+      <li><a class="reference" href="#timeago%2Cint64%2Cint64%2Cstring"
+    title="timeago(date_1, date_2: int64; num_mode: string = &quot;num&quot;): string">timeago,<wbr>int64,<wbr>int64,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">leetspeak
@@ -158,13 +158,13 @@ function main() {
 
   </ul>
   <ul class="simple nested-toc-section">multistring
-      <li><a class="reference" href="#multistring%2CSomeNumber%2Cstring%2Cstring%2Cbool"
-    title="multistring(num: SomeNumber; s_word, p_word: string; include_num: bool = true): string">multistring,<wbr>SomeNumber,<wbr>string,<wbr>string,<wbr>bool</a></li>
+      <li><a class="reference" href="#multistring%2CSomeNumber%2Cstring%2Cstring%2Cstring"
+    title="multistring(num: SomeNumber; s_word, p_word: string; num_mode: string = &quot;num&quot;): string">multistring,<wbr>SomeNumber,<wbr>string,<wbr>string,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">insertnum
-      <li><a class="reference" href="#insertnum%2Cstring%2Cstring"
-    title="insertnum(text, token: string): string">insertnum,<wbr>string,<wbr>string</a></li>
+      <li><a class="reference" href="#insertnum%2Cstring%2Cstring%2Cstring"
+    title="insertnum(text, token: string; num_mode: string = &quot;num&quot;): string">insertnum,<wbr>string,<wbr>string,<wbr>string</a></li>
 
   </ul>
 
@@ -177,7 +177,13 @@ function main() {
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
-  <p class="module-desc"></p>
+  <p class="module-desc"><p>Some procs receive a &quot;num_mode&quot; string which can be the following:</p>
+<p>num: Use a number literal like 2</p>
+<p>word: Use the number word like two</p>
+<p>Word: Use the number word like Two</p>
+<p>WORD: Use the number word like TWO</p>
+<p>None: Don't show anything</p>
+</p>
   <div class="section" id="10">
 <h1><a class="toc-backref" href="#10">Consts</a></h1>
 <dl class="item">
@@ -268,20 +274,23 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="multistring,SomeNumber,string,string,bool"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#multistring%2CSomeNumber%2Cstring%2Cstring%2Cbool"><span class="Identifier">multistring</span></a><span class="Other">(</span><span class="Identifier">num</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">s_word</span><span class="Other">,</span> <span class="Identifier">p_word</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                 <span class="Identifier">include_num</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="multistring,SomeNumber,string,string,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#multistring%2CSomeNumber%2Cstring%2Cstring%2Cstring"><span class="Identifier">multistring</span></a><span class="Other">(</span><span class="Identifier">num</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">s_word</span><span class="Other">,</span> <span class="Identifier">p_word</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+                 <span class="Identifier">num_mode</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;num&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 <p>Purpose: Avoid strings like &quot;1 days&quot; when it should be &quot;1 day&quot;</p>
 <p>Send the number of the amount of things. 1 == singular</p>
 <p>Send the singular word and the plural word</p>
-<p>Optional boolean to set if the number is shown</p>
+<p>Accepts a num_mode string</p>
 
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;day&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;days&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1 day&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;cat&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;cats&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;3 cats&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dog&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dog&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;none&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dog&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;four dogs&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dog&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Four Dogs&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">multistring</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dog&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;dogs&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;WORD&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;FOUR DOGS&quot;</span></pre>
 
 </dd>
 <a id="numberwords,SomeNumber"></a>
@@ -299,7 +308,7 @@ function main() {
 
 </dd>
 <a id="countword,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#countword%2Cstring"><span class="Identifier">countword</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#countword%2Cstring"><span class="Identifier">countword</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Purpose: Get the sum of letter index values
@@ -310,19 +319,23 @@ Purpose: Get the sum of letter index values
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">countword</span><span class="Punctuation">(</span><span class="StringLit">&quot;2 abc #$% 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">10</span></pre>
 
 </dd>
-<a id="timeago,int64,int64"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#timeago%2Cint64%2Cint64"><span class="Identifier">timeago</span></a><span class="Other">(</span><span class="Identifier">date_1</span><span class="Other">,</span> <span class="Identifier">date_2</span><span class="Other">:</span> <span class="Identifier">int64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="timeago,int64,int64,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#timeago%2Cint64%2Cint64%2Cstring"><span class="Identifier">timeago</span></a><span class="Other">(</span><span class="Identifier">date_1</span><span class="Other">,</span> <span class="Identifier">date_2</span><span class="Other">:</span> <span class="Identifier">int64</span><span class="Other">;</span> <span class="Identifier">num_mode</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;num&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Get the timeago message between two dates</p>
+<p>Used for simple messages like &quot;posted 1 hour ago&quot;</p>
 <p>The dates are 2 unix timestamps in seconds</p>
+<p>Accepts a num_mode string</p>
+<p>The num_mode also affects the strings</p>
 
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;10 seconds&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">140</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;2 minutes&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Hour</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">3</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;3 hours&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Month</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1 month&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Year</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;10 years&quot;</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Hour</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">3</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;three hours&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Month</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;One Month&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Year</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;WORD&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;TEN YEARS&quot;</span></pre>
 
 </dd>
 <a id="wordtag,int,bool,Rand"></a>
@@ -352,26 +365,37 @@ Purpose: Turn a string into 'leet speak'
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">leetspeak</span><span class="Punctuation">(</span><span class="StringLit">&quot;maple strikter&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;m4pl3 s7r1k73r&quot;</span></pre>
 
 </dd>
-<a id="numerate,openArray[string],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">numerate</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">,</span> <span class="Identifier">right</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="numerate,openArray[string],string,string,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#numerate%2CopenArray%5Bstring%5D%2Cstring%2Cstring%2Cstring"><span class="Identifier">numerate</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">left</span><span class="Other">,</span> <span class="Identifier">right</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+              <span class="Identifier">num_mode</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;num&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Purpose: Add numbers to lines</p>
 <p>Send an array of lines</p>
 <p>And the left and right parts around the number</p>
+<p>Accepts a num_mode string</p>
 
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;This line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;That line&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;)&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1) This line</span><span class="EscapeSequence">\n</span><span class="StringLit">2) That line&quot;</span></pre>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;This line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;That line&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;)&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1) This line</span><span class="EscapeSequence">\n</span><span class="StringLit">2) That line&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;This line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;That line&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;[&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;]&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;[one] This line</span><span class="EscapeSequence">\n</span><span class="StringLit">[two] That line&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;This line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;That line&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;[&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;]&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;[One] This line</span><span class="EscapeSequence">\n</span><span class="StringLit">[Two] That line&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numerate</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;This line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;That line&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;[&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;]&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;WORD&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;[ONE] This line</span><span class="EscapeSequence">\n</span><span class="StringLit">[TWO] That line&quot;</span></pre>
 
 </dd>
-<a id="insertnum,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="insertnum,string,string,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#insertnum%2Cstring%2Cstring%2Cstring"><span class="Identifier">insertnum</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">,</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">num_mode</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;num&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Purpose: Replace token with an incrementing number
+<p>Purpose: Replace token with an incrementing number</p>
+<p>Send the text and token</p>
+<p>Accepts a num_mode string</p>
+
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;This is $ and this is $&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;$&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;This is 1 and this is 2&quot;</span></pre>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;This is $ and this is $&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;$&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;This is 1 and this is 2&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello _ and _&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Hello one and two&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello _ and _&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Word&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Hello One and Two&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello _ and _&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;WORD&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Hello ONE and TWO&quot;</span></pre>
 
 </dd>
 
@@ -384,7 +408,7 @@ Purpose: Replace token with an incrementing number
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 04:41:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 21:05:12 UTC</small>
       </div>
     </div>
   </div>

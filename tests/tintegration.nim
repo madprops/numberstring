@@ -3,7 +3,10 @@ import pkg/numberstring
 assert multistring(0, "day", "days") == "0 days"
 assert multistring(1, "day", "days") == "1 day"
 assert multistring(2, "day", "days") == "2 days"
-assert multistring(10, "thing", "things") & " " & multistring(10, "was", "were", false) == "10 things were"
+assert multistring(4, "dog", "dogs", "none") == "dogs"
+assert multistring(4, "dog", "dogs", "word") == "four dogs"
+assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
+assert multistring(4, "dog", "dogs", "WORD") == "FOUR DOGS"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
@@ -30,6 +33,9 @@ assert timeago(1629246966, 1623102966) == "2 months"
 assert timeago(1629246966, 1513102966) == "3 years"
 assert timeago(2, 2000) == "33 minutes"
 assert timeago(80, 50) == "30 seconds"
+assert timeago(0, Hour * 3, "word") == "three hours"
+assert timeago(0, Month, "Word") == "One Month"
+assert timeago(0, Year * 10, "WORD") == "TEN YEARS"
 
 let wt1 = wordtag(4, true)
 assert wt1.len == 4
@@ -46,8 +52,14 @@ assert leetspeak("a e i o t") == "4 3 1 0 7"
 
 assert numerate(["a b c", "dfg", "h i j"], "(", ")") == "(1) a b c\n(2) dfg\n(3) h i j"
 assert numerate(["cat", "dog", "cow"], "#", ":") == "#1: cat\n#2: dog\n#3: cow"
+assert numerate(["This line", "That line"], "[", "]", "word") == "[one] This line\n[two] That line"
+assert numerate(["This line", "That line"], "[", "]", "Word") == "[One] This line\n[Two] That line"
+assert numerate(["This line", "That line"], "[", "]", "WORD") == "[ONE] This line\n[TWO] That line"
 
 assert insertnum("this is number __ and this is number __", "__") == "this is number 1 and this is number 2"
 assert insertnum("slot$  vs  trak$ in\nthe room-$ and\n$", "$") == "slot1  vs  trak2 in\nthe room-3 and\n4"
+assert insertnum("Hello _ and _", "_", "word") == "Hello one and two"
+assert insertnum("Hello _ and _", "_", "Word") == "Hello One and Two"
+assert insertnum("Hello _ and _", "_", "WORD") == "Hello ONE and TWO"
 
 echo "Test completed successfully."

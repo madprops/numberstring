@@ -1,5 +1,17 @@
 import std/[times, random, math, strutils, sequtils, strformat, sugar]
 
+## Some procs receive a "num_mode" string which can be the following:
+## 
+## num: Use a number literal like 2
+## 
+## word: Use the number word like two
+## 
+## Word: Use the number word like Two
+## 
+## WORD: Use the number word like TWO
+## 
+## None: Don't show anything
+
 const
   # Letter constants
   Vowels* = ['a', 'e', 'i', 'o', 'u']
@@ -27,21 +39,44 @@ proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 # '1' = 1
 proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 
-proc multistring*(num: SomeNumber, s_word, p_word: string, include_num: bool = true): string =
+# Pre-Declare numberwords
+proc numberwords*(num: SomeNumber): string
+
+# Capitalize accordingly
+proc capitalizer(text, mode: string): string =
+  if mode == "Word": capitalizeAscii(text)
+  elif mode == "WORD": toUpperAscii(text)
+  elif mode == "word": toLowerAscii(text)
+  else: text
+
+# Get the number, or the appropiate word
+proc apply_num_mode(num: SomeNumber, num_mode: string): string =
+  if num_mode == "num": $num
+  elif num_mode.toLower == "word": capitalizer(numberwords(num), num_mode)
+  else: ""
+
+proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "num"): string =
   ## Purpose: Avoid strings like "1 days" when it should be "1 day"
   ## 
   ## Send the number of the amount of things. 1 == singular
   ## 
   ## Send the singular word and the plural word
   ## 
-  ## Optional boolean to set if the number is shown
+  ## Accepts a num_mode string
   runnableExamples:
     assert multistring(1, "day", "days") == "1 day"
     assert multistring(3, "cat", "cats") == "3 cats"
-    assert multistring(4, "dog", "dogs", false) == "dogs"
+    assert multistring(4, "dog", "dogs", "none") == "dogs"
+    assert multistring(4, "dog", "dogs", "word") == "four dogs"
+    assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
+    assert multistring(4, "dog", "dogs", "WORD") == "FOUR DOGS"
   
   result = if num == 1: s_word else: p_word
-  if include_num: result = &"{num} {result}"
+
+  if num_mode != "none":
+    result = capitalizer(result, num_mode)
+    let ns = apply_num_mode(num, num_mode)
+    result = &"{ns} {result}"
 
 proc numberwords*(num: SomeNumber): string =
   ## Purpose: Turn numbers into english words
@@ -98,25 +133,31 @@ proc countword*(text: string): int =
       elif c in 'a'..'z':
         result += alphabetpos(c)
 
-proc timeago*(date_1, date_2: int64): string =
+proc timeago*(date_1, date_2: int64, num_mode: string = "num"): string =
   ## Purpose: Get the timeago message between two dates
   ## 
+  ## Used for simple messages like "posted 1 hour ago"
+  ## 
   ## The dates are 2 unix timestamps in seconds
+  ## 
+  ## Accepts a num_mode string
+  ## 
+  ## The num_mode also affects the strings
   runnableExamples:
     assert timeago(0, 10) == "10 seconds"
     assert timeago(0, 140) == "2 minutes"
-    assert timeago(0, Hour * 3) == "3 hours"
-    assert timeago(0, Month) == "1 month"
-    assert timeago(0, Year * 10) == "10 years"
+    assert timeago(0, Hour * 3, "word") == "three hours"
+    assert timeago(0, Month, "Word") == "One Month"
+    assert timeago(0, Year * 10, "WORD") == "TEN YEARS"
     
   let d = float(max(date_1, date_2) - min(date_1, date_2))
   
-  if d < Minute: multistring(int64(d), "second", "seconds")
-  elif d < Hour: multistring(int64(d / 60), "minute", "minutes")
-  elif d < Day: multistring(int64(d / 60 / 60), "hour", "hours")
-  elif d < Month: multistring(int64(d / 24 / 60 / 60), "day", "days")
-  elif d < Year: multistring(int64(d / 30 / 24 / 60 / 60), "month", "months")
-  else: multistring(int64(d / 365 / 24 / 60 / 60), "year", "years")
+  if d < Minute: multistring(int64(d), "second", "seconds", num_mode)
+  elif d < Hour: multistring(int64(d / 60), "minute", "minutes", num_mode)
+  elif d < Day: multistring(int64(d / 60 / 60), "hour", "hours", num_mode)
+  elif d < Month: multistring(int64(d / 24 / 60 / 60), "day", "days", num_mode)
+  elif d < Year: multistring(int64(d / 30 / 24 / 60 / 60), "month", "months", num_mode)
+  else: multistring(int64(d / 365 / 24 / 60 / 60), "year", "years", num_mode)
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags
@@ -151,27 +192,42 @@ proc leetspeak*(text: string): string =
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
-proc numerate*(lines: openArray[string], left, right: string): string =
+proc numerate*(lines: openArray[string], left, right: string, num_mode: string = "num"): string =
   ## Purpose: Add numbers to lines
   ## 
   ## Send an array of lines
   ## 
   ## And the left and right parts around the number
+  ## 
+  ## Accepts a num_mode string
   runnableExamples:
     assert numerate(["This line", "That line"], "", ")") == "1) This line\n2) That line"
+    assert numerate(["This line", "That line"], "[", "]", "word") == "[one] This line\n[two] That line"
+    assert numerate(["This line", "That line"], "[", "]", "Word") == "[One] This line\n[Two] That line"
+    assert numerate(["This line", "That line"], "[", "]", "WORD") == "[ONE] This line\n[TWO] That line"
     
   let new_array = collect(newSeq):
-    for i, s in lines: &"{left}{i + 1}{right} {s}"
+    for i, s in lines: 
+      let num = apply_num_mode(i + 1, num_mode)
+      &"{left}{num}{right} {s}"
   return new_array.join("\n")
 
-proc insertnum*(text, token: string): string =
+proc insertnum*(text, token: string, num_mode: string = "num"): string =
   ## Purpose: Replace token with an incrementing number
+  ## 
+  ## Send the text and token
+  ## 
+  ## Accepts a num_mode string
   runnableExamples:
     assert insertnum("This is $ and this is $", "$") == "This is 1 and this is 2"
+    assert insertnum("Hello _ and _", "_", "word") == "Hello one and two"
+    assert insertnum("Hello _ and _", "_", "Word") == "Hello One and Two"
+    assert insertnum("Hello _ and _", "_", "WORD") == "Hello ONE and TWO"
 
   result = ""; var ss = text
 
   for n in 1..text.count(token):
     let i = ss.find(token)
-    result.add(&"{ss[0..(i - 1)]}{n}")
+    let num = apply_num_mode(n, num_mode)
+    result.add(&"{ss[0..(i - 1)]}{num}")
     ss = ss[i + token.len..^1]
