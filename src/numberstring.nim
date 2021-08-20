@@ -106,20 +106,14 @@ proc timeago*(date_1, date_2: int64): string =
     assert timeago(0, Month) == "1 month"
     assert timeago(0, Year * 10) == "10 years"
     
-  let diff = float(max(date_1, date_2) - min(date_1, date_2))
-
-  if diff < Minute:
-    multistring(int64(diff), "second", "seconds")
-  elif diff < Hour:
-    multistring(int64(diff / 60), "minute", "minutes")
-  elif diff < Day:
-    multistring(int64(diff / 60 / 60), "hour", "hours")
-  elif diff < Month:
-    multistring(int64(diff / 24 / 60 / 60), "day", "days")
-  elif diff < Year:
-    multistring(int64(diff / 30 / 24 / 60 / 60), "month", "months")
-  else:
-    multistring(int64(diff / 365 / 24 / 60 / 60), "year", "years")
+  let d = float(max(date_1, date_2) - min(date_1, date_2))
+  
+  if d < Minute: multistring(int64(d), "second", "seconds")
+  elif d < Hour: multistring(int64(d / 60), "minute", "minutes")
+  elif d < Day: multistring(int64(d / 60 / 60), "hour", "hours")
+  elif d < Month: multistring(int64(d / 24 / 60 / 60), "day", "days")
+  elif d < Year: multistring(int64(d / 30 / 24 / 60 / 60), "month", "months")
+  else: multistring(int64(d / 365 / 24 / 60 / 60), "year", "years")
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags
