@@ -6,7 +6,7 @@ assert multistring(2, "day", "days") == "2 days"
 assert multistring(4, "dog", "dogs", "none") == "dogs"
 assert multistring(4, "dog", "dogs", "word") == "four dogs"
 assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
-assert multistring(4, "dog", "dogs", "WORD") == "FOUR DOGS"
+assert multistring(1, "dog", "dogs", "WORD") == "ONE DOG"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"

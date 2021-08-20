@@ -69,7 +69,7 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "n
     assert multistring(4, "dog", "dogs", "none") == "dogs"
     assert multistring(4, "dog", "dogs", "word") == "four dogs"
     assert multistring(4, "dog", "dogs", "Word") == "Four Dogs"
-    assert multistring(4, "dog", "dogs", "WORD") == "FOUR DOGS"
+    assert multistring(1, "dog", "dogs", "WORD") == "ONE DOG"
   
   result = if num == 1: s_word else: p_word
 
