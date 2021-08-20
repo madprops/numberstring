@@ -100,15 +100,15 @@ function main() {
     title="Consonants = [&apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;f&apos;, &apos;g&apos;, &apos;h&apos;, &apos;j&apos;, &apos;k&apos;, &apos;l&apos;, &apos;m&apos;, &apos;n&apos;, &apos;p&apos;, &apos;r&apos;,
               &apos;s&apos;, &apos;t&apos;, &apos;v&apos;, &apos;w&apos;, &apos;x&apos;, &apos;y&apos;, &apos;z&apos;]">Consonants</a></li>
   <li><a class="reference" href="#Minute"
-    title="Minute = 60.0">Minute</a></li>
+    title="Minute = 60">Minute</a></li>
   <li><a class="reference" href="#Hour"
-    title="Hour = 3600.0">Hour</a></li>
+    title="Hour = 3600">Hour</a></li>
   <li><a class="reference" href="#Day"
-    title="Day = 86400.0">Day</a></li>
+    title="Day = 86400">Day</a></li>
   <li><a class="reference" href="#Month"
-    title="Month = 2592000.0">Month</a></li>
+    title="Month = 2592000">Month</a></li>
   <li><a class="reference" href="#Year"
-    title="Year = 31536000.0">Year</a></li>
+    title="Year = 31536000">Year</a></li>
   <li><a class="reference" href="#Powers"
     title="Powers = [(&quot;hundred&quot;, 2), (&quot;thousand&quot;, 3), (&quot;million&quot;, 6), (&quot;billion&quot;, 9),
           (&quot;trillion&quot;, 12)]">Powers</a></li>
@@ -197,35 +197,35 @@ function main() {
 
 </dd>
 <a id="Minute"></a>
-<dt><pre><a href="numberstring.html#Minute"><span class="Identifier">Minute</span></a> <span class="Other">=</span> <span class="FloatNumber">60.0</span></pre></dt>
+<dt><pre><a href="numberstring.html#Minute"><span class="Identifier">Minute</span></a> <span class="Other">=</span> <span class="DecNumber">60</span></pre></dt>
 <dd>
 
 
 
 </dd>
 <a id="Hour"></a>
-<dt><pre><a href="numberstring.html#Hour"><span class="Identifier">Hour</span></a> <span class="Other">=</span> <span class="FloatNumber">3600.0</span></pre></dt>
+<dt><pre><a href="numberstring.html#Hour"><span class="Identifier">Hour</span></a> <span class="Other">=</span> <span class="DecNumber">3600</span></pre></dt>
 <dd>
 
 
 
 </dd>
 <a id="Day"></a>
-<dt><pre><a href="numberstring.html#Day"><span class="Identifier">Day</span></a> <span class="Other">=</span> <span class="FloatNumber">86400.0</span></pre></dt>
+<dt><pre><a href="numberstring.html#Day"><span class="Identifier">Day</span></a> <span class="Other">=</span> <span class="DecNumber">86400</span></pre></dt>
 <dd>
 
 
 
 </dd>
 <a id="Month"></a>
-<dt><pre><a href="numberstring.html#Month"><span class="Identifier">Month</span></a> <span class="Other">=</span> <span class="FloatNumber">2592000.0</span></pre></dt>
+<dt><pre><a href="numberstring.html#Month"><span class="Identifier">Month</span></a> <span class="Other">=</span> <span class="DecNumber">2592000</span></pre></dt>
 <dd>
 
 
 
 </dd>
 <a id="Year"></a>
-<dt><pre><a href="numberstring.html#Year"><span class="Identifier">Year</span></a> <span class="Other">=</span> <span class="FloatNumber">31536000.0</span></pre></dt>
+<dt><pre><a href="numberstring.html#Year"><span class="Identifier">Year</span></a> <span class="Other">=</span> <span class="DecNumber">31536000</span></pre></dt>
 <dd>
 
 
@@ -317,9 +317,9 @@ Purpose: Get the sum of letter index values
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;10 seconds&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">140</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;2 minutes&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">int</span><span class="Punctuation">(</span><span class="Identifier">Hour</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">3</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;3 hours&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">int</span><span class="Punctuation">(</span><span class="Identifier">Month</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1 month&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">int</span><span class="Punctuation">(</span><span class="Identifier">Year</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;10 years&quot;</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Hour</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">3</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;3 hours&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Month</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;1 month&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">timeago</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Year</span><span class="Whitespace"> </span><span class="Operator">*</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;10 years&quot;</span></pre>
 
 </dd>
 <a id="wordtag,int,bool,Rand"></a>
@@ -381,7 +381,7 @@ Purpose: Replace token with an incrementing number
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 03:17:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-20 03:21:41 UTC</small>
       </div>
     </div>
   </div>

@@ -6,11 +6,11 @@ const
   Consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
   
   # Constants to calculate time
-  Minute* = 60.0
-  Hour* = 3_600.0
-  Day* = 86_400.0
-  Month* = 2_592_000.0
-  Year* = 31_536_000.0
+  Minute* = 60
+  Hour* = 3_600
+  Day* = 86_400
+  Month* = 2_592_000
+  Year* = 31_536_000
   
   # Constants to calculate number words
   Powers* = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
@@ -98,26 +98,26 @@ proc timeago*(date_1, date_2: int64): string =
   runnableExamples:
     assert timeago(0, 10) == "10 seconds"
     assert timeago(0, 140) == "2 minutes"
-    assert timeago(0, int(Hour * 3)) == "3 hours"
-    assert timeago(0, int(Month)) == "1 month"
-    assert timeago(0, int(Year * 10)) == "10 years"
+    assert timeago(0, Hour * 3) == "3 hours"
+    assert timeago(0, Month) == "1 month"
+    assert timeago(0, Year * 10) == "10 years"
     
   let diff = float(max(date_1, date_2) - min(date_1, date_2))
   var n: int64; var w: string
 
-  if diff < Minute:
+  if diff < float(Minute):
     n = int64(diff)
     w = multistring(n, "second", "seconds")
-  elif diff < Hour:
+  elif diff < float(Hour):
     n = int64(diff / float(60))
     w = multistring(n, "minute", "minutes")
-  elif diff < Day:
+  elif diff < float(Day):
     n = int64(diff / float(60) / float(60))
     w = multistring(n, "hour", "hours")
-  elif diff < Month:
+  elif diff < float(Month):
     n = int64(diff / float(24) / float(60) / float(60))
     w = multistring(n, "day", "days")
-  elif diff < Year:
+  elif diff < float(Year):
     n = int64(diff / float(30) / float(24) / float(60) / float(60))
     w = multistring(n, "month", "months")
   else:
