@@ -10,7 +10,7 @@ import std/[times, random, math, strutils, sequtils, strformat, sugar]
 ## 
 ## WORD: Use the number word like TWO
 ## 
-## None: Don't show anything
+## none: Don't show anything
 ## 
 ## Similarly there are string_mode arguments
 ## 
