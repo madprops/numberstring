@@ -10,7 +10,7 @@ assert multistring(1, "dog", "dogs", "WORD") == "ONE dog"
 assert multistring(1.2, "thing", "things", "num") == "1 thing"
 assert multistring(1.2, "thing", "things", "fnum") == "1.2 things"
 assert multistring(1.2, "thing", "things", "word") == "one thing"
-assert multistring(1.2, "thing", "things", "fword") == "one point two things"
+assert multistring(1.2, "thing", "things", "fWORD") == "ONE POINT TWO things"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"

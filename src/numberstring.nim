@@ -58,9 +58,9 @@ proc numberwords*(num: SomeNumber): string
 
 # Capitalize accordingly
 proc capitalizer(text, mode: string): string =
-  if mode == "Word": capitalizeAscii(text)
-  elif mode == "WORD": toUpperAscii(text)
-  elif mode == "word": toLowerAscii(text)
+  if mode in ["word", "fword"]: toLowerAscii(text)
+  elif mode in ["Word", "fWord"]: capitalizeAscii(text)
+  elif mode in ["WORD", "fWORD"]: toUpperAscii(text)
   else: text
 
 # Format numbers like 1.1999 to 1.2
@@ -98,7 +98,7 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "n
     assert multistring(1.2, "thing", "things", "num") == "1 thing"
     assert multistring(1.2, "thing", "things", "fnum") == "1.2 things"
     assert multistring(1.2, "thing", "things", "word") == "one thing"
-    assert multistring(1.2, "thing", "things", "fword") == "one point two things"
+    assert multistring(1.2, "thing", "things", "fWORD") == "ONE POINT TWO things"
 
   if num_mode in ["num", "word", "Word", "WORD"]:
     result = if int(num) == 1: s_word else: p_word
