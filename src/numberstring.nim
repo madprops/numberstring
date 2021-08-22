@@ -5,12 +5,18 @@ import std/[times, random, math, strutils, sequtils, strformat, sugar]
 ## num: Int number like 2
 ##
 ## fnum: Rounded float number like 1.2
+## 
+## word: Use the number word like two (int)
 ##
-## word: Use the number word like two
+## Word: Use the number word like Two (int)
 ##
-## Word: Use the number word like Two
+## WORD: Use the number word like TWO (int)
 ##
-## WORD: Use the number word like TWO
+## fword: Use the number word like two (float)
+##
+## fWord: Use the number word like Two (float)
+##
+## fWORD: Use the number word like TWO (float)
 ##
 ## none: Don't show anything
 ##
@@ -70,7 +76,8 @@ proc fnum(num: SomeNumber): string =
 proc apply_num_mode(num: SomeNumber, num_mode: string): string =
   if num_mode == "num": $(int(num))
   elif num_mode == "fnum": fnum(num)
-  elif num_mode.toLower == "word": capitalizer(numberwords(num), num_mode)
+  elif num_mode.toLower.startsWith("word"): capitalizer(numberwords(int(num)), num_mode)
+  elif num_mode.toLower.startsWith("fword"): capitalizer(numberwords(float(num)), num_mode)
   else: ""
 
 proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "num"): string =
@@ -90,9 +97,10 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, num_mode: string = "n
     assert multistring(1, "dog", "dogs", "WORD") == "ONE dog"
     assert multistring(1.2, "thing", "things", "num") == "1 thing"
     assert multistring(1.2, "thing", "things", "fnum") == "1.2 things"
-    assert multistring(1.2, "thing", "things", "word") == "one point two things"
+    assert multistring(1.2, "thing", "things", "word") == "one thing"
+    assert multistring(1.2, "thing", "things", "fword") == "one point two things"
 
-  if num_mode == "num":
+  if num_mode in ["num", "word", "Word", "WORD"]:
     result = if int(num) == 1: s_word else: p_word
   else:
     result = if float(num) == 1.0: s_word else: p_word
@@ -268,5 +276,3 @@ proc insertnum*(text, token: string, num_mode: string = "num"): string =
     let num = apply_num_mode(n, num_mode)
     result.add(&"{ss[0..(i - 1)]}{num}")
     ss = ss[i + token.len..^1]
-
-echo multistring(4, "dog", "dogs", "none")
