@@ -1,4 +1,5 @@
 import std/[times, random, math, strutils, sequtils, strformat, sugar]
+from unicode import title
 
 type NumberMode* = enum
   Number, FloatNumber, NoNumber,
@@ -47,7 +48,7 @@ proc numberwords*(num: SomeNumber): string
 # Capitalize accordingly
 proc capitalizer(text: string, mode: NumberMode): string =
   if mode in [LowWord, FloatLowWord]: toLowerAscii(text)
-  elif mode in [CapWord, FloatCapWord]: capitalizeAscii(text)
+  elif mode in [CapWord, FloatCapWord]: title(text)
   elif mode in [UpWord, FloatUpWord]: toUpperAscii(text)
   else: text
 
