@@ -41,7 +41,6 @@ assert timeago(80, 50) == "30 seconds"
 assert timeago(0, Hour * 3, LowWord) == "three hours"
 assert timeago(0, Month, CapWord) == "One Month"
 assert timeago(0, Year * 10, UpWord) == "TEN YEARS"
-assert timeago(0, 140, FloatNumber) == "2.3 minutes"
 assert timeago(0, 70) == "1 minute"
 assert timeago(0, 70, FloatNumber) == "1.2 minutes"
 
