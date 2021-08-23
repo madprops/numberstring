@@ -5,14 +5,14 @@ type NumberMode* = enum
   LowWord, CapWord, UpWord,
   FloatLowWord, FloatCapWord, FloatUpWord
 
-proc nm_is_word(nm: NumberMode): bool =
-  nm in [LowWord, CapWord, UpWord]
+proc is_word(mode: NumberMode): bool =
+  mode in [LowWord, CapWord, UpWord]
 
-proc nm_is_f_word(nm: NumberMode): bool =
-  nm in [FloatLowWord, FloatCapWord, FloatUpWord] 
+proc is_f_word(mode: NumberMode): bool =
+  mode in [FloatLowWord, FloatCapWord, FloatUpWord] 
 
-proc nm_is_int(nm: NumberMode): bool =
-  nm in [Number] or nm_is_word(nm)
+proc is_int(mode: NumberMode): bool =
+  mode in [Number] or is_word(mode)
 
 const
   # Letter constants
@@ -45,10 +45,10 @@ proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 proc numberwords*(num: SomeNumber): string
 
 # Capitalize accordingly
-proc capitalizer(text: string, nm: NumberMode): string =
-  if nm in [LowWord, FloatLowWord]: toLowerAscii(text)
-  elif nm in [CapWord, FloatCapWord]: capitalizeAscii(text)
-  elif nm in [UpWord, FloatUpWord]: toUpperAscii(text)
+proc capitalizer(text: string, mode: NumberMode): string =
+  if mode in [LowWord, FloatLowWord]: toLowerAscii(text)
+  elif mode in [CapWord, FloatCapWord]: capitalizeAscii(text)
+  elif mode in [UpWord, FloatUpWord]: toUpperAscii(text)
   else: text
 
 # Format numbers like 1.1999 to 1.2
@@ -61,21 +61,21 @@ proc fnum(num: SomeNumber): string =
   return ns
 
 # Get the number, or the appropiate word
-proc apply_number_mode(num: SomeNumber, nm: NumberMode): string =
-  if nm == Number: $(int(num))
-  elif nm == FloatNumber: fnum(num)
-  elif nm_is_word(nm): capitalizer(numberwords(int(num)), nm)
-  elif nm_is_f_word(nm): capitalizer(numberwords(float(num)), nm)
+proc apply_number_mode(num: SomeNumber, mode: NumberMode): string =
+  if mode == Number: $(int(num))
+  elif mode == FloatNumber: fnum(num)
+  elif is_word(mode): capitalizer(numberwords(int(num)), mode)
+  elif is_f_word(mode): capitalizer(numberwords(float(num)), mode)
   else: ""
 
-proc multistring*(num: SomeNumber, s_word, p_word: string, nm = Number): string =
+proc multistring*(num: SomeNumber, s_word, p_word: string, mode = Number): string =
   ## Purpose: Avoid strings like "1 days" when it should be "1 day"
   ##
   ## Send the number of the amount of things. 1 == singular
   ##
   ## Send the singular word and the plural word
   ##
-  ## Accepts a NumberMode
+  ## Accepts an optional NumberMode
   runnableExamples:
     assert multistring(1, "day", "days") == "1 day"
     assert multistring(3, "cat", "cats") == "3 cats"
@@ -88,13 +88,13 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, nm = Number): string 
     assert multistring(1.2, "thing", "things", LowWord) == "one thing"
     assert multistring(1.2, "thing", "things", FloatUpWord) == "ONE POINT TWO things"
 
-  if nm_is_int(nm):
+  if is_int(mode):
     result = if int(num) == 1: s_word else: p_word
   else:
     result = if float(num) == 1.0: s_word else: p_word
 
-  if nm != NoNumber:
-    let ns = apply_number_mode(num, nm)
+  if mode != NoNumber:
+    let ns = apply_number_mode(num, mode)
     result = &"{ns} {result}"
 
 proc numberwords*(num: SomeNumber): string =
@@ -158,14 +158,14 @@ proc countword*(text: string): int =
       elif c in 'a'..'z':
         result += alphabetpos(c)
 
-proc timeago*(date_1, date_2: int64, nm = Number): string =
+proc timeago*(date_1, date_2: int64, mode = Number): string =
   ## Purpose: Get the timeago message between two dates
   ##
   ## Used for simple messages like "posted 1 hour ago"
   ##
   ## The dates are 2 unix timestamps in seconds
   ##
-  ## Accepts a NumberMode
+  ## Accepts an optional NumberMode
   runnableExamples:
     assert timeago(0, 10) == "10 seconds"
     assert timeago(0, 140) == "2 minutes"
@@ -175,25 +175,25 @@ proc timeago*(date_1, date_2: int64, nm = Number): string =
     assert timeago(0, Year * 10, UpWord) == "TEN YEARS"
 
   proc cs(s: string): string =
-    if nm_is_word(nm) or nm_is_f_word(nm):
-      return capitalizer(s, nm)
+    if is_word(mode) or is_f_word(mode):
+      return capitalizer(s, mode)
     else:
       return s
 
   let d = float(max(date_1, date_2) - min(date_1, date_2))
 
   if d < Minute:
-    multistring(d, cs("second"), cs("seconds"), nm)
+    multistring(d, cs("second"), cs("seconds"), mode)
   elif d < Hour:
-    multistring(d / 60, cs("minute"), cs("minutes"), nm)
+    multistring(d / 60, cs("minute"), cs("minutes"), mode)
   elif d < Day:
-    multistring(d / 60 / 60, cs("hour"), cs("hours"), nm)
+    multistring(d / 60 / 60, cs("hour"), cs("hours"), mode)
   elif d < Month:
-    multistring(d / 24 / 60 / 60, cs("day"), cs("days"), nm)
+    multistring(d / 24 / 60 / 60, cs("day"), cs("days"), mode)
   elif d < Year:
-    multistring(d / 30 / 24 / 60 / 60, cs("month"), cs("months"), nm)
+    multistring(d / 30 / 24 / 60 / 60, cs("month"), cs("months"), mode)
   else:
-    multistring(d / 365 / 24 / 60 / 60, cs("year"), cs("years"), nm)
+    multistring(d / 365 / 24 / 60 / 60, cs("year"), cs("years"), mode)
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags
@@ -228,14 +228,14 @@ proc leetspeak*(text: string): string =
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
-proc numerate*(lines: openArray[string], left, right: string, nm = Number): string =
+proc numerate*(lines: openArray[string], left, right: string, mode = Number): string =
   ## Purpose: Add numbers to lines
   ##
   ## Send an array of lines
   ##
   ## And the left and right parts around the number
   ##
-  ## Accepts a NumberMode
+  ## Accepts an optional NumberMode
   runnableExamples:
     assert numerate(["This line", "That line"], "", ")") == "1) This line\n2) That line"
     assert numerate(["This line", "That line"], "[", "]", LowWord) == "[one] This line\n[two] That line"
@@ -244,16 +244,16 @@ proc numerate*(lines: openArray[string], left, right: string, nm = Number): stri
 
   let new_array = collect(newSeq):
     for i, s in lines:
-      let num = apply_number_mode(i + 1, nm)
+      let num = apply_number_mode(i + 1, mode)
       &"{left}{num}{right} {s}"
   return new_array.join("\n")
 
-proc insertnum*(text, token: string, nm = Number): string =
+proc insertnum*(text, token: string, mode = Number): string =
   ## Purpose: Replace token with an incrementing number
   ##
   ## Send the text and token
   ##
-  ## Accepts a NumberMode
+  ## Accepts an optional NumberMode
   runnableExamples:
     assert insertnum("This is $ and this is $", "$") == "This is 1 and this is 2"
     assert insertnum("Hello _ and _", "_", LowWord) == "Hello one and two"
@@ -264,6 +264,6 @@ proc insertnum*(text, token: string, nm = Number): string =
 
   for n in 1..text.count(token):
     let i = ss.find(token)
-    let num = apply_number_mode(n, nm)
+    let num = apply_number_mode(n, mode)
     result.add(&"{ss[0..(i - 1)]}{num}")
     ss = ss[i + token.len..^1]
