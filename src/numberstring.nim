@@ -12,11 +12,11 @@ import std/[times, random, math, strutils, sequtils, strformat, sugar]
 ##
 ## WORD: Use the number word like TWO (int)
 ##
-## fword: Use the number word like two (float)
+## fword: Use the number word like two point one (float)
 ##
-## fWord: Use the number word like Two (float)
+## fWord: Use the number word like Two Point One (float)
 ##
-## fWORD: Use the number word like TWO (float)
+## fWORD: Use the number word like TWO POINT ONE (float)
 ##
 ## none: Don't show anything
 ##
