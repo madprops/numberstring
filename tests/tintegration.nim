@@ -73,4 +73,9 @@ assert insertnum("Hello _ and _", "_", LowWord) == "Hello one and two"
 assert insertnum("Hello _ and _", "_", CapWord) == "Hello One and Two"
 assert insertnum("Hello _ and _", "_", UpWord) == "Hello ONE and TWO"
 
+assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
+assert linesummary(["ab", "c d e"], true, true) == "ab (1 word) (2 chars)\nc d e (3 words) (3 chars)"
+assert linesummary(["ab", "c d e"], true, false) == "ab (1 word)\nc d e (3 words)"
+assert linesummary(["ab", "c d e"], false, true) == "ab (2 chars)\nc d e (3 chars)"
+
 echo "Test completed successfully."

@@ -162,6 +162,11 @@ function main() {
     title="timeago(date_1, date_2: int64; mode = Number): string">timeago,<wbr>int64,<wbr>int64</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">linesummary
+      <li><a class="reference" href="#linesummary%2CopenArray%5Bstring%5D%2Cbool%2Cbool"
+    title="linesummary(lines: openArray[string]; words, characters: bool): string">linesummary,<wbr>openArray[string],<wbr>bool,<wbr>bool</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">leetspeak
       <li><a class="reference" href="#leetspeak%2Cstring"
     title="leetspeak(text: string): string">leetspeak,<wbr>string</a></li>
@@ -425,6 +430,20 @@ Purpose: Turn a string into 'leet speak'
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">insertnum</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello _ and _&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">UpWord</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Hello ONE and TWO&quot;</span></pre>
 
 </dd>
+<a id="linesummary,openArray[string],bool,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#linesummary%2CopenArray%5Bstring%5D%2Cbool%2Cbool"><span class="Identifier">linesummary</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">words</span><span class="Other">,</span> <span class="Identifier">characters</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Print the number of words and characters per line</p>
+<p>Send an array of lines</p>
+<p>And two booleans to enable/disable words &amp; chars</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">linesummary</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;hello there&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;hello there (2 words) (10 chars)&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">linesummary</span><span class="Punctuation">(</span><span class="Punctuation">[</span><span class="StringLit">&quot;ab&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;c d e&quot;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;ab (1 word) (2 chars)</span><span class="EscapeSequence">\n</span><span class="StringLit">c d e (3 words) (3 chars)&quot;</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -435,7 +454,7 @@ Purpose: Turn a string into 'leet speak'
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-24 01:18:29 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-24 08:22:40 UTC</small>
       </div>
     </div>
   </div>

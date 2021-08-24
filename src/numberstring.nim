@@ -281,3 +281,32 @@ proc insertnum*(text, token: string, mode = Number): string =
     let num = apply_number_mode(n, mode)
     result.add(&"{ss[0..(i - 1)]}{num}")
     ss = ss[i + token.len..^1]
+
+proc linesummary*(lines: openArray[string], words, characters: bool): string =
+  ## Print the number of words and characters per line
+  ## 
+  ## Send an array of lines
+  ## 
+  ## And two booleans to enable/disable words & chars
+  runnableExamples:
+    assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
+    assert linesummary(["ab", "c d e"], true, true) == "ab (1 word) (2 chars)\nc d e (3 words) (3 chars)"
+
+  var newlines: seq[string] = @[]
+
+  for line in lines:
+    var s = line
+
+    if words: 
+      let c = line.split(" ").filterIt(it != "").len
+      let cs = multistring(c, "word", "words")
+      s &= &" ({cs})"
+
+    if characters:
+      let c = line.replace(" ", "").len
+      let cs = multistring(c, "char", "chars")
+      s &= &" ({cs})"
+
+    newlines.add(s)
+    
+  return newlines.join("\n")
