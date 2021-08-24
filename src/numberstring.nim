@@ -2,16 +2,28 @@ import std/[times, random, math, strutils, sequtils, strformat, sugar]
 from unicode import title
 
 type NumberMode* = enum
+  ## Type of number to display
+  ## 
+  ## Int Number. Float Number. No number
+  ## 
+  ## Words can be like "two hundred eighty-eight"
+  ## 
+  ## Lower case word, Capitalized word, Upper case word
+  ## 
+  ## Words that use a float number like "two point one"
   Number, FloatNumber, NoNumber,
   LowWord, CapWord, UpWord,
   FloatLowWord, FloatCapWord, FloatUpWord
 
+# Check if it's an int word
 proc is_word(mode: NumberMode): bool =
   mode in [LowWord, CapWord, UpWord]
 
+# Check if it's a float word
 proc is_f_word(mode: NumberMode): bool =
   mode in [FloatLowWord, FloatCapWord, FloatUpWord] 
 
+# Check if the number should be treated as int
 proc is_int(mode: NumberMode): bool =
   mode in [Number] or is_word(mode)
 
@@ -107,6 +119,7 @@ proc numberwords*(num: SomeNumber): string =
     assert numberwords(10) == "ten"
     assert numberwords(122) == "one hundred twenty-two"
     assert numberwords(3_654_321) == "three million six hundred fifty-four thousand three hundred twenty-one"
+    assert numberwords(9.1818) == "nine point two"
 
   let split = fnum(num).split(".")
   if split.len == 2:

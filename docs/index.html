@@ -197,6 +197,11 @@ function main() {
   <span class="Identifier">FloatCapWord</span><span class="Other">,</span> <span class="Identifier">FloatUpWord</span></pre></dt>
 <dd>
 
+<p>Type of number to display</p>
+<p>Int Number. Float Number. No number</p>
+<p>Words can be like &quot;two hundred eighty-eight&quot;</p>
+<p>Lower case word, Capitalized word, Upper case word</p>
+<p>Words that use a float number like &quot;two point one&quot;</p>
 
 
 </dd>
@@ -325,7 +330,8 @@ function main() {
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;zero&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="DecNumber">10</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;ten&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="DecNumber">122</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;one hundred twenty-two&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="DecNumber">3_654_321</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;three million six hundred fifty-four thousand three hundred twenty-one&quot;</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="DecNumber">3_654_321</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;three million six hundred fifty-four thousand three hundred twenty-one&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">numberwords</span><span class="Punctuation">(</span><span class="FloatNumber">9.1818</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;nine point two&quot;</span></pre>
 
 </dd>
 <a id="countword,string"></a>
@@ -429,7 +435,7 @@ Purpose: Turn a string into 'leet speak'
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-23 06:06:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-24 01:18:29 UTC</small>
       </div>
     </div>
   </div>
