@@ -290,7 +290,7 @@ proc linesummary*(lines: openArray[string], words, characters: bool): string =
   ## And two booleans to enable/disable words & chars
   runnableExamples:
     assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
-    assert linesummary(["ab", "c d e"], true, true) == "ab (1 word) (2 chars)\nc d e (3 words) (3 chars)"
+    assert linesummary(["ab", "c d e"], false, true) == "ab (2 chars)\nc d e (3 chars)"
 
   var newlines: seq[string] = @[]
 
