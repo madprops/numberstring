@@ -327,8 +327,15 @@ proc romano*(num: SomeNumber): string =
     assert romano(21) == "XXI"
     assert romano(1994) == "MCMXCIV"
 
-  var number = int(num)
   result = ""
+  var number = int(num)
+  
+  if number == 0:
+    return "0"
+  elif number < 0:
+    result &= "-"
+    number = abs(number)
+
   while number > 0:
     for symbol, value in Symbols.items:
       while number >= value:
