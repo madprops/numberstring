@@ -10,9 +10,9 @@ type NumberMode* = enum
   ## 
   ## Lower case word, Capitalized word, Upper case word
   ## 
-  ## Roman number
-  ## 
   ## Words that use a float number like "two point one"
+  ## 
+  ## Roman number like XXI
   Number, FloatNumber, NoNumber,
   LowWord, CapWord, UpWord,
   FloatLowWord, FloatCapWord, FloatUpWord,
