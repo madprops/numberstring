@@ -66,16 +66,22 @@ assert numerate(["cat", "dog", "cow"], "#", ":") == "#1: cat\n#2: dog\n#3: cow"
 assert numerate(["This line", "That line"], "[", "]", LowWord) == "[one] This line\n[two] That line"
 assert numerate(["This line", "That line"], "[", "]", CapWord) == "[One] This line\n[Two] That line"
 assert numerate(["This line", "That line"], "[", "]", UpWord) == "[ONE] This line\n[TWO] That line"
+assert numerate(["This line", "That line"], "(", ")", Roman) == "(I) This line\n(II) That line"
 
 assert insertnum("this is number __ and this is number __", "__") == "this is number 1 and this is number 2"
 assert insertnum("slot$  vs  trak$ in\nthe room-$ and\n$", "$") == "slot1  vs  trak2 in\nthe room-3 and\n4"
 assert insertnum("Hello _ and _", "_", LowWord) == "Hello one and two"
 assert insertnum("Hello _ and _", "_", CapWord) == "Hello One and Two"
 assert insertnum("Hello _ and _", "_", UpWord) == "Hello ONE and TWO"
+assert insertnum("x x x x x", "x", Roman) == "I II III IV V"
 
 assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
 assert linesummary(["ab", "c d e"], true, true) == "ab (1 word) (2 chars)\nc d e (3 words) (3 chars)"
 assert linesummary(["ab", "c d e"], true, false) == "ab (1 word)\nc d e (3 words)"
 assert linesummary(["ab", "c d e"], false, true) == "ab (2 chars)\nc d e (3 chars)"
+assert linesummary(["ab", "c d e"], false, true, CapWord) == "ab (Two Chars)\nc d e (Three Chars)"
+
+assert romano(21) == "XXI"
+assert romano(1994) == "MCMXCIV"
 
 echo "Test completed successfully."

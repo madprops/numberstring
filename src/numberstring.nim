@@ -10,10 +10,13 @@ type NumberMode* = enum
   ## 
   ## Lower case word, Capitalized word, Upper case word
   ## 
+  ## Roman number
+  ## 
   ## Words that use a float number like "two point one"
   Number, FloatNumber, NoNumber,
   LowWord, CapWord, UpWord,
-  FloatLowWord, FloatCapWord, FloatUpWord
+  FloatLowWord, FloatCapWord, FloatUpWord,
+  Roman
 
 # Check if it's an int word
 proc is_word(mode: NumberMode): bool =
@@ -32,18 +35,24 @@ const
   Vowels* = ['a', 'e', 'i', 'o', 'u']
   Consonants* = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
-  # Constants to calculate time
+  # To calculate time
   Minute* = 60
   Hour* = 3_600
   Day* = 86_400
   Month* = 2_592_000
   Year* = 31_536_000
 
-  # Constants to calculate number words
+  # To calculate number words
   Powers* = [("hundred", 2), ("thousand", 3), ("million", 6), ("billion", 9), ("trillion", 12)]
   Tens* = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
   Teens* = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
   Digits* = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+
+  # For roman number conversion
+  Symbols* = [
+    ("M", 1000), ("CM", 900), ("D", 500), ("CD", 400), ("C", 100),
+    ("XC", 90), ("L", 50), ("XL", 40), ("X", 10),
+    ("IX", 9), ("V", 5), ("IV", 4), ("I", 1)]
 
 # Init the random number generator
 var randgen = initRand(int(epochTime()))
@@ -57,8 +66,11 @@ proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 # Pre-Declare numberwords
 proc numberwords*(num: SomeNumber): string
 
+# Pre-Declare romano
+proc romano*(num: SomeNumber): string
+
 # Capitalize accordingly
-proc capitalizer(text: string, mode: NumberMode): string =
+proc capi(text: string, mode: NumberMode): string =
   if mode in [LowWord, FloatLowWord]: toLowerAscii(text)
   elif mode in [CapWord, FloatCapWord]: title(text)
   elif mode in [UpWord, FloatUpWord]: toUpperAscii(text)
@@ -77,8 +89,9 @@ proc fnum(num: SomeNumber): string =
 proc apply_number_mode(num: SomeNumber, mode: NumberMode): string =
   if mode == Number: $(int(num))
   elif mode == FloatNumber: fnum(num)
-  elif is_word(mode): capitalizer(numberwords(int(num)), mode)
-  elif is_f_word(mode): capitalizer(numberwords(float(num)), mode)
+  elif is_word(mode): capi(numberwords(int(num)), mode)
+  elif is_f_word(mode): capi(numberwords(float(num)), mode)
+  elif mode == Roman: romano(num)
   else: ""
 
 proc multistring*(num: SomeNumber, s_word, p_word: string, mode = Number): string =
@@ -188,26 +201,20 @@ proc timeago*(date_1, date_2: int64, mode = Number): string =
     assert timeago(0, Month, CapWord) == "One Month"
     assert timeago(0, Year * 10, UpWord) == "TEN YEARS"
 
-  proc cs(s: string): string =
-    if is_word(mode) or is_f_word(mode):
-      return capitalizer(s, mode)
-    else:
-      return s
-
   let d = float(max(date_1, date_2) - min(date_1, date_2))
 
   if d < Minute:
-    multistring(d, cs("second"), cs("seconds"), mode)
+    multistring(d, capi("second", mode), capi("seconds", mode), mode)
   elif d < Hour:
-    multistring(d / 60, cs("minute"), cs("minutes"), mode)
+    multistring(d / 60, capi("minute", mode), capi("minutes", mode), mode)
   elif d < Day:
-    multistring(d / 60 / 60, cs("hour"), cs("hours"), mode)
+    multistring(d / 60 / 60, capi("hour", mode), capi("hours", mode), mode)
   elif d < Month:
-    multistring(d / 24 / 60 / 60, cs("day"), cs("days"), mode)
+    multistring(d / 24 / 60 / 60, capi("day", mode), capi("days", mode), mode)
   elif d < Year:
-    multistring(d / 30 / 24 / 60 / 60, cs("month"), cs("months"), mode)
+    multistring(d / 30 / 24 / 60 / 60, capi("month", mode), capi("months", mode), mode)
   else:
-    multistring(d / 365 / 24 / 60 / 60, cs("year"), cs("years"), mode)
+    multistring(d / 365 / 24 / 60 / 60, capi("year", mode), capi("years", mode), mode)
 
 proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): string =
   ## Purpose: Generate random string tags
@@ -255,6 +262,7 @@ proc numerate*(lines: openArray[string], left, right: string, mode = Number): st
     assert numerate(["This line", "That line"], "[", "]", LowWord) == "[one] This line\n[two] That line"
     assert numerate(["This line", "That line"], "[", "]", CapWord) == "[One] This line\n[Two] That line"
     assert numerate(["This line", "That line"], "[", "]", UpWord) == "[ONE] This line\n[TWO] That line"
+    assert numerate(["This line", "That line"], "(", ")", Roman) == "(I) This line\n(II) That line"
 
   let new_array = collect(newSeq):
     for i, s in lines:
@@ -273,6 +281,7 @@ proc insertnum*(text, token: string, mode = Number): string =
     assert insertnum("Hello _ and _", "_", LowWord) == "Hello one and two"
     assert insertnum("Hello _ and _", "_", CapWord) == "Hello One and Two"
     assert insertnum("Hello _ and _", "_", UpWord) == "Hello ONE and TWO"
+    assert insertnum("x x x x x", "x", Roman) == "I II III IV V"
 
   result = ""; var ss = text
 
@@ -282,7 +291,7 @@ proc insertnum*(text, token: string, mode = Number): string =
     result.add(&"{ss[0..(i - 1)]}{num}")
     ss = ss[i + token.len..^1]
 
-proc linesummary*(lines: openArray[string], words, characters: bool): string =
+proc linesummary*(lines: openArray[string], words, characters: bool, mode = Number): string =
   ## Print the number of words and characters per line
   ## 
   ## Send an array of lines
@@ -291,6 +300,7 @@ proc linesummary*(lines: openArray[string], words, characters: bool): string =
   runnableExamples:
     assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
     assert linesummary(["ab", "c d e"], false, true) == "ab (2 chars)\nc d e (3 chars)"
+    assert linesummary(["ab", "c d e"], false, true, CapWord) == "ab (Two Chars)\nc d e (Three Chars)"
 
   var newlines: seq[string] = @[]
 
@@ -299,14 +309,28 @@ proc linesummary*(lines: openArray[string], words, characters: bool): string =
 
     if words: 
       let c = line.split(" ").filterIt(it != "").len
-      let cs = multistring(c, "word", "words")
+      let cs = multistring(c, capi("word", mode), capi("words", mode), mode)
       s &= &" ({cs})"
 
     if characters:
       let c = line.replace(" ", "").len
-      let cs = multistring(c, "char", "chars")
+      let cs = multistring(c, capi("char", mode), capi("chars", mode), mode)
       s &= &" ({cs})"
 
     newlines.add(s)
     
   return newlines.join("\n")
+
+proc romano*(num: SomeNumber): string = 
+  ## Convert regular numbers to roman numbers 
+  runnableExamples:
+    assert romano(21) == "XXI"
+    assert romano(1994) == "MCMXCIV"
+
+  var number = int(num)
+  result = ""
+  while number > 0:
+    for symbol, value in Symbols.items:
+      while number >= value:
+        result.add symbol
+        number -= value
