@@ -393,11 +393,11 @@ proc wordnumber*(text: string): float =
       num = $(Digits.find(word))
     elif word in Teens:
       num = $(Teens.find(word) + 10)
+    elif word in Tens:
+      num = $((Tens.find(word) + 2) * 10)
     elif "-" in word:
       let split = word.split("-")
       num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
-    elif word in Tens:
-      num = $((Tens.find(word) + 2) * 10)
     
     if num != "":
       charge += num.len
