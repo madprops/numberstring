@@ -358,6 +358,9 @@ proc wordnumber*(text: string): float =
 
   let words = text.tolower.split(" ").filterIt(it != "")
 
+  if words.len == 0:
+    raise newException(CatchableError, "No words provided")
+
   var
     ns = ""
     mode = ""
@@ -407,14 +410,18 @@ proc wordnumber*(text: string): float =
       last_num = num
       continue
 
-    for pi, p in Powers:
-      if p[0] == word:
-        checkdiff(i)
-        mode = p[0]
-        mode_num = p[1]
-        mode_index = pi
-        charge = 0
+    block modeblock:
+      for pi, p in Powers:
+        if p[0] == word:
+          checkdiff(i)
+          mode = p[0]
+          mode_num = p[1]
+          mode_index = pi
+          charge = 0
+          break modeblock
+
+      raise newException(CatchableError,
+      "Invalid number word -> " & word)
 
   checkdiff(0)
-  if ns == "": return 0.0
   parseFloat(ns)

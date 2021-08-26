@@ -97,5 +97,9 @@ assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") 
 assert wordnumber("three hundred forty") == 340
 assert wordnumber("four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight") == 4455667788.0
 assert wordnumber("One HUNDRED NiNeteen") == 119
+doAssertRaises(CatchableError):
+  echo wordnumber("nothing here")
+doAssertRaises(CatchableError):
+  echo wordnumber("")  
 
 echo "Test completed successfully."
