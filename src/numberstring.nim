@@ -351,6 +351,7 @@ proc wordnumber*(text: string): float =
     assert wordnumber("minus four thousand two") == -4002.0
     assert wordnumber("thirty-three point three") == 33.3
     assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
+    assert wordnumber("three hundred forty") == 340
 
   let words = text.split(" ").filterIt(it != "")
   
@@ -406,6 +407,8 @@ proc wordnumber*(text: string): float =
       elif "-" in word:
         let split = word.split("-")
         last_num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+      elif word in Tens:
+        last_num = $((Tens.find(word) + 2) * 10)
       
       charge += last_num.len
       if last_num != "": ns &= last_num

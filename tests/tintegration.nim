@@ -91,5 +91,6 @@ assert wordnumber("zero") == 0.0
 assert wordnumber("minus four thousand two") == -4002.0
 assert wordnumber("thirty-three point three") == 33.3
 assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
+assert wordnumber("three hundred forty") == 340
 
 echo "Test completed successfully."
