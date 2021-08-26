@@ -341,6 +341,16 @@ proc romano*(num: SomeNumber): string =
         result.add symbol
         number -= value
 
+proc stringpad*(n: int, s: string): string =
+  ## Fill n times with a string
+  runnableExamples:
+    assert stringpad(3, "x") == "xxx"
+    assert stringpad(6, "0") == "000000"
+    assert stringpad(0, "z") == ""
+    assert stringpad(2, "xo") == "xoxo"
+
+  for _ in 1..n: result &= s
+
 proc wordnumber*(text: string): float =
   ## Change number words to numbers
   runnableExamples:
@@ -362,12 +372,6 @@ proc wordnumber*(text: string): float =
     charge = 0
     last_num = ""
 
-  proc zeropad(diff: int): string =
-    var zeroes = ""
-    for _ in 1..diff:
-      zeroes &= "0"
-    return zeroes
-  
   proc checkdiff(i: int) =
     let diff = mode_num - charge
     
@@ -380,7 +384,9 @@ proc wordnumber*(text: string): float =
               let word = words[i2]
               if word == p2[0]:
                 return
-      let zeroes = zeropad(diff)
+
+      let zeroes = stringpad(diff, "0")
+
       if charge > 0:
         ns = ns[0..^(last_num.len + 1)] & zeroes & last_num    
       else:
