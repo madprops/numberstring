@@ -343,18 +343,18 @@ proc romano*(num: SomeNumber): string =
         result.add symbol
         number -= value
 
-proc wordnumber*(text: string): float =
+proc wordsnumber*(text: string): float =
   ## Change number words to numbers
   runnableExamples:
-    assert wordnumber("six hundred three") == 603.0
-    assert wordnumber("six hundred three million") == 603000000.0
-    assert wordnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632.0
-    assert wordnumber("zero") == 0
-    assert wordnumber("minus four thousand two") == -4002.0
-    assert wordnumber("thirty-three point three") == 33.3
-    assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
-    assert wordnumber("three hundred forty") == 340
-    assert wordnumber("One HUNDRED NiNeteen") == 119
+    assert wordsnumber("six hundred three") == 603.0
+    assert wordsnumber("six hundred three million") == 603000000.0
+    assert wordsnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632.0
+    assert wordsnumber("zero") == 0
+    assert wordsnumber("minus four thousand two") == -4002.0
+    assert wordsnumber("thirty-three point three") == 33.3
+    assert wordsnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
+    assert wordsnumber("three hundred forty") == 340
+    assert wordsnumber("One HUNDRED NiNeteen") == 119
 
   let words = text.tolower.split(" ").filterIt(it != "")
 
