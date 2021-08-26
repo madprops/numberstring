@@ -403,14 +403,15 @@ proc wordnumber*(text: string): float =
       charge += num.len
       ns &= num
       last_num = num
-    else:
-      for pi, p in Powers:
-        if p[0] == word:
-          checkdiff(i)
-          mode = p[0]
-          mode_num = p[1]
-          mode_index = pi
-          charge = 0      
+      continue
+    
+    for pi, p in Powers:
+      if p[0] == word:
+        checkdiff(i)
+        mode = p[0]
+        mode_num = p[1]
+        mode_index = pi
+        charge = 0      
   
   checkdiff(0)
 
