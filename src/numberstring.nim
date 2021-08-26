@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar, algorithm]
+import std/[times, random, math, strutils, sequtils, strformat, sugar]
 from unicode import title
 
 type NumberMode* = enum
@@ -341,22 +341,25 @@ proc romano*(num: SomeNumber): string =
         result.add symbol
         number -= value
 
-proc wordnumber*(text: string): int =
+proc wordnumber*(text: string): float =
   ## Change number words to numbers
   runnableExamples:
-    assert wordnumber("six hundred three") == 603
-    assert wordnumber("six hundred three million") == 603000000
-    assert wordnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632
+    assert wordnumber("six hundred three") == 603.0
+    assert wordnumber("six hundred three million") == 603000000.0
+    assert wordnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632.0
     assert wordnumber("zero") == 0
-    assert wordnumber("minus four thousand two") == -4002
+    assert wordnumber("minus four thousand two") == -4002.0
+    assert wordnumber("thirty-three point three") == 33.3
 
   let words = text.split(" ").filterIt(it != "")
-  var ns = ""
-  var mode = ""
-  var mode_num = 0
-  var mode_index = 0
-  var charge = 0
-  var last_num = ""
+  
+  var
+    ns = ""
+    mode = ""
+    mode_num = 0
+    mode_index = 0
+    charge = 0
+    last_num = ""
 
   proc zeropad(diff: int): string =
     var zeroes = ""
@@ -383,6 +386,10 @@ proc wordnumber*(text: string): int =
         ns &= zeroes
 
   for i, word in words:
+    if word == "point":
+      ns &= "."
+      continue
+
     block loop:
       for pi, p in Powers:
         if p[0] == word:
@@ -411,4 +418,4 @@ proc wordnumber*(text: string): int =
   if words[0] == "minus":
     ns = "-" & ns
 
-  parseInt(ns)
+  parseFloat(ns)
