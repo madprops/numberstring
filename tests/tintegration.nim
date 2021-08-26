@@ -86,6 +86,9 @@ assert linesummary(["ab", "c d e"], false, true, CapWord) == "ab (Two Chars)\nc 
 
 assert romano(21) == "XXI"
 assert romano(1994) == "MCMXCIV"
+assert romano(1) == "I"
+assert romano(0) == "0"
+assert romano(-11) == "-XI"
 
 assert wordsnumber("six hundred three") == 603.0
 assert wordsnumber("six hundred three million") == 603000000.0

@@ -328,6 +328,9 @@ proc romano*(num: SomeNumber): string =
   runnableExamples:
     assert romano(21) == "XXI"
     assert romano(1994) == "MCMXCIV"
+    assert romano(1) == "I"
+    assert romano(0) == "0"
+    assert romano(-11) == "-XI"
 
   var number = int(num)
 
