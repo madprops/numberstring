@@ -371,13 +371,10 @@ proc wordnumber*(text: string): float =
     
     if diff > 0:
       if i > 0:
-        if i + 1 < words.len:
-          if mode_index - 1 >= 0:
-            let p2 = Powers[mode_index - 1]
-            for i2 in i..<words.len:
-              let word = words[i2]
-              if word == p2[0]:
-                return
+        if mode_index - 1 >= 0:
+          let pnext = Powers[mode_index - 1]
+          if pnext[0] in words[i..^1].join(" "):
+            return
 
       let zeroes = "0".repeat(diff)
 
