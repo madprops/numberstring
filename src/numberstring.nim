@@ -350,6 +350,7 @@ proc wordnumber*(text: string): float =
     assert wordnumber("zero") == 0
     assert wordnumber("minus four thousand two") == -4002.0
     assert wordnumber("thirty-three point three") == 33.3
+    assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
 
   let words = text.split(" ").filterIt(it != "")
   
@@ -381,7 +382,7 @@ proc wordnumber*(text: string): float =
                 return
       let zeroes = zeropad(diff)
       if charge > 0:
-        ns = ns[0..^(last_num.len + 1)] & zeroes & ns[^(last_num.len)]    
+        ns = ns[0..^(last_num.len + 1)] & zeroes & last_num    
       else:
         ns &= zeroes
 
