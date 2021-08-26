@@ -3,15 +3,15 @@ from unicode import title
 
 type NumberMode* = enum
   ## Type of number to display
-  ## 
+  ##
   ## Int Number. Float Number. No number
-  ## 
+  ##
   ## Words can be like "two hundred eighty-eight"
-  ## 
+  ##
   ## Lower case word, Capitalized word, Upper case word
-  ## 
+  ##
   ## Words that use a float number like "two point one"
-  ## 
+  ##
   ## Roman number like XXI
   Number, FloatNumber, NoNumber,
   LowWord, CapWord, UpWord,
@@ -24,7 +24,7 @@ proc is_word(mode: NumberMode): bool =
 
 # Check if it's a float word
 proc is_f_word(mode: NumberMode): bool =
-  mode in [FloatLowWord, FloatCapWord, FloatUpWord] 
+  mode in [FloatLowWord, FloatCapWord, FloatUpWord]
 
 # Check if the number should be treated as int
 proc is_int(mode: NumberMode): bool =
@@ -295,9 +295,9 @@ proc insertnum*(text, token: string, mode = Number): string =
 
 proc linesummary*(lines: openArray[string], words, characters: bool, mode = Number): string =
   ## Print the number of words and characters per line
-  ## 
+  ##
   ## Send an array of lines
-  ## 
+  ##
   ## And two booleans to enable/disable words & chars
   runnableExamples:
     assert linesummary(["hello there"], true, true) == "hello there (2 words) (10 chars)"
@@ -309,7 +309,7 @@ proc linesummary*(lines: openArray[string], words, characters: bool, mode = Numb
   for line in lines:
     var s = line
 
-    if words: 
+    if words:
       let c = line.split(" ").filterIt(it != "").len
       let cs = multistring(c, capi("word", mode), capi("words", mode), mode)
       s &= &" ({cs})"
@@ -320,17 +320,17 @@ proc linesummary*(lines: openArray[string], words, characters: bool, mode = Numb
       s &= &" ({cs})"
 
     newlines.add(s)
-    
+
   return newlines.join("\n")
 
-proc romano*(num: SomeNumber): string = 
-  ## Convert regular numbers to roman numbers 
+proc romano*(num: SomeNumber): string =
+  ## Convert regular numbers to roman numbers
   runnableExamples:
     assert romano(21) == "XXI"
     assert romano(1994) == "MCMXCIV"
 
   var number = int(num)
-  
+
   if number == 0:
     return "0"
   elif number < 0:
@@ -357,7 +357,7 @@ proc wordnumber*(text: string): float =
     assert wordnumber("one hundred nineteen") == 119
 
   let words = text.split(" ").filterIt(it != "")
-  
+
   var
     ns = ""
     mode = ""
@@ -368,7 +368,7 @@ proc wordnumber*(text: string): float =
 
   proc checkdiff(i: int) =
     let diff = mode_num - charge
-    
+
     if diff > 0:
       if i > 0 and mode_index - 1 >= 0:
         let pnext = Powers[mode_index - 1]
@@ -378,7 +378,7 @@ proc wordnumber*(text: string): float =
       let zeroes = "0".repeat(diff)
 
       if charge > 0:
-        ns = ns[0..^(last_num.len + 1)] & zeroes & last_num    
+        ns = ns[0..^(last_num.len + 1)] & zeroes & last_num
       else:
         ns &= zeroes
 
@@ -388,7 +388,7 @@ proc wordnumber*(text: string): float =
       continue
 
     var num = ""
-    
+
     if word in Digits:
       num = $(Digits.find(word))
     elif word in Teens:
@@ -398,21 +398,21 @@ proc wordnumber*(text: string): float =
     elif "-" in word:
       let split = word.split("-")
       num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
-    
+
     if num != "":
       charge += num.len
       ns &= num
       last_num = num
       continue
-    
+
     for pi, p in Powers:
       if p[0] == word:
         checkdiff(i)
         mode = p[0]
         mode_num = p[1]
         mode_index = pi
-        charge = 0      
-  
+        charge = 0
+
   checkdiff(0)
 
   if words[0] == "minus":
