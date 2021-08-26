@@ -84,4 +84,10 @@ assert linesummary(["ab", "c d e"], false, true, CapWord) == "ab (Two Chars)\nc 
 assert romano(21) == "XXI"
 assert romano(1994) == "MCMXCIV"
 
+assert wordnumber("six hundred three") == 603
+assert wordnumber("six hundred three million") == 603000000
+assert wordnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632
+assert wordnumber("zero") == 0
+assert wordnumber("minus four thousand two") == -4002
+
 echo "Test completed successfully."

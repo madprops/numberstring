@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar]
+import std/[times, random, math, strutils, sequtils, strformat, sugar, algorithm]
 from unicode import title
 
 type NumberMode* = enum
@@ -327,7 +327,6 @@ proc romano*(num: SomeNumber): string =
     assert romano(21) == "XXI"
     assert romano(1994) == "MCMXCIV"
 
-  result = ""
   var number = int(num)
   
   if number == 0:
@@ -341,3 +340,75 @@ proc romano*(num: SomeNumber): string =
       while number >= value:
         result.add symbol
         number -= value
+
+proc wordnumber*(text: string): int =
+  ## Change number words to numbers
+  runnableExamples:
+    assert wordnumber("six hundred three") == 603
+    assert wordnumber("six hundred three million") == 603000000
+    assert wordnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632
+    assert wordnumber("zero") == 0
+    assert wordnumber("minus four thousand two") == -4002
+
+  let words = text.split(" ").filterIt(it != "")
+  var ns = ""
+  var mode = ""
+  var mode_num = 0
+  var mode_index = 0
+  var charge = 0
+  var last_num = ""
+
+  proc zeropad(diff: int): string =
+    var zeroes = ""
+    for _ in 1..diff:
+      zeroes &= "0"
+    return zeroes
+  
+  proc checkdiff(i: int) =
+    let diff = mode_num - charge
+    
+    if diff > 0:
+      if i > 0:
+        if i + 1 < words.len:
+          if mode_index - 1 >= 0:
+            let p2 = Powers[mode_index - 1]
+            for i2 in i..<words.len:
+              let word = words[i2]
+              if word == p2[0]:
+                return
+      let zeroes = zeropad(diff)
+      if charge > 0:
+        ns = ns[0..^(last_num.len + 1)] & zeroes & ns[^(last_num.len)]    
+      else:
+        ns &= zeroes
+
+  for i, word in words:
+    block loop:
+      for pi, p in Powers:
+        if p[0] == word:
+          checkdiff(i)
+          mode = p[0]
+          mode_num = p[1]
+          mode_index = pi
+          charge = 0
+          break loop
+      
+      last_num = ""
+      
+      if word in Digits:
+        last_num = $(Digits.find(word))
+      elif word in Teens:
+        last_num = $(Teens.find(word) + 10)
+      elif "-" in word:
+        let split = word.split("-")
+        last_num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+      
+      charge += last_num.len
+      if last_num != "": ns &= last_num
+  
+  checkdiff(0)
+
+  if words[0] == "minus":
+    ns = "-" & ns
+
+  parseInt(ns)
