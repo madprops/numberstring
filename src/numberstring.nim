@@ -391,8 +391,7 @@ proc wordsnumber*(text: string): float =
     if skip:
       skip = false
       continue
-
-    if word == "point":
+    elif word == "point":
       ns &= "."
       continue
     elif word == "minus":
