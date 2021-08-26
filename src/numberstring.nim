@@ -28,7 +28,7 @@ proc is_f_word(mode: NumberMode): bool =
 
 # Check if the number should be treated as int
 proc is_int(mode: NumberMode): bool =
-  mode in [Number] or is_word(mode)
+  mode in [Number, Roman] or is_word(mode)
 
 const
   # Letter constants
@@ -113,6 +113,7 @@ proc multistring*(num: SomeNumber, s_word, p_word: string, mode = Number): strin
     assert multistring(1.2, "thing", "things", FloatNumber) == "1.2 things"
     assert multistring(1.2, "thing", "things", LowWord) == "one thing"
     assert multistring(1.2, "thing", "things", FloatUpWord) == "ONE POINT TWO things"
+    assert multistring(1.2, "thing", "things", Roman) == "I thing"
 
   if is_int(mode):
     result = if int(num) == 1: s_word else: p_word

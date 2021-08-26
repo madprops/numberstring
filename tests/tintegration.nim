@@ -15,6 +15,7 @@ assert multistring(1.2, "thing", "things", UpWord) == "ONE thing"
 assert multistring(1.2, "thing", "things", FloatLowWord) == "one point two things"
 assert multistring(1.2, "thing", "things", FloatCapWord) == "One Point Two things"
 assert multistring(1.2, "thing", "things", FloatUpWord) == "ONE POINT TWO things"
+assert multistring(1.2, "thing", "things", Roman) == "I thing"
 
 assert numberwords(-89) == "minus eighty-nine"
 assert numberwords(0) == "zero"
