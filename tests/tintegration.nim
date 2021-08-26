@@ -28,6 +28,7 @@ assert numberwords(999) == "nine hundred ninety-nine"
 assert numberwords(2345) == "two thousand three hundred forty-five"
 assert numberwords(4455667788) == "four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight"
 assert numberwords(9.1818) == "nine point two"
+assert numberwords(603000000) == "six hundred three million"
 
 assert countword("") == 0
 assert countword("a") == 1

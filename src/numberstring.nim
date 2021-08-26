@@ -134,6 +134,7 @@ proc numberwords*(num: SomeNumber): string =
     assert numberwords(122) == "one hundred twenty-two"
     assert numberwords(3_654_321) == "three million six hundred fifty-four thousand three hundred twenty-one"
     assert numberwords(9.1818) == "nine point two"
+    assert numberwords(603000000) == "six hundred three million"
 
   let split = fnum(num).split(".")
   if split.len == 2:
