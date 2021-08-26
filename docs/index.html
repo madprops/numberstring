@@ -168,7 +168,7 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">wordnumber
       <li><a class="reference" href="#wordnumber%2Cstring"
-    title="wordnumber(text: string): int">wordnumber,<wbr>string</a></li>
+    title="wordnumber(text: string): float">wordnumber,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">timeago
@@ -483,16 +483,17 @@ Convert regular numbers to roman numbers
 
 </dd>
 <a id="wordnumber,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#wordnumber%2Cstring"><span class="Identifier">wordnumber</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#wordnumber%2Cstring"><span class="Identifier">wordnumber</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Change number words to numbers
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six hundred three&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">603</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six hundred three million&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">603000000</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six million three hundred ten thousand six hundred thirty-two&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">6310632</span><span class="Whitespace">
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six hundred three&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="FloatNumber">603.0</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six hundred three million&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="FloatNumber">603000000.0</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;six million three hundred ten thousand six hundred thirty-two&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="FloatNumber">6310632.0</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;zero&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">0</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;minus four thousand two&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">-</span><span class="DecNumber">4002</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;minus four thousand two&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">-</span><span class="FloatNumber">4002.0</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;thirty-three point three&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="FloatNumber">33.3</span></pre>
 
 </dd>
 
@@ -505,7 +506,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-26 00:35:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-26 00:59:28 UTC</small>
       </div>
     </div>
   </div>
