@@ -354,9 +354,9 @@ proc wordnumber*(text: string): float =
     assert wordnumber("thirty-three point three") == 33.3
     assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
     assert wordnumber("three hundred forty") == 340
-    assert wordnumber("one hundred nineteen") == 119
+    assert wordnumber("One HUNDRED NiNeteen") == 119
 
-  let words = text.split(" ").filterIt(it != "")
+  let words = text.tolower.split(" ").filterIt(it != "")
 
   var
     ns = ""
@@ -417,4 +417,6 @@ proc wordnumber*(text: string): float =
         charge = 0
 
   checkdiff(0)
+
+  if ns == "": return 0.0
   parseFloat(ns)

@@ -96,6 +96,6 @@ assert wordnumber("thirty-three point three") == 33.3
 assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
 assert wordnumber("three hundred forty") == 340
 assert wordnumber("four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight") == 4455667788.0
-assert wordnumber("one hundred nineteen") == 119
+assert wordnumber("One HUNDRED NiNeteen") == 119
 
 echo "Test completed successfully."
