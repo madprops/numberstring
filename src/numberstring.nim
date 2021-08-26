@@ -387,30 +387,30 @@ proc wordnumber*(text: string): float =
       ns &= "."
       continue
 
-    block loop:
+    var num = ""
+    
+    if word in Digits:
+      num = $(Digits.find(word))
+    elif word in Teens:
+      num = $(Teens.find(word) + 10)
+    elif "-" in word:
+      let split = word.split("-")
+      num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+    elif word in Tens:
+      num = $((Tens.find(word) + 2) * 10)
+    
+    if num != "":
+      charge += num.len
+      ns &= num
+      last_num = num
+    else:
       for pi, p in Powers:
         if p[0] == word:
           checkdiff(i)
           mode = p[0]
           mode_num = p[1]
           mode_index = pi
-          charge = 0
-          break loop
-      
-      last_num = ""
-      
-      if word in Digits:
-        last_num = $(Digits.find(word))
-      elif word in Teens:
-        last_num = $(Teens.find(word) + 10)
-      elif "-" in word:
-        let split = word.split("-")
-        last_num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
-      elif word in Tens:
-        last_num = $((Tens.find(word) + 2) * 10)
-      
-      charge += last_num.len
-      if last_num != "": ns &= last_num
+          charge = 0      
   
   checkdiff(0)
 
