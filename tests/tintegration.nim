@@ -101,5 +101,3 @@ doAssertRaises(CatchableError):
   echo wordnumber("nothing here")
 doAssertRaises(CatchableError):
   echo wordnumber("")  
-
-echo "Test completed successfully."
