@@ -386,6 +386,9 @@ proc wordnumber*(text: string): float =
     if word == "point":
       ns &= "."
       continue
+    elif word == "minus":
+      ns &= "-"
+      continue
 
     var num = ""
 
@@ -414,8 +417,4 @@ proc wordnumber*(text: string): float =
         charge = 0
 
   checkdiff(0)
-
-  if words[0] == "minus":
-    ns = "-" & ns
-
   parseFloat(ns)
