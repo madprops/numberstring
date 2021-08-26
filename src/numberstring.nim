@@ -390,17 +390,16 @@ proc wordnumber*(text: string): float =
       ns &= "-"
       continue
 
-    var num = ""
-
-    if word in Digits:
-      num = $(Digits.find(word))
+    let num = if word in Digits:
+      $(Digits.find(word))
     elif word in Teens:
-      num = $(Teens.find(word) + 10)
+      $(Teens.find(word) + 10)
     elif word in Tens:
-      num = $((Tens.find(word) + 2) * 10)
+      $((Tens.find(word) + 2) * 10)
     elif "-" in word:
       let split = word.split("-")
-      num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+      $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+    else: ""
 
     if num != "":
       charge += num.len
@@ -417,6 +416,5 @@ proc wordnumber*(text: string): float =
         charge = 0
 
   checkdiff(0)
-
   if ns == "": return 0.0
   parseFloat(ns)
