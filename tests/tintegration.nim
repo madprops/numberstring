@@ -92,9 +92,4 @@ assert wordnumber("minus four thousand two") == -4002.0
 assert wordnumber("thirty-three point three") == 33.3
 assert wordnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
 
-assert stringpad(3, "x") == "xxx"
-assert stringpad(6, "0") == "000000"
-assert stringpad(0, "z") == ""
-assert stringpad(2, "xo") == "xoxo"
-
 echo "Test completed successfully."
