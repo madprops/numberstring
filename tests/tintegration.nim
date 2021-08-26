@@ -93,10 +93,11 @@ assert wordsnumber("six million three hundred ten thousand six hundred thirty-tw
 assert wordsnumber("zero") == 0.0
 assert wordsnumber("minus four thousand two") == -4002.0
 assert wordsnumber("thirty-three point three") == 33.3
-assert wordsnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
+assert wordsnumber("thirty three point five hundred thirty two thousand eleven") == 33.532011
 assert wordsnumber("three hundred forty") == 340
 assert wordsnumber("four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight") == 4455667788.0
 assert wordsnumber("One HUNDRED NiNeteen") == 119
+assert wordsnumber("minus three three two one seven point five") == -33217.5
 doAssertRaises(CatchableError):
   echo wordsnumber("nothing here")
 doAssertRaises(CatchableError):

@@ -352,9 +352,10 @@ proc wordsnumber*(text: string): float =
     assert wordsnumber("zero") == 0
     assert wordsnumber("minus four thousand two") == -4002.0
     assert wordsnumber("thirty-three point three") == 33.3
-    assert wordsnumber("thirty-three point five hundred thirty-two thousand eleven") == 33.532011
+    assert wordsnumber("thirty three point five hundred thirty two thousand eleven") == 33.532011
     assert wordsnumber("three hundred forty") == 340
     assert wordsnumber("One HUNDRED NiNeteen") == 119
+    assert wordsnumber("minus three three two one seven point five") == -33217.5
 
   let words = text.tolower.split(" ").filterIt(it != "")
 
@@ -368,6 +369,7 @@ proc wordsnumber*(text: string): float =
     mode_index = 0
     charge = 0
     last_num = ""
+    skip = false
 
   proc checkdiff(i: int) =
     let diff = mode_num - charge
@@ -386,23 +388,32 @@ proc wordsnumber*(text: string): float =
         ns &= zeroes
 
   for i, word in words:
+    if skip:
+      skip = false
+      continue
+
     if word == "point":
       ns &= "."
       continue
     elif word == "minus":
       ns &= "-"
       continue
-
-    let num = if word in Digits:
-      $(Digits.find(word))
+    
+    var num = ""
+    
+    if word in Digits:
+      num = $(Digits.find(word))
     elif word in Teens:
-      $(Teens.find(word) + 10)
+      num = $(Teens.find(word) + 10)
     elif word in Tens:
-      $((Tens.find(word) + 2) * 10)
+      if i + 1 < words.len:
+        if words[i + 1] in Digits:
+          skip = true
+          num = $(Tens.find(word) + 2) & $(Digits.find(words[i + 1]))
+      if num == "": num = $((Tens.find(word) + 2) * 10)
     elif "-" in word:
       let split = word.split("-")
-      $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
-    else: ""
+      num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
 
     if num != "":
       charge += num.len
