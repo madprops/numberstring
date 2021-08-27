@@ -451,17 +451,17 @@ proc wordsnumber*(text: string): float =
   checkdiff(0)
   parseFloat(ns)
 
-proc morseit*(text: string): string =
+proc writemorse*(text: string): string =
   ## Turn a string into morse code
   ## 
   ## Words in the result are separated by a slash
   runnableExamples:
-    assert morseit("a b   c") == ".- / -... / -.-."
-    assert morseit("420") == "....- ..--- -----"
-    assert morseit("hunter 2") == ".... ..- -. - . .-. / ..---"
-    assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
-    assert morseit("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
-    assert morseit("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"    
+    assert writemorse("a b   c") == ".- / -... / -.-."
+    assert writemorse("420") == "....- ..--- -----"
+    assert writemorse("hunter 2") == ".... ..- -. - . .-. / ..---"
+    assert writemorse("@$.,") == ".--.-. ...-..- .-.-.- --..--"
+    assert writemorse("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
+    assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"    
 
   var fullcode: seq[string]
 
@@ -494,7 +494,7 @@ proc readmorse*(text: string): string =
       for k in Morse.keys:
         if Morse[k] == c:
           ws &= k
-          
+
     wordlist.add(ws)
   
   wordlist.join(" ").toLower

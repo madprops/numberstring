@@ -106,12 +106,12 @@ doAssertRaises(CatchableError):
 doAssertRaises(CatchableError):
   echo wordsnumber("")
 
-assert morseit("a b   c") == ".- / -... / -.-."
-assert morseit("420") == "....- ..--- -----"
-assert morseit("hunter 2") == ".... ..- -. - . .-. / ..---"
-assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
-assert morseit("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
-assert morseit("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"
+assert writemorse("a b   c") == ".- / -... / -.-."
+assert writemorse("420") == "....- ..--- -----"
+assert writemorse("hunter 2") == ".... ..- -. - . .-. / ..---"
+assert writemorse("@$.,") == ".--.-. ...-..- .-.-.- --..--"
+assert writemorse("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
+assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"
 
 assert readmorse(".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..") == "what 112 !!?"
 assert readmorse("- .... . / -- .- --. .. -.-. .. .- -.") == "the magician"

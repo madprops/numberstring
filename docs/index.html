@@ -146,6 +146,11 @@ function main() {
     title="numerate(lines: openArray[string]; left, right: string; mode = Number): string">numerate,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">writemorse
+      <li><a class="reference" href="#writemorse%2Cstring"
+    title="writemorse(text: string): string">writemorse,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">countword
       <li><a class="reference" href="#countword%2Cstring"
     title="countword(text: string): int">countword,<wbr>string</a></li>
@@ -171,9 +176,9 @@ function main() {
     title="wordtag(num: int; vowels_first: bool = true; rng: var Rand = randgen): string">wordtag,<wbr>int,<wbr>bool,<wbr>Rand</a></li>
 
   </ul>
-  <ul class="simple nested-toc-section">morseit
-      <li><a class="reference" href="#morseit%2Cstring"
-    title="morseit(text: string): string">morseit,<wbr>string</a></li>
+  <ul class="simple nested-toc-section">readmorse
+      <li><a class="reference" href="#readmorse%2Cstring"
+    title="readmorse(text: string): string">readmorse,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">timeago
@@ -511,18 +516,33 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;minus three three two one seven point five&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">-</span><span class="FloatNumber">33217.5</span></pre>
 
 </dd>
-<a id="morseit,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#morseit%2Cstring"><span class="Identifier">morseit</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="writemorse,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#writemorse%2Cstring"><span class="Identifier">writemorse</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Turn a string into morse code</p>
 <p>Words in the result are separated by a slash</p>
 
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;a b   c&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.- / -... / -.-.&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;420&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;....- ..--- -----&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;hunter 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.... ..- -. - . .-. / ..---&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;@$.,&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.--.-. ...-..- .-.-.- --..--&quot;</span></pre>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;a b   c&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.- / -... / -.-.&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;420&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;....- ..--- -----&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;hunter 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.... ..- -. - . .-. / ..---&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;@$.,&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.--.-. ...-..- .-.-.- --..--&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;what 112 !!?&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">writemorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;100 + 200&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.---- ----- ----- / .-.-. / ..--- ----- -----&quot;</span><span class="Whitespace">    </span></pre>
+
+</dd>
+<a id="readmorse,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#readmorse%2Cstring"><span class="Identifier">readmorse</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Turn morse code into a string</p>
+<p>Words should be separated by a slash</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">readmorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;.-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what 112 !!?&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">readmorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;- .... . / -- .- --. .. -.-. .. .- -.&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;the magician&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">readmorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;.---- ----- ----- / .-.-. / ..--- ----- -----&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;100 + 200&quot;</span><span class="Whitespace">    </span></pre>
 
 </dd>
 
@@ -535,7 +555,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-27 06:43:50 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-27 22:32:56 UTC</small>
       </div>
     </div>
   </div>
