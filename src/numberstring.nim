@@ -452,18 +452,23 @@ proc wordsnumber*(text: string): float =
   parseFloat(ns)
 
 proc morseit*(text: string): string =
-  # Turn a string into morse code
+  ## Turn a string into morse code
+  ## 
+  ## Words in the result are separated by a slash
   runnableExamples:
-    assert morseit("a b   c") == ".- -... -.-."
+    assert morseit("a b   c") == ".- / -... / -.-."
     assert morseit("420") == "....- ..--- -----"
-    assert morseit("hunter 2") == ".... ..- -. - . .-. ..---"
+    assert morseit("hunter 2") == ".... ..- -. - . .-. / ..---"
     assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
 
-  var codes: seq[string]
-  let chars = toSeq(text.toupper.items).filterIt(it != ' ')
+  var fullcode: seq[string]
 
-  for c in chars:
-    if Morse.hasKey(c):
-      codes.add Morse[c]
+  for word in text.toupper.splitWhitespace:
+    var code: seq[string]
+    let chars = toSeq(word.items).filterIt(it != ' ')
+    for c in chars:
+      if Morse.hasKey(c):
+        code.add Morse[c]
+    fullcode.add(code.join(" "))
 
-  codes.join(" ")
+  fullcode.join(" / ")

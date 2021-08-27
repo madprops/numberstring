@@ -515,11 +515,13 @@ Change number words to numbers
 <dt><pre><span class="Keyword">proc</span> <a href="#morseit%2Cstring"><span class="Identifier">morseit</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
+<p>Turn a string into morse code</p>
+<p>Words in the result are separated by a slash</p>
 
 <p><strong class="examples_text">Example:</strong></p>
-<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;a b   c&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.- -... -.-.&quot;</span><span class="Whitespace">
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;a b   c&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.- / -... / -.-.&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;420&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;....- ..--- -----&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;hunter 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.... ..- -. - . .-. ..---&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;hunter 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.... ..- -. - . .-. / ..---&quot;</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;@$.,&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.--.-. ...-..- .-.-.- --..--&quot;</span></pre>
 
 </dd>
@@ -533,7 +535,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-27 06:34:18 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-27 06:43:50 UTC</small>
       </div>
     </div>
   </div>

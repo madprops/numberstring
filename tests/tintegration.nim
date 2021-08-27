@@ -106,7 +106,7 @@ doAssertRaises(CatchableError):
 doAssertRaises(CatchableError):
   echo wordsnumber("")
 
-assert morseit("a b   c") == ".- -... -.-."
+assert morseit("a b   c") == ".- / -... / -.-."
 assert morseit("420") == "....- ..--- -----"
-assert morseit("hunter 2") == ".... ..- -. - . .-. ..---"
+assert morseit("hunter 2") == ".... ..- -. - . .-. / ..---"
 assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
