@@ -104,4 +104,9 @@ assert wordsnumber("minus three three two one seven point five") == -33217.5
 doAssertRaises(CatchableError):
   echo wordsnumber("nothing here")
 doAssertRaises(CatchableError):
-  echo wordsnumber("")  
+  echo wordsnumber("")
+
+assert morseit("a b   c") == ".- -... -.-."
+assert morseit("420") == "....- ..--- -----"
+assert morseit("hunter 2") == ".... ..- -. - . .-. ..---"
+assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"

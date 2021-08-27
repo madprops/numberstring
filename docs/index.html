@@ -171,6 +171,11 @@ function main() {
     title="wordtag(num: int; vowels_first: bool = true; rng: var Rand = randgen): string">wordtag,<wbr>int,<wbr>bool,<wbr>Rand</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">morseit
+      <li><a class="reference" href="#morseit%2Cstring"
+    title="morseit(text: string): string">morseit,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">timeago
       <li><a class="reference" href="#timeago%2Cint64%2Cint64"
     title="timeago(date_1, date_2: int64; mode = Number): string">timeago,<wbr>int64,<wbr>int64</a></li>
@@ -506,6 +511,18 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;minus three three two one seven point five&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">-</span><span class="FloatNumber">33217.5</span></pre>
 
 </dd>
+<a id="morseit,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#morseit%2Cstring"><span class="Identifier">morseit</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;a b   c&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.- -... -.-.&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;420&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;....- ..--- -----&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;hunter 2&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.... ..- -. - . .-. ..---&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">morseit</span><span class="Punctuation">(</span><span class="StringLit">&quot;@$.,&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;.--.-. ...-..- .-.-.- --..--&quot;</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -516,7 +533,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-26 22:55:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-27 06:34:18 UTC</small>
       </div>
     </div>
   </div>

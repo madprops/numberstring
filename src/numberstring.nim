@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar]
+import std/[times, random, math, strutils, sequtils, strformat, sugar, tables]
 from unicode import title
 
 type NumberMode* = enum
@@ -53,6 +53,18 @@ const
     ("M", 1000), ("CM", 900), ("D", 500), ("CD", 400), ("C", 100),
     ("XC", 90), ("L", 50), ("XL", 40), ("X", 10),
     ("IX", 9), ("V", 5), ("IV", 4), ("I", 1)]
+
+  Morse = {'A': ".-",     'B': "-...",   'C': "-.-.",    'D': "-..",    'E': ".",
+           'F': "..-.",   'G': "--.",    'H': "....",    'I': "..",     'J': ".---",
+           'K': "-.-",    'L': ".-..",   'M': "--",      'N': "-.",     'O': "---",
+           'P': ".--.",   'Q': "--.-",   'R': ".-.",     'S': "...",    'T': "-",
+           'U': "..-",    'V': "...-",   'W': ".--",     'X': "-..-",   'Y': "-.--",
+           'Z': "--..",   '0': "-----",  '1': ".----",   '2': "..---",  '3': "...--",
+           '4': "....-",  '5': ".....",  '6': "-....",   '7': "--...",  '8': "---..",
+           '9': "----.",  '.': ".-.-.-", ',': "--..--",  '?': "..--..", '\'': ".----.",
+           '!': "-.-.--", '/': "-..-.",  '(': "-.--.",   ')': "-.--.-", '&': ".-...",
+           ':': "---...", ';': "-.-.-.", '=': "-...-",   '+': ".-.-.",  '-': "-....-",
+           '_': "..--.-", '"': ".-..-.", '$': "...-..-", '@': ".--.-."}.toTable
 
 # Init the random number generator
 var randgen = initRand(int(epochTime()))
@@ -438,3 +450,20 @@ proc wordsnumber*(text: string): float =
 
   checkdiff(0)
   parseFloat(ns)
+
+proc morseit*(text: string): string =
+  # Turn a string into morse code
+  runnableExamples:
+    assert morseit("a b   c") == ".- -... -.-."
+    assert morseit("420") == "....- ..--- -----"
+    assert morseit("hunter 2") == ".... ..- -. - . .-. ..---"
+    assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
+
+  var codes: seq[string]
+  let chars = toSeq(text.toupper.items).filterIt(it != ' ')
+
+  for c in chars:
+    if Morse.hasKey(c):
+      codes.add Morse[c]
+
+  codes.join(" ")
