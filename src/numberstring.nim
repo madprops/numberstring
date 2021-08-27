@@ -460,6 +460,8 @@ proc morseit*(text: string): string =
     assert morseit("420") == "....- ..--- -----"
     assert morseit("hunter 2") == ".... ..- -. - . .-. / ..---"
     assert morseit("@$.,") == ".--.-. ...-..- .-.-.- --..--"
+    assert morseit("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
+    assert morseit("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"    
 
   var fullcode: seq[string]
 
@@ -472,3 +474,27 @@ proc morseit*(text: string): string =
     fullcode.add(code.join(" "))
 
   fullcode.join(" / ")
+
+proc readmorse*(text: string): string =
+  ## Turn morse code into a string
+  ## 
+  ## Words should be separated by a slash
+  runnableExamples:
+    assert readmorse(".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..") == "what 112 !!?"
+    assert readmorse("- .... . / -- .- --. .. -.-. .. .- -.") == "the magician"
+    assert readmorse(".---- ----- ----- / .-.-. / ..--- ----- -----") == "100 + 200"    
+
+  var wordlist: seq[string]
+  let words = text.split("/").mapIt(it.strip())
+
+  for word in words:
+    var ws = ""
+    let codes = word.splitWhitespace
+    for c in codes:
+      for k in Morse.keys:
+        if Morse[k] == c:
+          ws &= k
+          
+    wordlist.add(ws)
+  
+  wordlist.join(" ").toLower
