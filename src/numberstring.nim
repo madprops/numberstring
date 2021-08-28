@@ -413,21 +413,22 @@ proc wordsnumber*(text: string): float =
       ns &= "-"
       continue
     
-    var num = ""
-    
-    if word in Digits:
-      num = $(Digits.find(word))
-    elif word in Teens:
-      num = $(Teens.find(word) + 10)
-    elif word in Tens:
-      if i + 1 < words.len:
-        if words[i + 1] in Digits:
-          skip = true
-          num = $(Tens.find(word) + 2) & $(Digits.find(words[i + 1]))
-      if num == "": num = $((Tens.find(word) + 2) * 10)
-    elif "-" in word:
-      let split = word.split("-")
-      num = $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+    let num = block:
+      if word in Digits:
+        $(Digits.find(word))
+      elif word in Teens:
+        $(Teens.find(word) + 10)
+      elif word in Tens:
+        var ans = $((Tens.find(word) + 2) * 10)
+        if i + 1 < words.len:
+          if words[i + 1] in Digits:
+            skip = true
+            ans = $(Tens.find(word) + 2) & $(Digits.find(words[i + 1]))
+        ans
+      elif "-" in word:
+        let split = word.split("-")
+        $(Tens.find(split[0]) + 2) & $(Digits.find(split[1]))
+      else: ""
 
     if num != "":
       charge += num.len
