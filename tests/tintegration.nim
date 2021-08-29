@@ -128,3 +128,8 @@ assert textnumbers("Number 3.2 and 8.9", FloatNumber) == "Number 3.2 and 8.9"
 assert textnumbers("Number 3 and 8", LowWord) == "Number three and eight"
 assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
 assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"
+
+assert wordslen("what is there", false) == "4 2 5"
+assert wordslen("what is there", true) == "what (4) is (2) there (5)"
+assert wordslen("what is there", false, CapWord) == "Four Two Five"
+assert wordslen("what is there", true, Roman) == "what (IV) is (II) there (V)"

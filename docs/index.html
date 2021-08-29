@@ -176,6 +176,11 @@ function main() {
     title="romano(num: SomeNumber): string">romano,<wbr>SomeNumber</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">wordslen
+      <li><a class="reference" href="#wordslen%2Cstring%2Cbool"
+    title="wordslen(text: string; keep_word: bool; mode = Number): string">wordslen,<wbr>string,<wbr>bool</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">wordtag
       <li><a class="reference" href="#wordtag%2Cint%2Cbool%2CRand"
     title="wordtag(num: int; vowels_first: bool = true; rng: var Rand = randgen): string">wordtag,<wbr>int,<wbr>bool,<wbr>Rand</a></li>
@@ -590,6 +595,23 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;3.2 and 8.9&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">FloatCapWord</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Three Point Two and Eight Point Nine&quot;</span><span class="Whitespace">  </span></pre>
 
 </dd>
+<a id="wordslen,string,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#wordslen%2Cstring%2Cbool"><span class="Identifier">wordslen</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keep_word</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">Number</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Replace all words with their string length</p>
+<p>Send a text string</p>
+<p>Send a boolean to specify if words are kept</p>
+<p>Accepts an optional NumberMode</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordslen</span><span class="Punctuation">(</span><span class="StringLit">&quot;what is there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;4 2 5&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordslen</span><span class="Punctuation">(</span><span class="StringLit">&quot;what is there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what (4) is (2) there (5)&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordslen</span><span class="Punctuation">(</span><span class="StringLit">&quot;what is there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">CapWord</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Four Two Five&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordslen</span><span class="Punctuation">(</span><span class="StringLit">&quot;what is there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Roman</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what (IV) is (II) there (V)&quot;</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -600,7 +622,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 02:02:02 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 03:44:43 UTC</small>
       </div>
     </div>
   </div>

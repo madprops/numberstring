@@ -75,6 +75,11 @@ proc alphabetpos(c: 'a'..'z'): int = (c.ord - 'a'.ord) + 1
 # '1' = 1
 proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 
+# Split into words
+proc get_words(text: string, lower: bool = false): seq[string] =
+  let s = if lower: text.tolower else: text
+  s.split(" ").filterIt(it != "")  
+
 # Pre-Declare numberwords
 proc numberwords*(num: SomeNumber): string
 
@@ -322,7 +327,7 @@ proc linesummary*(lines: openArray[string], words, characters: bool, mode = Numb
     var s = line
 
     if words:
-      let c = line.split(" ").filterIt(it != "").len
+      let c = get_words(line).len
       let cs = multistring(c, capi("word", mode), capi("words", mode), mode)
       s &= &" ({cs})"
 
@@ -372,7 +377,7 @@ proc wordsnumber*(text: string): float =
     assert wordsnumber("One HUNDRED NiNeteen") == 119
     assert wordsnumber("minus three three two one seven point five") == -33217.5
 
-  let words = text.tolower.split(" ").filterIt(it != "")
+  let words = get_words(text, true)
 
   if words.len == 0:
     raise newException(CatchableError, "No words provided")
@@ -513,7 +518,7 @@ proc shufflewords*(text: string, rng: var Rand = randgen): string =
     assert shufflewords("this thing is", rng) == "this thing is"
     assert shufflewords("this thing is", rng) == "thing this is"    
 
-  var words = text.split(" ").filterIt(it != "")
+  var words = get_Words(text)
   rng.shuffle(words)
   return words.join(" ")
 
@@ -532,7 +537,7 @@ proc textnumbers*(text: string, mode = Number): string =
     assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
     assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"  
 
-  let words = text.split(" ").filterIt(it != "")
+  let words = get_words(text)
   var new_words: seq[string]
 
   for word in words:
@@ -541,5 +546,30 @@ proc textnumbers*(text: string, mode = Number): string =
       new_words.add(apply_number_mode(num, mode))
     except:
       new_words.add(word)
+  
+  new_words.join(" ")
+
+proc wordslen*(text: string, keep_word: bool, mode = Number): string =
+  ## Replace all words with their string length
+  ## 
+  ## Send a text string
+  ## 
+  ## Send a boolean to specify if words are kept
+  ## 
+  ## Accepts an optional NumberMode
+  runnableExamples:
+    assert wordslen("what is there", false) == "4 2 5"
+    assert wordslen("what is there", true) == "what (4) is (2) there (5)"
+    assert wordslen("what is there", false, CapWord) == "Four Two Five"
+    assert wordslen("what is there", true, Roman) == "what (IV) is (II) there (V)"
+
+  let words = get_words(text)
+  var new_words: seq[string]
+
+  for word in words:
+    var ns = apply_number_mode(word.len, mode)
+    if keep_word:
+      ns = &"{word} ({ns})"
+    new_words.add(ns)
   
   new_words.join(" ")
