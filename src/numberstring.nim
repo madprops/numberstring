@@ -598,5 +598,3 @@ proc dumbspeak*(text: string, caps_first: bool): string =
     new_words.add(ns)
   
   new_words.join(" ")
-
-echo dumbspeak("hello there", true)
