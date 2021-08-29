@@ -1,3 +1,4 @@
+import std/[random]
 import pkg/numberstring
 
 assert multistring(0, "day", "days") == "0 days"
@@ -116,3 +117,8 @@ assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----
 assert readmorse(".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..") == "what 112 !!?"
 assert readmorse("- .... . / -- .- --. .. -.-. .. .- -.") == "the magician"
 assert readmorse(".---- ----- ----- / .-.-. / ..--- ----- -----") == "100 + 200"
+
+var rng = initRand(100)
+assert wordshuffle("this thing is", rng) == "thing is this"
+assert wordshuffle("this thing is", rng) == "this thing is"
+assert wordshuffle("this thing is", rng) == "thing this is"

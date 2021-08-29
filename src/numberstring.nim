@@ -499,3 +499,20 @@ proc readmorse*(text: string): string =
     wordlist.add(ws)
   
   wordlist.join(" ").toLower
+
+proc wordshuffle*(text: string, rng: var Rand = randgen): string =
+  ## Shuffle words around
+  ## 
+  ## Send a string to be shuffled
+  ## 
+  ## A rand seed can be provided as an extra argument
+  runnableExamples:
+    import std/random
+    var rng = initRand(100)
+    assert wordshuffle("this thing is", rng) == "thing is this"
+    assert wordshuffle("this thing is", rng) == "this thing is"
+    assert wordshuffle("this thing is", rng) == "thing this is"    
+
+  var words = text.split(" ").filterIt(it != "")
+  rng.shuffle(words)
+  return words.join(" ")
