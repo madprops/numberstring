@@ -151,6 +151,11 @@ function main() {
     title="writemorse(text: string): string">writemorse,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">textnumbers
+      <li><a class="reference" href="#textnumbers%2Cstring"
+    title="textnumbers(text: string; mode = Number): string">textnumbers,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">countword
       <li><a class="reference" href="#countword%2Cstring"
     title="countword(text: string): int">countword,<wbr>string</a></li>
@@ -567,6 +572,24 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">shufflewords</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;thing this is&quot;</span><span class="Whitespace">    </span></pre>
 
 </dd>
+<a id="textnumbers,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#textnumbers%2Cstring"><span class="Identifier">textnumbers</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">mode</span> <span class="Other">=</span> <span class="Identifier">Number</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Replace all numbers in a string</p>
+<p>Send a text string</p>
+<p>It checks every word in search for numbers</p>
+<p>Accepts an optional NumberMode</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;Number 3.2 and 8.9&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number 3 and 8&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;Number 3.2 and 8.9&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">FloatNumber</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number 3.2 and 8.9&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;Number 3 and 8&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">LowWord</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number three and eight&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;Number 3 and 8&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Roman</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number III and VIII&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">textnumbers</span><span class="Punctuation">(</span><span class="StringLit">&quot;3.2 and 8.9&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">FloatCapWord</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Three Point Two and Eight Point Nine&quot;</span><span class="Whitespace">  </span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -577,7 +600,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 01:13:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 02:02:02 UTC</small>
       </div>
     </div>
   </div>

@@ -516,3 +516,30 @@ proc shufflewords*(text: string, rng: var Rand = randgen): string =
   var words = text.split(" ").filterIt(it != "")
   rng.shuffle(words)
   return words.join(" ")
+
+proc textnumbers*(text: string, mode = Number): string =
+  ## Replace all numbers in a string
+  ## 
+  ## Send a text string
+  ## 
+  ## It checks every word in search for numbers
+  ## 
+  ## Accepts an optional NumberMode
+  runnableExamples:
+    assert textnumbers("Number 3.2 and 8.9") == "Number 3 and 8"
+    assert textnumbers("Number 3.2 and 8.9", FloatNumber) == "Number 3.2 and 8.9"
+    assert textnumbers("Number 3 and 8", LowWord) == "Number three and eight"
+    assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
+    assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"  
+
+  let words = text.split(" ").filterIt(it != "")
+  var new_words: seq[string]
+
+  for word in words:
+    try:
+      let num = parseFloat(word)
+      new_words.add(apply_number_mode(num, mode))
+    except:
+      new_words.add(word)
+  
+  new_words.join(" ")

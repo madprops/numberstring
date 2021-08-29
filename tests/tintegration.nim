@@ -122,3 +122,9 @@ var rng = initRand(100)
 assert shufflewords("this thing is", rng) == "thing is this"
 assert shufflewords("this thing is", rng) == "this thing is"
 assert shufflewords("this thing is", rng) == "thing this is"
+
+assert textnumbers("Number 3.2 and 8.9") == "Number 3 and 8"
+assert textnumbers("Number 3.2 and 8.9", FloatNumber) == "Number 3.2 and 8.9"
+assert textnumbers("Number 3 and 8", LowWord) == "Number three and eight"
+assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
+assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"
