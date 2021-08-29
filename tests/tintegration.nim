@@ -133,3 +133,6 @@ assert wordslen("what is there", false) == "4 2 5"
 assert wordslen("what is there", true) == "what (4) is (2) there (5)"
 assert wordslen("what is there", false, CapWord) == "Four Two Five"
 assert wordslen("what is there", true, Roman) == "what (IV) is (II) there (V)"
+
+assert dumbspeak("hello there", true) == "HeLlO tHeRe"
+assert dumbspeak("hello there", false) == "hElLo ThErE"

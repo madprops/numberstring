@@ -77,7 +77,7 @@ proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 
 # Split into words
 proc get_words(text: string, lower: bool = false): seq[string] =
-  let s = if lower: text.tolower else: text
+  let s = if lower: text.toLowerAscii else: text
   s.split(" ").filterIt(it != "")  
 
 # Pre-Declare numberwords
@@ -197,7 +197,7 @@ proc countword*(text: string): int =
 
   result = 0
 
-  for c in toSeq(text.strip().tolower()):
+  for c in toSeq(text.strip().toLowerAscii()):
     if c != ' ':
       if c in '0'..'9':
         result += numericval(c)
@@ -264,7 +264,7 @@ proc leetspeak*(text: string): string =
   runnableExamples:
     assert leetspeak("maple strikter") == "m4pl3 s7r1k73r"
 
-  return text.tolower().replace("a", "4")
+  return text.toLowerAscii().replace("a", "4")
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
@@ -471,7 +471,7 @@ proc writemorse*(text: string): string =
 
   var fullcode: seq[string]
 
-  for word in text.toupper.splitWhitespace:
+  for word in text.toUpperAscii.splitWhitespace:
     var code: seq[string]
     let chars = toSeq(word.items).filterIt(it != ' ')
     for c in chars:
@@ -503,7 +503,7 @@ proc readmorse*(text: string): string =
 
     wordlist.add(ws)
   
-  wordlist.join(" ").toLower
+  wordlist.join(" ").toLowerAscii
 
 proc shufflewords*(text: string, rng: var Rand = randgen): string =
   ## Shuffle words around
@@ -573,3 +573,30 @@ proc wordslen*(text: string, keep_word: bool, mode = Number): string =
     new_words.add(ns)
   
   new_words.join(" ")
+
+proc dumbspeak*(text: string, caps_first: bool): string =
+  ## Capitalize every other letter
+  ## 
+  ## Send a text string
+  ## 
+  ## Send a boolean to specify if caps go first
+  runnableExamples:
+    assert dumbspeak("hello there", true) == "HeLlO tHeRe"
+    assert dumbspeak("hello there", false) == "hElLo ThErE"
+  
+  let words = get_words(text)
+  var new_words: seq[string]
+  var cap = caps_first
+
+  for word in words:
+    var ns = ""
+    for c in word.items:
+      var cs = $c
+      if cap: ns &= cs.toUpperAscii
+      else: ns &= cs.toLowerAscii
+      cap = not cap
+    new_words.add(ns)
+  
+  new_words.join(" ")
+
+echo dumbspeak("hello there", true)

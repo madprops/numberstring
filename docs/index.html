@@ -191,6 +191,11 @@ function main() {
     title="readmorse(text: string): string">readmorse,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">dumbspeak
+      <li><a class="reference" href="#dumbspeak%2Cstring%2Cbool"
+    title="dumbspeak(text: string; caps_first: bool): string">dumbspeak,<wbr>string,<wbr>bool</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">shufflewords
       <li><a class="reference" href="#shufflewords%2Cstring%2CRand"
     title="shufflewords(text: string; rng: var Rand = randgen): string">shufflewords,<wbr>string,<wbr>Rand</a></li>
@@ -612,6 +617,19 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordslen</span><span class="Punctuation">(</span><span class="StringLit">&quot;what is there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">Roman</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what (IV) is (II) there (V)&quot;</span></pre>
 
 </dd>
+<a id="dumbspeak,string,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#dumbspeak%2Cstring%2Cbool"><span class="Identifier">dumbspeak</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">caps_first</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Capitalize every other letter</p>
+<p>Send a text string</p>
+<p>Send a boolean to specify if caps go first</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">dumbspeak</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">true</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;HeLlO tHeRe&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">dumbspeak</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;hElLo ThErE&quot;</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -622,7 +640,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 03:44:43 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 08:09:53 UTC</small>
       </div>
     </div>
   </div>
