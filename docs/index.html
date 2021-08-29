@@ -151,11 +151,6 @@ function main() {
     title="writemorse(text: string): string">writemorse,<wbr>string</a></li>
 
   </ul>
-  <ul class="simple nested-toc-section">wordshuffle
-      <li><a class="reference" href="#wordshuffle%2Cstring%2CRand"
-    title="wordshuffle(text: string; rng: var Rand = randgen): string">wordshuffle,<wbr>string,<wbr>Rand</a></li>
-
-  </ul>
   <ul class="simple nested-toc-section">countword
       <li><a class="reference" href="#countword%2Cstring"
     title="countword(text: string): int">countword,<wbr>string</a></li>
@@ -184,6 +179,11 @@ function main() {
   <ul class="simple nested-toc-section">readmorse
       <li><a class="reference" href="#readmorse%2Cstring"
     title="readmorse(text: string): string">readmorse,<wbr>string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">shufflewords
+      <li><a class="reference" href="#shufflewords%2Cstring%2CRand"
+    title="shufflewords(text: string; rng: var Rand = randgen): string">shufflewords,<wbr>string,<wbr>Rand</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">timeago
@@ -550,8 +550,8 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">readmorse</span><span class="Punctuation">(</span><span class="StringLit">&quot;.---- ----- ----- / .-.-. / ..--- ----- -----&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;100 + 200&quot;</span><span class="Whitespace">    </span></pre>
 
 </dd>
-<a id="wordshuffle,string,Rand"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#wordshuffle%2Cstring%2CRand"><span class="Identifier">wordshuffle</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">rng</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Rand</span> <span class="Other">=</span> <span class="Identifier">randgen</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<a id="shufflewords,string,Rand"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#shufflewords%2Cstring%2CRand"><span class="Identifier">shufflewords</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">rng</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Rand</span> <span class="Other">=</span> <span class="Identifier">randgen</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -562,9 +562,9 @@ Change number words to numbers
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Keyword">import</span><span class="Whitespace"> </span><span class="Identifier">std</span><span class="Operator">/</span><span class="Identifier">random</span><span class="Whitespace">
 </span><span class="Keyword">var</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Identifier">initRand</span><span class="Punctuation">(</span><span class="DecNumber">100</span><span class="Punctuation">)</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordshuffle</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;thing is this&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordshuffle</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;this thing is&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordshuffle</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;thing this is&quot;</span><span class="Whitespace">    </span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">shufflewords</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;thing is this&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">shufflewords</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;this thing is&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">shufflewords</span><span class="Punctuation">(</span><span class="StringLit">&quot;this thing is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">rng</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;thing this is&quot;</span><span class="Whitespace">    </span></pre>
 
 </dd>
 
@@ -577,7 +577,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 00:08:47 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-29 01:13:35 UTC</small>
       </div>
     </div>
   </div>

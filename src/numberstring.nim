@@ -500,7 +500,7 @@ proc readmorse*(text: string): string =
   
   wordlist.join(" ").toLower
 
-proc wordshuffle*(text: string, rng: var Rand = randgen): string =
+proc shufflewords*(text: string, rng: var Rand = randgen): string =
   ## Shuffle words around
   ## 
   ## Send a string to be shuffled
@@ -509,9 +509,9 @@ proc wordshuffle*(text: string, rng: var Rand = randgen): string =
   runnableExamples:
     import std/random
     var rng = initRand(100)
-    assert wordshuffle("this thing is", rng) == "thing is this"
-    assert wordshuffle("this thing is", rng) == "this thing is"
-    assert wordshuffle("this thing is", rng) == "thing this is"    
+    assert shufflewords("this thing is", rng) == "thing is this"
+    assert shufflewords("this thing is", rng) == "this thing is"
+    assert shufflewords("this thing is", rng) == "thing this is"    
 
   var words = text.split(" ").filterIt(it != "")
   rng.shuffle(words)
