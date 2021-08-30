@@ -138,12 +138,11 @@ assert dumbspeak("hello there", true) == "HeLlO tHeRe"
 assert dumbspeak("hello there", false) == "hElLo ThErE"
 
 let s1 = """
-###########
-# One     #
-# line    #
-# Another #
-# line    #
-###########"""
+############
+# One line #
+# Another  #
+# line     #
+############"""
 
 let s2 = """
 ################

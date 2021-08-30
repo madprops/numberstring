@@ -622,12 +622,11 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
   ## Linebreaks get removed from the string
   runnableExamples:
     let s1 = """
-###########
-# One     #
-# line    #
-# Another #
-# line    #
-###########"""
+############
+# One line #
+# Another  #
+# line     #
+############"""
 
     let s2 = """
 ################
@@ -656,7 +655,7 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
 
   for i, word in words:
     let last = i == (words.len - 1)
-    let fits = ns.strip.len + word.len <= width - 4
+    let fits = ns.strip.len + word.len <= width - 3
 
     if fits:
       ns &= &"{word} "
