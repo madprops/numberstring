@@ -602,3 +602,83 @@ proc dumbspeak*(text: string, caps_first: bool): string =
     new_words.add(ns)
 
   new_words.join(" ")
+
+proc nobreaks*(text: string): string =
+  ## Remove linebreaks into a single fluid line
+  runnableExamples:
+    assert nobreaks("this.\nthing") == "this. thing"
+
+  text.replace("\n", " ")
+
+proc charframe*(text: string, max_width: SomeNumber, token: char): string =
+  ## Add a frame around the text with a certain character
+  ## 
+  ## Send a text string
+  ## 
+  ## Send the max width of the output
+  ## 
+  ## Send the token used as the frame
+  ## 
+  ## Linebreaks get removed from the string
+  runnableExamples:
+    let s1 = """
+###########
+# One     #
+# line    #
+# Another #
+# line    #
+###########"""
+
+    let s2 = """
+################
+# One line     #
+# Another line #
+################"""
+
+    let s3 = """
+#########################
+# One line Another line #
+#########################"""
+
+    assert charframe("One line\nAnother line", 10, '#') == s1
+    assert charframe("One line\nAnother line", 15, '#') == s2
+    assert charframe("One line\nAnother line", 25, '#') == s3
+  
+  let width = int(max_width)
+  let words = get_words(nobreaks(text))
+  var lines: seq[string]
+  var ns = ""
+  var mw = 0
+
+  proc add_ns() =
+    if ns.len > mw: mw = ns.strip.len
+    lines.add(ns.strip)
+
+  for i, word in words:
+    let last = i == (words.len - 1)
+    let fits = ns.strip.len + word.len <= width - 4
+
+    if fits:
+      ns &= &"{word} "
+    else:
+      add_ns()
+      ns = &"{word} "
+    if last:
+      add_ns()
+        
+  var fl = ""
+  for x in 1..(mw + 4):
+    fl &= token
+
+  var nlines: seq[string] = @[fl]
+
+  for line in lines:
+    var ls = &"{token} {line}"
+    let diff = mw - line.len
+    for z in 1..diff:
+      ls &= " "
+    ls &= &" {token}"
+    nlines.add(ls)
+
+  nlines.add(fl)
+  nlines.join("\n")

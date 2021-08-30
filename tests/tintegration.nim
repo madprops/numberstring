@@ -136,3 +136,26 @@ assert wordslen("what is there", true, Roman) == "what (IV) is (II) there (V)"
 
 assert dumbspeak("hello there", true) == "HeLlO tHeRe"
 assert dumbspeak("hello there", false) == "hElLo ThErE"
+
+let s1 = """
+###########
+# One     #
+# line    #
+# Another #
+# line    #
+###########"""
+
+let s2 = """
+################
+# One line     #
+# Another line #
+################"""
+
+let s3 = """
+#########################
+# One line Another line #
+#########################"""
+
+assert charframe("One line\nAnother line", 10, '#') == s1
+assert charframe("One line\nAnother line", 15, '#') == s2
+assert charframe("One line\nAnother line", 25, '#') == s3

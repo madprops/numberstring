@@ -211,6 +211,11 @@ function main() {
     title="writemorse(text: string): string">writemorse,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">nobreaks
+      <li><a class="reference" href="#nobreaks%2Cstring"
+    title="nobreaks(text: string): string">nobreaks,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">textnumbers
       <li><a class="reference" href="#textnumbers%2Cstring"
     title="textnumbers(text: string; mode = Number): string">textnumbers,<wbr>string</a></li>
@@ -269,6 +274,11 @@ function main() {
   <ul class="simple nested-toc-section">linesummary
       <li><a class="reference" href="#linesummary%2CopenArray%5Bstring%5D%2Cbool%2Cbool"
     title="linesummary(lines: openArray[string]; words, characters: bool; mode = Number): string">linesummary,<wbr>openArray[string],<wbr>bool,<wbr>bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">charframe
+      <li><a class="reference" href="#charframe%2Cstring%2CSomeNumber%2Cchar"
+    title="charframe(text: string; max_width: SomeNumber; token: char): string">charframe,<wbr>string,<wbr>SomeNumber,<wbr>char</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">leetspeak
@@ -755,6 +765,50 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">dumbspeak</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello there&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;hElLo ThErE&quot;</span></pre>
 
 </dd>
+<a id="nobreaks,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#nobreaks%2Cstring"><span class="Identifier">nobreaks</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Remove linebreaks into a single fluid line
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">nobreaks</span><span class="Punctuation">(</span><span class="StringLit">&quot;this.</span><span class="EscapeSequence">\n</span><span class="StringLit">thing&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;this. thing&quot;</span></pre>
+
+</dd>
+<a id="charframe,string,SomeNumber,char"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#charframe%2Cstring%2CSomeNumber%2Cchar"><span class="Identifier">charframe</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">max_width</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">token</span><span class="Other">:</span> <span class="Identifier">char</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+<p>Add a frame around the text with a certain character</p>
+<p>Send a text string</p>
+<p>Send the max width of the output</p>
+<p>Send the token used as the frame</p>
+<p>Linebreaks get removed from the string</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">s1</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="LongStringLit">&quot;&quot;&quot;
+###########
+# One     #
+# line    #
+# Another #
+# line    #
+###########&quot;&quot;&quot;</span><span class="Whitespace">
+
+</span><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">s2</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="LongStringLit">&quot;&quot;&quot;
+################
+# One line     #
+# Another line #
+################&quot;&quot;&quot;</span><span class="Whitespace">
+
+</span><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">s3</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="LongStringLit">&quot;&quot;&quot;
+#########################
+# One line Another line #
+#########################&quot;&quot;&quot;</span><span class="Whitespace">
+
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">charframe</span><span class="Punctuation">(</span><span class="StringLit">&quot;One line</span><span class="EscapeSequence">\n</span><span class="StringLit">Another line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">10</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;#&apos;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Identifier">s1</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">charframe</span><span class="Punctuation">(</span><span class="StringLit">&quot;One line</span><span class="EscapeSequence">\n</span><span class="StringLit">Another line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">15</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;#&apos;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Identifier">s2</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">charframe</span><span class="Punctuation">(</span><span class="StringLit">&quot;One line</span><span class="EscapeSequence">\n</span><span class="StringLit">Another line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">25</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;#&apos;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Identifier">s3</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -765,7 +819,7 @@ Change number words to numbers
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-30 04:48:22 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-30 06:16:28 UTC</small>
       </div>
     </div>
   </div>
