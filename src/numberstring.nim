@@ -77,7 +77,11 @@ proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 # Split into words
 proc get_words(text: string, lower: bool = false): seq[string] =
   let s = if lower: text.toLower else: text
-  s.split(" ").filterIt(it != "")  
+  s.split(" ").filterIt(it != "")
+
+# Split words into chars
+proc get_chars(word: string): seq[char] =
+  toSeq(word).filterIt(it != ' ')
 
 # Pre-Declare numberwords
 proc numberwords*(num: SomeNumber): string
@@ -416,7 +420,7 @@ proc wordsnumber*(text: string): float =
     elif word == "minus":
       ns &= "-"
       continue
-    
+
     let num = block:
       if word in Digits:
         $(Digits.find(word))
@@ -458,7 +462,7 @@ proc wordsnumber*(text: string): float =
 
 proc writemorse*(text: string): string =
   ## Turn a string into morse code
-  ## 
+  ##
   ## Words in the result are separated by a slash
   runnableExamples:
     assert writemorse("a b   c") == ".- / -... / -.-."
@@ -466,14 +470,14 @@ proc writemorse*(text: string): string =
     assert writemorse("hunter 2") == ".... ..- -. - . .-. / ..---"
     assert writemorse("@$.,") == ".--.-. ...-..- .-.-.- --..--"
     assert writemorse("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
-    assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"    
+    assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"
 
   let words = get_words(text, true)
   var fullcode: seq[string]
 
   for word in words:
     var code: seq[string]
-    let chars = toSeq(word.items).filterIt(it != ' ')
+    let chars = get_chars(word)
     for c in chars:
       if Morse.hasKey(c):
         code.add Morse[c]
@@ -483,12 +487,12 @@ proc writemorse*(text: string): string =
 
 proc readmorse*(text: string): string =
   ## Turn morse code into a string
-  ## 
+  ##
   ## Words should be separated by a slash
   runnableExamples:
     assert readmorse(".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--..") == "what 112 !!?"
     assert readmorse("- .... . / -- .- --. .. -.-. .. .- -.") == "the magician"
-    assert readmorse(".---- ----- ----- / .-.-. / ..--- ----- -----") == "100 + 200"    
+    assert readmorse(".---- ----- ----- / .-.-. / ..--- ----- -----") == "100 + 200"
 
   var wordlist: seq[string]
   let codeblock = text.split("/").mapIt(it.strip())
@@ -502,21 +506,21 @@ proc readmorse*(text: string): string =
           ws &= k
 
     wordlist.add(ws)
-  
+
   wordlist.join(" ")
 
 proc shufflewords*(text: string, rng: var Rand = randgen): string =
   ## Shuffle words around
-  ## 
+  ##
   ## Send a string to be shuffled
-  ## 
+  ##
   ## A rand seed can be provided as an extra argument
   runnableExamples:
     import std/random
     var rng = initRand(100)
     assert shufflewords("this thing is", rng) == "thing is this"
     assert shufflewords("this thing is", rng) == "this thing is"
-    assert shufflewords("this thing is", rng) == "thing this is"    
+    assert shufflewords("this thing is", rng) == "thing this is"
 
   var words = get_Words(text)
   rng.shuffle(words)
@@ -524,18 +528,18 @@ proc shufflewords*(text: string, rng: var Rand = randgen): string =
 
 proc textnumbers*(text: string, mode = Number): string =
   ## Replace all numbers in a string
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## It checks every word in search for numbers
-  ## 
+  ##
   ## Accepts an optional NumberMode
   runnableExamples:
     assert textnumbers("Number 3.2 and 8.9") == "Number 3 and 8"
     assert textnumbers("Number 3.2 and 8.9", FloatNumber) == "Number 3.2 and 8.9"
     assert textnumbers("Number 3 and 8", LowWord) == "Number three and eight"
     assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
-    assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"  
+    assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"
 
   let words = get_words(text)
   var new_words: seq[string]
@@ -546,16 +550,16 @@ proc textnumbers*(text: string, mode = Number): string =
       new_words.add(apply_number_mode(num, mode))
     except:
       new_words.add(word)
-  
+
   new_words.join(" ")
 
 proc wordslen*(text: string, keep_word: bool, mode = Number): string =
   ## Replace all words with their string length
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send a boolean to specify if words are kept
-  ## 
+  ##
   ## Accepts an optional NumberMode
   runnableExamples:
     assert wordslen("what is there", false) == "4 2 5"
@@ -571,30 +575,30 @@ proc wordslen*(text: string, keep_word: bool, mode = Number): string =
     if keep_word:
       ns = &"{word} ({ns})"
     new_words.add(ns)
-  
+
   new_words.join(" ")
 
 proc dumbspeak*(text: string, caps_first: bool): string =
   ## Capitalize every other letter
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send a boolean to specify if caps go first
   runnableExamples:
     assert dumbspeak("hello there", true) == "HeLlO tHeRe"
     assert dumbspeak("hello there", false) == "hElLo ThErE"
-  
+
   let words = get_words(text)
   var new_words: seq[string]
   var cap = caps_first
 
   for word in words:
     var ns = ""
-    for c in word.items:
+    for c in get_chars(word):
       var cs = $c
       if cap: ns &= cs.toUpper
       else: ns &= cs.toLower
       cap = not cap
     new_words.add(ns)
-  
+
   new_words.join(" ")
