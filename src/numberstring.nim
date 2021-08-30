@@ -54,18 +54,17 @@ const
     ("XC", 90), ("L", 50), ("XL", 40), ("X", 10),
     ("IX", 9), ("V", 5), ("IV", 4), ("I", 1)]
 
-  Morse* = {'A': ".-",     'B': "-...",   'C': "-.-.",    'D': "-..",    'E': ".",
-           'F': "..-.",   'G': "--.",    'H': "....",    'I': "..",     'J': ".---",
-           'K': "-.-",    'L': ".-..",   'M': "--",      'N': "-.",     'O': "---",
-           'P': ".--.",   'Q': "--.-",   'R': ".-.",     'S': "...",    'T': "-",
-           'U': "..-",    'V': "...-",   'W': ".--",     'X': "-..-",   'Y': "-.--",
-           'Z': "--..",   '0': "-----",  '1': ".----",   '2': "..---",  '3': "...--",
-           '4': "....-",  '5': ".....",  '6': "-....",   '7': "--...",  '8': "---..",
-           '9': "----.",  '.': ".-.-.-", ',': "--..--",  '?': "..--..", '\'': ".----.",
-           '!': "-.-.--", '/': "-..-.",  '(': "-.--.",   ')': "-.--.-", '&': ".-...",
-           ':': "---...", ';': "-.-.-.", '=': "-...-",   '+': ".-.-.",  '-': "-....-",
-           '_': "..--.-", '"': ".-..-.", '$': "...-..-", '@': ".--.-."}.toTable
-
+  Morse* = {'a': ".-",     'b': "-...",   'c': "-.-.",    'd': "-..",    'e': ".",
+            'f': "..-.",   'g': "--.",    'h': "....",    'i': "..",     'j': ".---",
+            'k': "-.-",    'l': ".-..",   'm': "--",      'n': "-.",     'o': "---",
+            'p': ".--.",   'q': "--.-",   'r': ".-.",     's': "...",    't': "-",
+            'u': "..-",    'v': "...-",   'w': ".--",     'x': "-..-",   'y': "-.--",
+            'z': "--..",   '0': "-----",  '1': ".----",   '2': "..---",  '3': "...--",
+            '4': "....-",  '5': ".....",  '6': "-....",   '7': "--...",  '8': "---..",
+            '9': "----.",  '.': ".-.-.-", ',': "--..--",  '?': "..--..", '\'': ".----.",
+            '!': "-.-.--", '/': "-..-.",  '(': "-.--.",   ')': "-.--.-", '&': ".-...",
+            ':': "---...", ';': "-.-.-.", '=': "-...-",   '+': ".-.-.",  '-': "-....-",
+            '_': "..--.-", '"': ".-..-.", '$': "...-..-", '@': ".--.-."}.totable
 # Init the random number generator
 var randgen = initRand(int(epochTime()))
 
@@ -77,7 +76,7 @@ proc numericval(c: '0'..'9'): int = (c.ord - '0'.ord)
 
 # Split into words
 proc get_words(text: string, lower: bool = false): seq[string] =
-  let s = if lower: text.toLowerAscii else: text
+  let s = if lower: text.toLower else: text
   s.split(" ").filterIt(it != "")  
 
 # Pre-Declare numberwords
@@ -88,9 +87,9 @@ proc romano*(num: SomeNumber): string
 
 # Capitalize accordingly
 proc capi(text: string, mode: NumberMode): string =
-  if mode in [LowWord, FloatLowWord]: toLowerAscii(text)
+  if mode in [LowWord, FloatLowWord]: toLower(text)
   elif mode in [CapWord, FloatCapWord]: title(text)
-  elif mode in [UpWord, FloatUpWord]: toUpperAscii(text)
+  elif mode in [UpWord, FloatUpWord]: toUpper(text)
   else: text
 
 # Format numbers like 1.1999 to 1.2
@@ -197,7 +196,7 @@ proc countword*(text: string): int =
 
   result = 0
 
-  for c in toSeq(text.strip().toLowerAscii()):
+  for c in toSeq(text.strip().toLower()):
     if c != ' ':
       if c in '0'..'9':
         result += numericval(c)
@@ -264,7 +263,7 @@ proc leetspeak*(text: string): string =
   runnableExamples:
     assert leetspeak("maple strikter") == "m4pl3 s7r1k73r"
 
-  return text.toLowerAscii().replace("a", "4")
+  return text.toLower().replace("a", "4")
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
@@ -469,9 +468,10 @@ proc writemorse*(text: string): string =
     assert writemorse("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
     assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"    
 
+  let words = get_words(text, true)
   var fullcode: seq[string]
 
-  for word in text.toUpperAscii.splitWhitespace:
+  for word in words:
     var code: seq[string]
     let chars = toSeq(word.items).filterIt(it != ' ')
     for c in chars:
@@ -491,11 +491,11 @@ proc readmorse*(text: string): string =
     assert readmorse(".---- ----- ----- / .-.-. / ..--- ----- -----") == "100 + 200"    
 
   var wordlist: seq[string]
-  let words = text.split("/").mapIt(it.strip())
+  let codeblock = text.split("/").mapIt(it.strip())
 
-  for word in words:
+  for cblock in codeblock:
     var ws = ""
-    let codes = word.splitWhitespace
+    let codes = get_words(cblock)
     for c in codes:
       for k in Morse.keys:
         if Morse[k] == c:
@@ -503,7 +503,7 @@ proc readmorse*(text: string): string =
 
     wordlist.add(ws)
   
-  wordlist.join(" ").toLowerAscii
+  wordlist.join(" ")
 
 proc shufflewords*(text: string, rng: var Rand = randgen): string =
   ## Shuffle words around
@@ -592,8 +592,8 @@ proc dumbspeak*(text: string, caps_first: bool): string =
     var ns = ""
     for c in word.items:
       var cs = $c
-      if cap: ns &= cs.toUpperAscii
-      else: ns &= cs.toLowerAscii
+      if cap: ns &= cs.toUpper
+      else: ns &= cs.toLower
       cap = not cap
     new_words.add(ns)
   
