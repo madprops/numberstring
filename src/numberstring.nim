@@ -79,9 +79,9 @@ proc get_words(text: string, lower: bool = false): seq[string] =
   let s = if lower: text.toLower else: text
   s.split(" ").filterIt(it != "")
 
-# Split words into chars
-proc get_chars(word: string): seq[char] =
-  toSeq(word).filterIt(it != ' ')
+# Split into chars
+proc get_chars(text: string): seq[char] =
+  toSeq(text).filterIt(it != ' ')
 
 # Pre-Declare numberwords
 proc numberwords*(num: SomeNumber): string
