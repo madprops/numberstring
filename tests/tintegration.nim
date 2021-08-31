@@ -159,9 +159,9 @@ assert charframe("One line\nAnother line", 10, '#') == s1
 assert charframe("One line\nAnother line", 15, '#') == s2
 assert charframe("One line\nAnother line", 25, '#') == s3
 
-assert biggestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
+assert longestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
 
-assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
+assert shortestwords("Is that the only solution to this problem?") == @["is", "to"]
 
 assert repstring("what !is! this???!", ['!', '?']) == "what is this"
 assert repstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"

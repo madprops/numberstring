@@ -678,12 +678,12 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
   new_lines.add(fl)
   new_lines.join("\n")
 
-proc biggestwords*(text: string): seq[string] =
+proc longestwords*(text: string): seq[string] =
   ## Get a list of the longest words
   ##
   ## All words in the output are of equal length
   runnableExamples:
-    assert biggestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
+    assert longestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
 
   var max = 0
   var max_list: seq[string]
@@ -697,12 +697,12 @@ proc biggestwords*(text: string): seq[string] =
 
   return max_list
 
-proc smallestwords*(text: string): seq[string] =
+proc shortestwords*(text: string): seq[string] =
   ## Get a list of the longest words
   ##
   ## All words in the output are of equal length
   runnableExamples:
-    assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
+    assert shortestwords("Is that the only solution to this problem?") == @["is", "to"]
 
   var min = -1
   var min_list: seq[string]
