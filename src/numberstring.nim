@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar, tables]
+import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re]
 from unicode import title
 
 type NumberMode* = enum
@@ -778,4 +778,25 @@ proc keepchars*(text: string, chars: openArray[char]): string =
     if nw.len > 0:
       new_words.add(nw)
 
+  new_words.join(" ")
+
+proc remove_punctuation*(text: string): string =
+  ## Remove punctuation at the end of words
+  runnableExamples:
+    assert remove_punctuation("hello, what is this?") == "hello what is this"
+    assert remove_punctuation("hello!! ok; ??") == "hello ok"
+    
+  var new_words: seq[string]
+
+  for word in get_words(text):
+    var nw = word
+    nw = nw.replace(re"\,+$")
+    nw = nw.replace(re"\.+$")
+    nw = nw.replace(re"\;+$")
+    nw = nw.replace(re"\!+$")
+    nw = nw.replace(re"\?+$")
+    nw = nw.replace(re"\:+$")
+    if nw.len > 0:        
+      new_words.add(nw)
+  
   new_words.join(" ")

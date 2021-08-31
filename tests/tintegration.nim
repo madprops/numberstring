@@ -171,3 +171,6 @@ assert asciistring("N!u!mber 22...") == "Number 22"
 assert asciistring("w2h2a2t 5is t4hi9s", false) == "what is this"
 
 assert keepchars("hello these thing", ['e', 'l']) == "ell ee"
+
+assert remove_punctuation("hello, what is this?") == "hello what is this"
+assert remove_punctuation("hello!! ok; ??") == "hello ok"
