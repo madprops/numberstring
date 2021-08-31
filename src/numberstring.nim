@@ -716,7 +716,7 @@ proc smallestwords*(text: string): seq[string] =
 
   return min_list
 
-proc cleanstring*(text: string, chars: openArray[char], replace_with: string = ""): string =
+proc repstring*(text: string, chars: openArray[char], replace_with: string = ""): string =
   ## Remove chars from strings
   ##
   ## Send a text string
@@ -725,8 +725,8 @@ proc cleanstring*(text: string, chars: openArray[char], replace_with: string = "
   ##
   ## Send an optional replace_with string
   runnableExamples:
-    assert cleanstring("what !is! this???!", ['!', '?']) == "what is this"
-    assert cleanstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"
+    assert repstring("what !is! this???!", ['!', '?']) == "what is this"
+    assert repstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"
 
   var new_words: seq[string]
 
@@ -765,7 +765,7 @@ proc keepchars*(text: string, chars: openArray[char]): string =
   ##
   ## Send a text string
   ##
-  ## Send an array of strings to keep
+  ## Send an array of chars to keep
   runnableExamples:
     assert keepchars("hello these thing", ['e', 'l']) == "ell ee"
     assert keepchars("eeEEmsteeEm", ['E', 'm']) == "EEmEm"
