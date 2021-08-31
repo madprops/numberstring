@@ -256,7 +256,7 @@ proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): str
 
   result = ""; var m = true
 
-  for i in 1..num:
+  for _ in 1..num:
     result.add(if (m and vowels_first) or
     (not m and not vowels_first): rng.sample(Vowels)
     else: rng.sample(Consonants))
@@ -787,17 +787,21 @@ proc remove_punctuation*(text: string): string =
     assert remove_punctuation("hello, what is this?") == "hello what is this"
     assert remove_punctuation("hello!! ok; ??") == "hello ok"
     assert remove_punctuation("Hello #12") == "Hello #12"
+    assert remove_punctuation("Hello?!!?:?!:;; There") == "Hello There"
 
   var new_words: seq[string]
 
   for word in get_words(text):
     var nw = word
-    nw = nw.replace(re"\,+$")
-    nw = nw.replace(re"\.+$")
-    nw = nw.replace(re"\;+$")
-    nw = nw.replace(re"\!+$")
-    nw = nw.replace(re"\?+$")
-    nw = nw.replace(re"\:+$")
+    for _ in 1..word.len:
+      let olen = nw.len
+      nw = nw.replace(re"\,+$")
+      nw = nw.replace(re"\.+$")
+      nw = nw.replace(re"\;+$")
+      nw = nw.replace(re"\!+$")
+      nw = nw.replace(re"\?+$")
+      nw = nw.replace(re"\:+$")
+      if olen == nw.len: break
     if nw.len > 0:
       new_words.add(nw)
 
