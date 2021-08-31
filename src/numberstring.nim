@@ -472,10 +472,9 @@ proc writemorse*(text: string): string =
     assert writemorse("what 112 !!?") == ".-- .... .- - / .---- .---- ..--- / -.-.-- -.-.-- ..--.."
     assert writemorse("100 + 200") == ".---- ----- ----- / .-.-. / ..--- ----- -----"
 
-  let words = get_words(text, true)
   var fullcode: seq[string]
 
-  for word in words:
+  for word in get_words(text, true):
     var code: seq[string]
     let chars = get_chars(word)
     for c in chars:
@@ -541,10 +540,9 @@ proc textnumbers*(text: string, mode = Number): string =
     assert textnumbers("Number 3 and 8", Roman) == "Number III and VIII"
     assert textnumbers("3.2 and 8.9", FloatCapWord) == "Three Point Two and Eight Point Nine"
 
-  let words = get_words(text)
   var new_words: seq[string]
 
-  for word in words:
+  for word in get_words(text):
     try:
       let num = parseFloat(word)
       new_words.add(apply_number_mode(num, mode))
@@ -567,10 +565,9 @@ proc wordslen*(text: string, keep_word: bool, mode = Number): string =
     assert wordslen("what is there", false, CapWord) == "Four Two Five"
     assert wordslen("what is there", true, Roman) == "what (IV) is (II) there (V)"
 
-  let words = get_words(text)
   var new_words: seq[string]
 
-  for word in words:
+  for word in get_words(text):
     var ns = apply_number_mode(word.len, mode)
     if keep_word:
       ns = &"{word} ({ns})"
@@ -588,11 +585,10 @@ proc dumbspeak*(text: string, caps_first: bool): string =
     assert dumbspeak("hello there", true) == "HeLlO tHeRe"
     assert dumbspeak("hello there", false) == "hElLo ThErE"
 
-  let words = get_words(text)
   var new_words: seq[string]
   var cap = caps_first
 
-  for word in words:
+  for word in get_words(text):
     var ns = ""
     for c in get_chars(word):
       var cs = $c
@@ -689,11 +685,10 @@ proc biggestwords*(text: string): seq[string] =
   runnableExamples:
     assert biggestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
 
-  let words = get_words(text, true)
   var max = 0
   var max_list: seq[string]
 
-  for word in words:
+  for word in get_words(text, true):
     if word.len > max:
       max = word.len
       max_list = @[word]
@@ -709,11 +704,10 @@ proc smallestwords*(text: string): seq[string] =
   runnableExamples:
     assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
 
-  let words = get_words(text, true)
   var min = -1
   var min_list: seq[string]
 
-  for word in words:
+  for word in get_words(text, true):
     if min == -1 or word.len < min:
       min = word.len
       min_list = @[word]
@@ -732,15 +726,33 @@ proc cleanstring*(text: string, chars: openArray[string]): string =
     assert cleanstring("what !is! this???!", ["!", "?"]) == "what is this"
     assert cleanstring("what??is this ???!", ["!", "?"]) == "whatis this"
 
-  let words = get_words(text)
   var new_words: seq[string]
 
-  for word in words:
+  for word in get_words(text):
     echo word
     var w = word
     for c in chars:
       w = w.replace(c, "")
     if w.len > 0:
       new_words.add(w)
+  
+  new_words.join(" ")
+
+proc asciistring*(text: string): string =
+  ## Remove all non-ascii chars
+  ## 
+  ## Numbers are kept
+  runnableExamples:
+    assert asciistring("That thing!!") == "That thing"
+    assert asciistring("N!u!mber 22...") == "Number 22"  
+  
+  var new_words: seq[string]
+
+  for word in get_words(text):
+    var nw = ""
+    for c in get_chars(word):
+      if c in '0'..'9' or c.isLowerAscii or c.isUpperAscii:
+        nw &= c
+    new_words.add(nw)
   
   new_words.join(" ")
