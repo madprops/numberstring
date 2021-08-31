@@ -716,25 +716,24 @@ proc smallestwords*(text: string): seq[string] =
   
   return min_list
 
-proc cleanstring*(text: string, chars: openArray[string]): string =
+proc cleanstring*(text: string, chars: openArray[char]): string =
   ## Remove chars from strings
   ## 
   ## Send a text string
   ## 
   ## Send an array of chars to replace
   runnableExamples:
-    assert cleanstring("what !is! this???!", ["!", "?"]) == "what is this"
-    assert cleanstring("what??is this ???!", ["!", "?"]) == "whatis this"
+    assert cleanstring("what !is! this???!", ['!', '?']) == "what is this"
+    assert cleanstring("what??is this ???!", ['!', '?']) == "whatis this"
 
   var new_words: seq[string]
 
   for word in get_words(text):
-    echo word
-    var w = word
+    var nw = word
     for c in chars:
-      w = w.replace(c, "")
-    if w.len > 0:
-      new_words.add(w)
+      nw = nw.replace($c, "")
+    if nw.len > 0:
+      new_words.add(nw)
   
   new_words.join(" ")
 
@@ -753,6 +752,27 @@ proc asciistring*(text: string): string =
     for c in get_chars(word):
       if c in '0'..'9' or c.isLowerAscii or c.isUpperAscii:
         nw &= c
-    new_words.add(nw)
+    if nw.len > 0:        
+      new_words.add(nw)
+  
+  new_words.join(" ")
+
+proc keepchars*(text: string, chars: openArray[char]): string =
+  ## Remove all chars except the given ones
+  ## 
+  ## Send a text string
+  ## 
+  ## Send an array of strings to keep
+  runnableExamples:
+    assert keepchars("hello these thing", ['e', 'l']) == "ell ee"
+
+  var new_words: seq[string]
+  
+  for word in get_words(text):
+    var nw = ""
+    for c in get_chars(word):
+      if c in chars: nw &= c
+    if nw.len > 0:        
+      new_words.add(nw)
   
   new_words.join(" ")
