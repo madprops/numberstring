@@ -768,6 +768,7 @@ proc keepchars*(text: string, chars: openArray[char]): string =
   ## Send an array of strings to keep
   runnableExamples:
     assert keepchars("hello these thing", ['e', 'l']) == "ell ee"
+    assert keepchars("eeEEmsteeEm", ['E', 'm']) == "EEmEm"
 
   var new_words: seq[string]
 
@@ -785,6 +786,7 @@ proc remove_punctuation*(text: string): string =
   runnableExamples:
     assert remove_punctuation("hello, what is this?") == "hello what is this"
     assert remove_punctuation("hello!! ok; ??") == "hello ok"
+    assert remove_punctuation("Hello #12") == "Hello #12"
 
   var new_words: seq[string]
 
