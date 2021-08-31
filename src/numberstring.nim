@@ -716,22 +716,24 @@ proc smallestwords*(text: string): seq[string] =
   
   return min_list
 
-proc cleanstring*(text: string, chars: openArray[char]): string =
+proc cleanstring*(text: string, chars: openArray[char], replace_with: string = ""): string =
   ## Remove chars from strings
   ## 
   ## Send a text string
   ## 
   ## Send an array of chars to replace
+  ## 
+  ## Send an optional replace_with string
   runnableExamples:
     assert cleanstring("what !is! this???!", ['!', '?']) == "what is this"
-    assert cleanstring("what??is this ???!", ['!', '?']) == "whatis this"
+    assert cleanstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"
 
   var new_words: seq[string]
 
   for word in get_words(text):
     var nw = word
     for c in chars:
-      nw = nw.replace($c, "")
+      nw = nw.replace($c, replace_with)
     if nw.len > 0:
       new_words.add(nw)
   

@@ -164,7 +164,7 @@ assert biggestwords("Is that the only solution to this problem?") == @["solution
 assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
 
 assert cleanstring("what !is! this???!", ['!', '?']) == "what is this"
-assert cleanstring("what??is this ???!", ['!', '?']) == "whatis this"
+assert cleanstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"
 
 assert asciistring("That thing!!") == "That thing"
 assert asciistring("N!u!mber 22...") == "Number 22"

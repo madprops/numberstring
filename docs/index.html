@@ -257,8 +257,8 @@ function main() {
 
   </ul>
   <ul class="simple nested-toc-section">cleanstring
-      <li><a class="reference" href="#cleanstring%2Cstring%2CopenArray%5Bchar%5D"
-    title="cleanstring(text: string; chars: openArray[char]): string">cleanstring,<wbr>string,<wbr>openArray[char]</a></li>
+      <li><a class="reference" href="#cleanstring%2Cstring%2CopenArray%5Bchar%5D%2Cstring"
+    title="cleanstring(text: string; chars: openArray[char]; replace_with: string = &quot;&quot;): string">cleanstring,<wbr>string,<wbr>openArray[char],<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">wordtag
@@ -855,18 +855,19 @@ Remove linebreaks into a single fluid line
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">smallestwords</span><span class="Punctuation">(</span><span class="StringLit">&quot;Is that the only solution to this problem?&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;to&quot;</span><span class="Punctuation">]</span></pre>
 
 </dd>
-<a id="cleanstring,string,openArray[char]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#cleanstring%2Cstring%2CopenArray%5Bchar%5D"><span class="Identifier">cleanstring</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">chars</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">char</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="cleanstring,string,openArray[char],string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#cleanstring%2Cstring%2CopenArray%5Bchar%5D%2Cstring"><span class="Identifier">cleanstring</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">chars</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">char</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">replace_with</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Remove chars from strings</p>
 <p>Send a text string</p>
 <p>Send an array of chars to replace</p>
+<p>Send an optional replace_with string</p>
 
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what !is! this???!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="CharLit">&apos;!&apos;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;?&apos;</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what is this&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what??is this ???!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="CharLit">&apos;!&apos;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;?&apos;</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;whatis this&quot;</span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what??is this&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="CharLit">&apos;?&apos;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;s&apos;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;@&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what@@i@ thi@&quot;</span></pre>
 
 </dd>
 <a id="asciistring,string"></a>
@@ -904,7 +905,7 @@ Remove linebreaks into a single fluid line
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 01:34:03 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 02:25:32 UTC</small>
       </div>
     </div>
   </div>
