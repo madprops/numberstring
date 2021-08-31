@@ -665,7 +665,7 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
   for x in 1..(mw + 4):
     fl &= token
 
-  var nlines: seq[string] = @[fl]
+  var new_lines: seq[string] = @[fl]
 
   for line in lines:
     var ls = &"{token} {line}"
@@ -673,10 +673,10 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
     for z in 1..diff:
       ls &= " "
     ls &= &" {token}"
-    nlines.add(ls)
+    new_lines.add(ls)
 
-  nlines.add(fl)
-  nlines.join("\n")
+  new_lines.add(fl)
+  new_lines.join("\n")
 
 proc biggestwords*(text: string): seq[string] =
   ## Get a list of the longest words
@@ -785,7 +785,7 @@ proc remove_punctuation*(text: string): string =
   runnableExamples:
     assert remove_punctuation("hello, what is this?") == "hello what is this"
     assert remove_punctuation("hello!! ok; ??") == "hello ok"
-    
+
   var new_words: seq[string]
 
   for word in get_words(text):
@@ -796,7 +796,7 @@ proc remove_punctuation*(text: string): string =
     nw = nw.replace(re"\!+$")
     nw = nw.replace(re"\?+$")
     nw = nw.replace(re"\:+$")
-    if nw.len > 0:        
+    if nw.len > 0:
       new_words.add(nw)
-  
+
   new_words.join(" ")
