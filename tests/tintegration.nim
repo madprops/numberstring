@@ -168,5 +168,6 @@ assert cleanstring("what??is this", ['?', 's'], "@") == "what@@i@ thi@"
 
 assert asciistring("That thing!!") == "That thing"
 assert asciistring("N!u!mber 22...") == "Number 22"
+assert asciistring("w2h2a2t 5is t4hi9s", false) == "what is this"
 
 assert keepchars("hello these thing", ['e', 'l']) == "ell ee"

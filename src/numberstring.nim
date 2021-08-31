@@ -608,13 +608,13 @@ proc nobreaks*(text: string): string =
 
 proc charframe*(text: string, max_width: SomeNumber, token: char): string =
   ## Add a frame around the text with a certain character
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send the max width of the output
-  ## 
+  ##
   ## Send the token used as the frame
-  ## 
+  ##
   ## Linebreaks get removed from the string
   runnableExamples:
     let s1 = """
@@ -638,7 +638,7 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
     assert charframe("One line\nAnother line", 10, '#') == s1
     assert charframe("One line\nAnother line", 15, '#') == s2
     assert charframe("One line\nAnother line", 25, '#') == s3
-  
+
   let width = int(max_width)
   let words = get_words(nobreaks(text))
   var lines: seq[string]
@@ -660,7 +660,7 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
       ns = &"{word} "
     if last:
       add_ns()
-        
+
   var fl = ""
   for x in 1..(mw + 4):
     fl &= token
@@ -680,7 +680,7 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
 
 proc biggestwords*(text: string): seq[string] =
   ## Get a list of the longest words
-  ## 
+  ##
   ## All words in the output are of equal length
   runnableExamples:
     assert biggestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
@@ -694,12 +694,12 @@ proc biggestwords*(text: string): seq[string] =
       max_list = @[word]
     elif word.len == max:
       max_list.add(word)
-  
+
   return max_list
 
 proc smallestwords*(text: string): seq[string] =
   ## Get a list of the longest words
-  ## 
+  ##
   ## All words in the output are of equal length
   runnableExamples:
     assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
@@ -713,16 +713,16 @@ proc smallestwords*(text: string): seq[string] =
       min_list = @[word]
     elif word.len == min:
       min_list.add(word)
-  
+
   return min_list
 
 proc cleanstring*(text: string, chars: openArray[char], replace_with: string = ""): string =
   ## Remove chars from strings
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send an array of chars to replace
-  ## 
+  ##
   ## Send an optional replace_with string
   runnableExamples:
     assert cleanstring("what !is! this???!", ['!', '?']) == "what is this"
@@ -736,45 +736,46 @@ proc cleanstring*(text: string, chars: openArray[char], replace_with: string = "
       nw = nw.replace($c, replace_with)
     if nw.len > 0:
       new_words.add(nw)
-  
+
   new_words.join(" ")
 
-proc asciistring*(text: string): string =
+proc asciistring*(text: string, keep_numbers: bool = true): string =
   ## Remove all non-ascii chars
-  ## 
-  ## Numbers are kept
+  ##
+  ## Send an optional bool to set if numbers are kept
   runnableExamples:
     assert asciistring("That thing!!") == "That thing"
-    assert asciistring("N!u!mber 22...") == "Number 22"  
-  
+    assert asciistring("N!u!mber 22...") == "Number 22"
+    assert asciistring("w2h2a2t 5is t4hi9s", false) == "what is this"
+
   var new_words: seq[string]
 
   for word in get_words(text):
     var nw = ""
     for c in get_chars(word):
-      if c in '0'..'9' or c.isLowerAscii or c.isUpperAscii:
+      if (keep_numbers and c in '0'..'9') or c.isLowerAscii or c.isUpperAscii:
         nw &= c
-    if nw.len > 0:        
+    if nw.len > 0:
       new_words.add(nw)
-  
+
   new_words.join(" ")
 
 proc keepchars*(text: string, chars: openArray[char]): string =
   ## Remove all chars except the given ones
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send an array of strings to keep
   runnableExamples:
     assert keepchars("hello these thing", ['e', 'l']) == "ell ee"
 
   var new_words: seq[string]
-  
+
   for word in get_words(text):
     var nw = ""
     for c in get_chars(word):
       if c in chars: nw &= c
-    if nw.len > 0:        
+    if nw.len > 0:
       new_words.add(nw)
-  
+
   new_words.join(" ")

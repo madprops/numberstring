@@ -307,8 +307,8 @@ function main() {
 
   </ul>
   <ul class="simple nested-toc-section">asciistring
-      <li><a class="reference" href="#asciistring%2Cstring"
-    title="asciistring(text: string): string">asciistring,<wbr>string</a></li>
+      <li><a class="reference" href="#asciistring%2Cstring%2Cbool"
+    title="asciistring(text: string; keep_numbers: bool = true): string">asciistring,<wbr>string,<wbr>bool</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">multistring
@@ -870,16 +870,18 @@ Remove linebreaks into a single fluid line
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what??is this&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="CharLit">&apos;?&apos;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;s&apos;</span><span class="Punctuation">]</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;@&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what@@i@ thi@&quot;</span></pre>
 
 </dd>
-<a id="asciistring,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#asciistring%2Cstring"><span class="Identifier">asciistring</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="asciistring,string,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#asciistring%2Cstring%2Cbool"><span class="Identifier">asciistring</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">keep_numbers</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Remove all non-ascii chars</p>
-<p>Numbers are kept</p>
+<p>Send an optional bool to set if numbers are kept</p>
 
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">asciistring</span><span class="Punctuation">(</span><span class="StringLit">&quot;That thing!!&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;That thing&quot;</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">asciistring</span><span class="Punctuation">(</span><span class="StringLit">&quot;N!u!mber 22...&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number 22&quot;</span><span class="Whitespace">  </span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">asciistring</span><span class="Punctuation">(</span><span class="StringLit">&quot;N!u!mber 22...&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Number 22&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">asciistring</span><span class="Punctuation">(</span><span class="StringLit">&quot;w2h2a2t 5is t4hi9s&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">false</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what is this&quot;</span></pre>
 
 </dd>
 <a id="keepchars,string,openArray[char]"></a>
@@ -905,7 +907,7 @@ Remove linebreaks into a single fluid line
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 02:25:32 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 02:31:12 UTC</small>
       </div>
     </div>
   </div>
