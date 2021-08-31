@@ -236,6 +236,11 @@ function main() {
     title="wordsnumber(text: string): float">wordsnumber,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">biggestwords
+      <li><a class="reference" href="#biggestwords%2Cstring"
+    title="biggestwords(text: string): seq[string]">biggestwords,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">romano
       <li><a class="reference" href="#romano%2CSomeNumber"
     title="romano(num: SomeNumber): string">romano,<wbr>SomeNumber</a></li>
@@ -244,6 +249,11 @@ function main() {
   <ul class="simple nested-toc-section">wordslen
       <li><a class="reference" href="#wordslen%2Cstring%2Cbool"
     title="wordslen(text: string; keep_word: bool; mode = Number): string">wordslen,<wbr>string,<wbr>bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">cleanstring
+      <li><a class="reference" href="#cleanstring%2Cstring%2CopenArray%5Bstring%5D"
+    title="cleanstring(text: string; chars: openArray[string]): string">cleanstring,<wbr>string,<wbr>openArray[string]</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">wordtag
@@ -259,6 +269,11 @@ function main() {
   <ul class="simple nested-toc-section">dumbspeak
       <li><a class="reference" href="#dumbspeak%2Cstring%2Cbool"
     title="dumbspeak(text: string; caps_first: bool): string">dumbspeak,<wbr>string,<wbr>bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">smallestwords
+      <li><a class="reference" href="#smallestwords%2Cstring"
+    title="smallestwords(text: string): seq[string]">smallestwords,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">shufflewords
@@ -808,6 +823,42 @@ Remove linebreaks into a single fluid line
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">charframe</span><span class="Punctuation">(</span><span class="StringLit">&quot;One line</span><span class="EscapeSequence">\n</span><span class="StringLit">Another line&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="DecNumber">25</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="CharLit">&apos;#&apos;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Identifier">s3</span></pre>
 
 </dd>
+<a id="biggestwords,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#biggestwords%2Cstring"><span class="Identifier">biggestwords</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Get a list of the longest words</p>
+<p>All words in the output are of equal length</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">biggestwords</span><span class="Punctuation">(</span><span class="StringLit">&quot;Is that the only solution to this problem?&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;solution&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;problem?&quot;</span><span class="Punctuation">]</span></pre>
+
+</dd>
+<a id="smallestwords,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#smallestwords%2Cstring"><span class="Identifier">smallestwords</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Get a list of the longest words</p>
+<p>All words in the output are of equal length</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">smallestwords</span><span class="Punctuation">(</span><span class="StringLit">&quot;Is that the only solution to this problem?&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;is&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;to&quot;</span><span class="Punctuation">]</span></pre>
+
+</dd>
+<a id="cleanstring,string,openArray[string]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#cleanstring%2Cstring%2CopenArray%5Bstring%5D"><span class="Identifier">cleanstring</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">chars</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Remove chars from strings</p>
+<p>Send a text string</p>
+<p>Send an array of chars to replace</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what !is! this???!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="StringLit">&quot;!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;?&quot;</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;what is this&quot;</span><span class="Whitespace">
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">cleanstring</span><span class="Punctuation">(</span><span class="StringLit">&quot;what??is this ???!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Punctuation">[</span><span class="StringLit">&quot;!&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;?&quot;</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;whatis this&quot;</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -818,7 +869,7 @@ Remove linebreaks into a single fluid line
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-30 06:26:29 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 01:01:58 UTC</small>
       </div>
     </div>
   </div>

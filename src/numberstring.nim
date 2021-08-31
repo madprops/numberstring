@@ -681,3 +681,66 @@ proc charframe*(text: string, max_width: SomeNumber, token: char): string =
 
   nlines.add(fl)
   nlines.join("\n")
+
+proc biggestwords*(text: string): seq[string] =
+  ## Get a list of the longest words
+  ## 
+  ## All words in the output are of equal length
+  runnableExamples:
+    assert biggestwords("Is that the only solution to this problem?") == @["solution", "problem?"]
+
+  let words = get_words(text, true)
+  var max = 0
+  var max_list: seq[string]
+
+  for word in words:
+    if word.len > max:
+      max = word.len
+      max_list = @[word]
+    elif word.len == max:
+      max_list.add(word)
+  
+  return max_list
+
+proc smallestwords*(text: string): seq[string] =
+  ## Get a list of the longest words
+  ## 
+  ## All words in the output are of equal length
+  runnableExamples:
+    assert smallestwords("Is that the only solution to this problem?") == @["is", "to"]
+
+  let words = get_words(text, true)
+  var min = -1
+  var min_list: seq[string]
+
+  for word in words:
+    if min == -1 or word.len < min:
+      min = word.len
+      min_list = @[word]
+    elif word.len == min:
+      min_list.add(word)
+  
+  return min_list
+
+proc cleanstring*(text: string, chars: openArray[string]): string =
+  ## Remove chars from strings
+  ## 
+  ## Send a text string
+  ## 
+  ## Send an array of chars to replace
+  runnableExamples:
+    assert cleanstring("what !is! this???!", ["!", "?"]) == "what is this"
+    assert cleanstring("what??is this ???!", ["!", "?"]) == "whatis this"
+
+  let words = get_words(text)
+  var new_words: seq[string]
+
+  for word in words:
+    echo word
+    var w = word
+    for c in chars:
+      w = w.replace(c, "")
+    if w.len > 0:
+      new_words.add(w)
+  
+  new_words.join(" ")
