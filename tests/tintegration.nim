@@ -177,3 +177,6 @@ assert remove_punctuation("hello, what is this?") == "hello what is this"
 assert remove_punctuation("hello!! ok; ??") == "hello ok"
 assert remove_punctuation("Hello #12") == "Hello #12"
 assert remove_punctuation("Hello?!!?:?!:;; There") == "Hello There"
+
+assert count_vowels("la pacha") == 3
+assert count_consonants("la pacha") == 4

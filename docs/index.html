@@ -261,6 +261,11 @@ function main() {
     title="wordtag(num: int; vowels_first: bool = true; rng: var Rand = randgen): string">wordtag,<wbr>int,<wbr>bool,<wbr>Rand</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">count_consonants
+      <li><a class="reference" href="#count_consonants%2Cstring"
+    title="count_consonants(text: string): int">count_consonants,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">readmorse
       <li><a class="reference" href="#readmorse%2Cstring"
     title="readmorse(text: string): string">readmorse,<wbr>string</a></li>
@@ -309,6 +314,11 @@ function main() {
   <ul class="simple nested-toc-section">repstring
       <li><a class="reference" href="#repstring%2Cstring%2CopenArray%5Bchar%5D%2Cstring"
     title="repstring(text: string; chars: openArray[char]; replace_with: string = &quot;&quot;): string">repstring,<wbr>string,<wbr>openArray[char],<wbr>string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">count_vowels
+      <li><a class="reference" href="#count_vowels%2Cstring"
+    title="count_vowels(text: string): int">count_vowels,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">asciistring
@@ -915,6 +925,24 @@ Remove punctuation at the end of words
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">remove_punctuation</span><span class="Punctuation">(</span><span class="StringLit">&quot;Hello?!!?:?!:;; There&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;Hello There&quot;</span></pre>
 
 </dd>
+<a id="count_vowels,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#count_vowels%2Cstring"><span class="Identifier">count_vowels</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Count the number of vowels in a string
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">count_vowels</span><span class="Punctuation">(</span><span class="StringLit">&quot;la pacha&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">3</span></pre>
+
+</dd>
+<a id="count_consonants,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#count_consonants%2Cstring"><span class="Identifier">count_consonants</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Count the number of consonants in a string
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">count_consonants</span><span class="Punctuation">(</span><span class="StringLit">&quot;la pacha&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">4</span></pre>
+
+</dd>
 
 </dl></div>
 
@@ -925,7 +953,7 @@ Remove punctuation at the end of words
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-31 08:32:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-09-01 01:25:44 UTC</small>
       </div>
     </div>
   </div>

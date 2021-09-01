@@ -100,10 +100,11 @@ proc capi(text: string, mode: NumberMode): string =
 proc fnum(num: SomeNumber): string =
   let ns = formatFloat(float(num), format=ffDecimal, precision=1)
   let split = ns.split(".")
+
   if split.len == 2:
     if split[1] == "0":
       return split[0]
-  return ns
+  ns
 
 # Get the number, or the appropiate word
 proc apply_number_mode(num: SomeNumber, mode: NumberMode): string =
@@ -267,7 +268,7 @@ proc leetspeak*(text: string): string =
   runnableExamples:
     assert leetspeak("maple strikter") == "m4pl3 s7r1k73r"
 
-  return text.toLower().replace("a", "4")
+  text.toLower().replace("a", "4")
   .replace("e", "3").replace("i", "1")
   .replace("o", "0").replace("t", "7")
 
@@ -290,7 +291,8 @@ proc numerate*(lines: openArray[string], left, right: string, mode = Number): st
     for i, s in lines:
       let num = apply_number_mode(i + 1, mode)
       &"{left}{num}{right} {s}"
-  return new_array.join("\n")
+
+  new_array.join("\n")
 
 proc insertnum*(text, token: string, mode = Number): string =
   ## Purpose: Replace token with an incrementing number
@@ -341,7 +343,7 @@ proc linesummary*(lines: openArray[string], words, characters: bool, mode = Numb
 
     newlines.add(s)
 
-  return newlines.join("\n")
+  newlines.join("\n")
 
 proc romano*(num: SomeNumber): string =
   ## Convert regular numbers to roman numbers
@@ -523,7 +525,7 @@ proc shufflewords*(text: string, rng: var Rand = randgen): string =
 
   var words = get_Words(text)
   rng.shuffle(words)
-  return words.join(" ")
+  words.join(" ")
 
 proc textnumbers*(text: string, mode = Number): string =
   ## Replace all numbers in a string
@@ -695,7 +697,7 @@ proc longestwords*(text: string): seq[string] =
     elif word.len == max:
       max_list.add(word)
 
-  return max_list
+  max_list
 
 proc shortestwords*(text: string): seq[string] =
   ## Get a list of the longest words
@@ -714,7 +716,7 @@ proc shortestwords*(text: string): seq[string] =
     elif word.len == min:
       min_list.add(word)
 
-  return min_list
+  min_list
 
 proc repstring*(text: string, chars: openArray[char], replace_with: string = ""): string =
   ## Remove chars from strings
@@ -806,3 +808,21 @@ proc remove_punctuation*(text: string): string =
       new_words.add(nw)
 
   new_words.join(" ")
+
+proc count_vowels*(text: string): int =
+  ## Count the number of vowels in a string
+  runnableExamples:
+    assert count_vowels("la pacha") == 3
+
+  result = 0
+  for c in get_chars(text):
+    if c in Vowels: result += 1
+
+proc count_consonants*(text: string): int =
+  ## Count the number of consonants in a string
+  runnableExamples:
+    assert count_consonants("la pacha") == 4
+
+  result = 0
+  for c in get_chars(text):
+    if c in Consonants: result += 1
