@@ -370,7 +370,7 @@ proc wordsnumber*(text: string): Option[float] =
   ## Change number words to numbers
   runnableExamples:
     import std/options
-    
+
     assert wordsnumber("six hundred three").get() == 603.0
     assert wordsnumber("six hundred three million").get() == 603000000.0
     assert wordsnumber("six million three hundred ten thousand six hundred thirty-two").get() == 6310632.0
@@ -382,7 +382,7 @@ proc wordsnumber*(text: string): Option[float] =
     assert wordsnumber("One HUNDRED NiNeteen").get() == 119
     assert wordsnumber("minus three three two one seven point five").get() == -33217.5
     assert wordsnumber("nothing here") == none(float)
-    assert wordsnumber("nothing two here forty").get() == 240    
+    assert wordsnumber("nothing two here forty").get() == 240
 
   let words = get_words(text, true)
 
@@ -826,7 +826,7 @@ proc count_consonants*(text: string): int =
 
 proc countletters*(text: string): int =
   ## Count the number of letters in a string
-  ## 
+  ##
   ## Doesn't count whitespace
   runnableExamples:
     assert countletters("hello world") == 10
@@ -836,20 +836,20 @@ proc countletters*(text: string): int =
 
 proc printwords*(text: string, max_words: SomeNumber, delay: SomeNumber) =
   ## Print words every x milliseconds
-  ## 
+  ##
   ## Send a text string
-  ## 
+  ##
   ## Send the max number of words per line
-  ## 
+  ##
   ## Send the sleep delay in ms
 
   var i = 0
   let words = get_words(text)
 
   while true:
-    let ni = min(words.len - 1, i + max_words - 1)
+    let ni = min(words.len - 1, i + int(max_words) - 1)
     echo words[i..ni].join(" ")
     i = ni + 1
     if i > words.len - 1:
       break
-    sleep(delay)
+    sleep(int(delay))
