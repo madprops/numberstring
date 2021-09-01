@@ -231,6 +231,11 @@ function main() {
     title="keepchars(text: string; chars: openArray[char]): string">keepchars,<wbr>string,<wbr>openArray[char]</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">countletters
+      <li><a class="reference" href="#countletters%2Cstring"
+    title="countletters(text: string): int">countletters,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">numberwords
       <li><a class="reference" href="#numberwords%2CSomeNumber"
     title="numberwords(num: SomeNumber): string">numberwords,<wbr>SomeNumber</a></li>
@@ -264,6 +269,11 @@ function main() {
   <ul class="simple nested-toc-section">count_consonants
       <li><a class="reference" href="#count_consonants%2Cstring"
     title="count_consonants(text: string): int">count_consonants,<wbr>string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">printwords
+      <li><a class="reference" href="#printwords%2Cstring%2CSomeNumber%2CSomeNumber"
+    title="printwords(text: string; max_words: SomeNumber; delay: SomeNumber)">printwords,<wbr>string,<wbr>SomeNumber,<wbr>SomeNumber</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">readmorse
@@ -943,6 +953,28 @@ Count the number of consonants in a string
 <pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">count_consonants</span><span class="Punctuation">(</span><span class="StringLit">&quot;la pacha&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">4</span></pre>
 
 </dd>
+<a id="countletters,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#countletters%2Cstring"><span class="Identifier">countletters</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Count the number of letters in a string</p>
+<p>Doesn't count whitespace</p>
+
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">countletters</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello world&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">10</span></pre>
+
+</dd>
+<a id="printwords,string,SomeNumber,SomeNumber"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#printwords%2Cstring%2CSomeNumber%2CSomeNumber"><span class="Identifier">printwords</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">max_words</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">delay</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">)</span></pre></dt>
+<dd>
+
+<p>Print words every x milliseconds</p>
+<p>Send a text string</p>
+<p>Send the max number of words per line</p>
+<p>Send the sleep delay in ms</p>
+
+
+</dd>
 
 </dl></div>
 
@@ -953,7 +985,7 @@ Count the number of consonants in a string
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-09-01 01:26:54 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-09-01 02:45:14 UTC</small>
       </div>
     </div>
   </div>

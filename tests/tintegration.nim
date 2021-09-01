@@ -180,3 +180,5 @@ assert remove_punctuation("Hello?!!?:?!:;; There") == "Hello There"
 
 assert count_vowels("la pacha") == 3
 assert count_consonants("la pacha") == 4
+
+assert countletters("hello world") == 10

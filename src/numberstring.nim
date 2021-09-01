@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re]
+import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re, os]
 from unicode import title
 
 type NumberMode* = enum
@@ -822,3 +822,33 @@ proc count_consonants*(text: string): int =
 
   for c in get_chars(text):
     if c in Consonants: result += 1
+
+proc countletters*(text: string): int =
+  ## Count the number of letters in a string
+  ## 
+  ## Doesn't count whitespace
+  runnableExamples:
+    assert countletters("hello world") == 10
+
+  for word in get_words(text):
+    result += word.len
+
+proc printwords*(text: string, max_words: SomeNumber, delay: SomeNumber) =
+  ## Print words every x milliseconds
+  ## 
+  ## Send a text string
+  ## 
+  ## Send the max number of words per line
+  ## 
+  ## Send the sleep delay in ms
+
+  var i = 0
+  let words = get_words(text)
+
+  while true:
+    let ni = min(words.len - 1, i + max_words - 1)
+    echo words[i..ni].join(" ")
+    i = ni + 1
+    if i > words.len - 1:
+      break
+    sleep(delay)
