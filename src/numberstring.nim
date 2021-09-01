@@ -199,8 +199,6 @@ proc countword*(text: string): int =
     assert countword("abc") == 6
     assert countword("2 abc #$% 2") == 10
 
-  result = 0
-
   for c in toSeq(text.strip().toLower()):
     if c != ' ':
       if c in '0'..'9':
@@ -255,7 +253,7 @@ proc wordtag*(num: int, vowels_first: bool = true, rng: var Rand = randgen): str
     assert wtag[0] in Vowels
     assert wtag[1] in Consonants
 
-  result = ""; var m = true
+  var m = true
 
   for _ in 1..num:
     result.add(if (m and vowels_first) or
@@ -307,7 +305,7 @@ proc insertnum*(text, token: string, mode = Number): string =
     assert insertnum("Hello _ and _", "_", UpWord) == "Hello ONE and TWO"
     assert insertnum("x x x x x", "x", Roman) == "I II III IV V"
 
-  result = ""; var ss = text
+  var ss = text
 
   for n in 1..text.count(token):
     let i = ss.find(token)
@@ -814,7 +812,6 @@ proc count_vowels*(text: string): int =
   runnableExamples:
     assert count_vowels("la pacha") == 3
 
-  result = 0
   for c in get_chars(text):
     if c in Vowels: result += 1
 
@@ -823,6 +820,5 @@ proc count_consonants*(text: string): int =
   runnableExamples:
     assert count_consonants("la pacha") == 4
 
-  result = 0
   for c in get_chars(text):
     if c in Consonants: result += 1
