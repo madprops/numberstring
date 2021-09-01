@@ -1,4 +1,4 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re, os]
+import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re, os, options]
 from unicode import title
 
 type NumberMode* = enum
@@ -366,24 +366,25 @@ proc romano*(num: SomeNumber): string =
         result.add symbol
         number -= value
 
-proc wordsnumber*(text: string): float =
+proc wordsnumber*(text: string): Option[float] =
   ## Change number words to numbers
   runnableExamples:
-    assert wordsnumber("six hundred three") == 603.0
-    assert wordsnumber("six hundred three million") == 603000000.0
-    assert wordsnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632.0
-    assert wordsnumber("zero") == 0
-    assert wordsnumber("minus four thousand two") == -4002.0
-    assert wordsnumber("thirty-three point three") == 33.3
-    assert wordsnumber("thirty three point five hundred thirty two thousand eleven") == 33.532011
-    assert wordsnumber("three hundred forty") == 340
-    assert wordsnumber("One HUNDRED NiNeteen") == 119
-    assert wordsnumber("minus three three two one seven point five") == -33217.5
+    import std/options
+    
+    assert wordsnumber("six hundred three").get() == 603.0
+    assert wordsnumber("six hundred three million").get() == 603000000.0
+    assert wordsnumber("six million three hundred ten thousand six hundred thirty-two").get() == 6310632.0
+    assert wordsnumber("zero").get() == 0
+    assert wordsnumber("minus four thousand two").get() == -4002.0
+    assert wordsnumber("thirty-three point three").get() == 33.3
+    assert wordsnumber("thirty three point five hundred thirty two thousand eleven").get() == 33.532011
+    assert wordsnumber("three hundred forty").get() == 340
+    assert wordsnumber("One HUNDRED NiNeteen").get() == 119
+    assert wordsnumber("minus three three two one seven point five").get() == -33217.5
+    assert wordsnumber("nothing here") == none(float)
+    assert wordsnumber("nothing two here forty").get() == 240    
 
   let words = get_words(text, true)
-
-  if words.len == 0:
-    raise newException(CatchableError, "No words provided")
 
   var
     ns = ""
@@ -454,11 +455,11 @@ proc wordsnumber*(text: string): float =
           charge = 0
           break modeblock
 
-      raise newException(CatchableError,
-      "Invalid number word -> " & word)
+  if ns.len == 0:
+    return none(float)
 
   checkdiff(0)
-  parseFloat(ns)
+  some(parseFloat(ns))
 
 proc writemorse*(text: string): string =
   ## Turn a string into morse code

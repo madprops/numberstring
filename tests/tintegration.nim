@@ -1,4 +1,4 @@
-import std/[random]
+import std/[random, options]
 import pkg/numberstring
 
 assert multistring(0, "day", "days") == "0 days"
@@ -91,21 +91,19 @@ assert romano(1) == "I"
 assert romano(0) == "0"
 assert romano(-11) == "-XI"
 
-assert wordsnumber("six hundred three") == 603.0
-assert wordsnumber("six hundred three million") == 603000000.0
-assert wordsnumber("six million three hundred ten thousand six hundred thirty-two") == 6310632.0
-assert wordsnumber("zero") == 0.0
-assert wordsnumber("minus four thousand two") == -4002.0
-assert wordsnumber("thirty-three point three") == 33.3
-assert wordsnumber("thirty three point five hundred thirty two thousand eleven") == 33.532011
-assert wordsnumber("three hundred forty") == 340
-assert wordsnumber("four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight") == 4455667788.0
-assert wordsnumber("One HUNDRED NiNeteen") == 119
-assert wordsnumber("minus three three two one seven point five") == -33217.5
-doAssertRaises(CatchableError):
-  echo wordsnumber("nothing here")
-doAssertRaises(CatchableError):
-  echo wordsnumber("")
+assert wordsnumber("six hundred three").get() == 603.0
+assert wordsnumber("six hundred three million").get() == 603000000.0
+assert wordsnumber("six million three hundred ten thousand six hundred thirty-two").get() == 6310632.0
+assert wordsnumber("zero").get() == 0.0
+assert wordsnumber("minus four thousand two").get() == -4002.0
+assert wordsnumber("thirty-three point three").get() == 33.3
+assert wordsnumber("thirty three point five hundred thirty two thousand eleven").get() == 33.532011
+assert wordsnumber("three hundred forty").get() == 340
+assert wordsnumber("four billion four hundred fifty-five million six hundred sixty-seven thousand seven hundred eighty-eight").get() == 4455667788.0
+assert wordsnumber("One HUNDRED NiNeteen").get() == 119
+assert wordsnumber("minus three three two one seven point five").get() == -33217.5
+assert wordsnumber("nothing here") == none(float)
+assert wordsnumber("nothing two here forty").get() == 240
 
 assert writemorse("a b   c") == ".- / -... / -.-."
 assert writemorse("420") == "....- ..--- -----"
