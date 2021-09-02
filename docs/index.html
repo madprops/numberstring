@@ -246,6 +246,11 @@ function main() {
     title="wordsnumber(text: string): Option[float]">wordsnumber,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">flashwords
+      <li><a class="reference" href="#flashwords%2Cstring%2CSomeNumber%2CSomeNumber"
+    title="flashwords(text: string; max_words: SomeNumber; delay: SomeNumber)">flashwords,<wbr>string,<wbr>SomeNumber,<wbr>SomeNumber</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">romano
       <li><a class="reference" href="#romano%2CSomeNumber"
     title="romano(num: SomeNumber): string">romano,<wbr>SomeNumber</a></li>
@@ -721,7 +726,7 @@ Change number words to numbers
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;One HUNDRED NiNeteen&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">get</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">119</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;minus three three two one seven point five&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">get</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Operator">-</span><span class="FloatNumber">33217.5</span><span class="Whitespace">
 </span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;nothing here&quot;</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="Identifier">none</span><span class="Punctuation">(</span><span class="Identifier">float</span><span class="Punctuation">)</span><span class="Whitespace">
-</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;nothing two here forty&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">get</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">240</span><span class="Whitespace">    </span></pre>
+</span><span class="Identifier">assert</span><span class="Whitespace"> </span><span class="Identifier">wordsnumber</span><span class="Punctuation">(</span><span class="StringLit">&quot;nothing two here forty&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">get</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">240</span></pre>
 
 </dd>
 <a id="writemorse,string"></a>
@@ -978,6 +983,13 @@ Count the number of consonants in a string
 
 
 </dd>
+<a id="flashwords,string,SomeNumber,SomeNumber"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#flashwords%2Cstring%2CSomeNumber%2CSomeNumber"><span class="Identifier">flashwords</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">max_words</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">;</span> <span class="Identifier">delay</span><span class="Other">:</span> <span class="Identifier">SomeNumber</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Same as printwords but erases the previous line
+
+</dd>
 
 </dl></div>
 
@@ -988,7 +1000,7 @@ Count the number of consonants in a string
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-09-01 03:09:01 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-09-02 06:58:32 UTC</small>
       </div>
     </div>
   </div>

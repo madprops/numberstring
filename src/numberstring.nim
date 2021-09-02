@@ -1,4 +1,5 @@
-import std/[times, random, math, strutils, sequtils, strformat, sugar, tables, re, os, options]
+import std/[times, random, math, strutils, sequtils, strformat]
+import std/[sugar, tables, re, os, options, terminal]
 from unicode import title
 
 type NumberMode* = enum
@@ -853,3 +854,23 @@ proc printwords*(text: string, max_words: SomeNumber, delay: SomeNumber) =
     if i > words.len - 1:
       break
     sleep(int(delay))
+
+proc flashwords*(text: string, max_words: SomeNumber, delay: SomeNumber) =
+  ## Same as printwords but erases the previous line
+
+  var i = 0
+  let words = get_words(text)
+
+  proc waitprint() =
+    sleep(int(delay))    
+    stdout.eraseLine()
+
+  while true:
+    let ni = min(words.len - 1, i + int(max_words) - 1)
+    stdout.write(words[i..ni].join(" "))
+    stdout.flushFile
+    i = ni + 1
+    if i > words.len - 1:
+      break
+    waitprint()
+  waitprint()
